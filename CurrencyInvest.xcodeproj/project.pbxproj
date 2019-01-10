@@ -171,13 +171,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		5D09545221DB6D8600B30D4E /* View */ = {
+		5D09545221DB6D8600B30D4E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				5D09545321DB6DAC00B30D4E /* MainViewController.swift */,
 				5D729E3121DF2C1600A64E42 /* EntryViewViewController.swift */,
 			);
-			path = View;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5DDEAAAC21A7ABCD00BE58AF = {
@@ -209,7 +209,7 @@
 				5DDEAAE621A7AE4600BE58AF /* Extensions */,
 				5D09545021DB6CDB00B30D4E /* Manager */,
 				5DDEAAE721A7AE5D00BE58AF /* Components */,
-				5D09545221DB6D8600B30D4E /* View */,
+				5D09545221DB6D8600B30D4E /* ViewController */,
 				5D09545121DB6CF100B30D4E /* ViewModel */,
 				5D09544F21DB6CC000B30D4E /* Model */,
 				5DDEAABC21A7ABCD00BE58AF /* Main.storyboard */,
