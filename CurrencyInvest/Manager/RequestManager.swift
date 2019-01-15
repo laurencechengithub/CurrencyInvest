@@ -15,6 +15,7 @@ class RequestManager {
     static let sharedInstance = RequestManager()
     
     enum Url:String {
+        
         case currency = "http://apilayer.net/api/live?access_key=0c056c4320688c8c947e54ab6f59bfcb"
         case crypto = ""
     }
@@ -51,41 +52,37 @@ class RequestManager {
         
         }.resume()
         
-//
-//        Alamofire.request(url, method: .get, parameters: parameters, encoding: encoding).responseJSON (completionHandler: { (response) in
-//
-//            print(response.value)
-//
-//            switch response.result {
-//            case .failure(let error):
-//                print(error)
-//            case .success(let data):
-//                let aa = JSON(response.value)
-//                print(aa)
-//
-//
-//                completiondHandler(CurrencyDataModel(fromJson: aa))
-//
-//            }
+    }
+
+    func baseRequest (url:URL,isSwiftSpinner:Bool,completiondHandler:@escaping (_ Rate: CurrencyDataModel) -> ()) {
         
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-//            if RtnData.result.isSuccess {
-//
-//                let data = RtnData
-//                print(data)
-////                let json = JSON(data)
-//
-//                let json = JSON(data)
-//                print(json)
-//                completiondHandler(CurrencyDataModel(fromJson: json))
-//
-//            } else if RtnData.result.isFailure {
-//
-//                print(RtnData.error)
-//            }
-        }
-    
+            guard let theData = data else {
+                print("data is nil")
+                return
+            }
+            
+            do {
+                let modelData = try JSONDecoder().decode(CurrencyDataModel.self,from:theData)
+                print(modelData)
+                
+                completiondHandler(modelData)
+                
+            } catch {
+                
+                let showError = error
+                print(showError)
+                
+            }
+            
+            }.resume()
         
-//    )}
+    }
+    
+    
+    
+    
     
 }

@@ -7,51 +7,70 @@
 //
 
 import Foundation
+import UIKit
 
 class MainViewModel {
     
-    var quotesLoadCompleteHandler:((Bool)->())!
-    var currencyData:CurrencyDataModel!
-    var currencyQuotes = [String:Double]()
-    var currencyKeys = [String]()
-    
-    func getQuotes() {
+    private var quotes = UserDefualtManager.sharedInstance.localQuote
+
+    func getQuotesKey() -> [String] {
         
+        var keys = [String]()
         
-        RequestManager.sharedInstance.getCurrecyRate { (completeHandlerData) in
-            self.currencyData = completeHandlerData
-            self.currencyQuotes = completeHandlerData.quotes
-            
-            UserDefualtManager.sharedInstance.localQuote = self.currencyQuotes
-            
-            // suffix 取從string後面數來第三位
-            self.currencyKeys = self.currencyQuotes.map () {
-                String($0.key.suffix(3))
-            }
-            // abc排序
-            self.currencyKeys = self.currencyKeys.sorted(by: {$0 < $1})
-            print(self.currencyKeys)
-            
-            self.quotesLoadCompleteHandler(true)
-            
-//            DispatchQueue.main.sync(execute: {
-//                vc.currencyPicker.reloadAllComponents()
-//            })
-            
-            
+        // suffix 取從string後面數來第三位
+        keys = self.quotes.map () {
+            String($0.key.suffix(3))
         }
+        // abc排序
+        keys = keys.sorted(by: {$0 < $1})
+        print(keys)
+        
+        return keys
+    }
+    
+    func getQuotes() -> [String:Double] {
+                
+        return quotes
     }
     
     
-    
-    
-    func calculate (OneAmount:Double,oneRate:Double,rtnRate:Double) -> Double{
+    func calculateWith (textField: UITextField, inRate:Double, outRate:Double ) -> Double {
         
-        let OneAmountToUSD = OneAmount/oneRate
-        let returnAmount = OneAmountToUSD * rtnRate
-        
-        return returnAmount
-    
+        if let qty = textField.text {
+            let inAmount = Double(qty) ?? 0
+            let inAmountToUSD = inAmount/inRate
+            let returnAmount = inAmountToUSD * outRate
+            
+            return returnAmount
+        } else {
+            return 0
+        }
+
     }
+    
+    func calculateUSD (textField: UITextField, inRate:Double) {
+        
+        guard let text = textField.text else {
+            print("text is nil")
+            return
+        }
+        let textIntoDouble = Double(text)
+        GlobalTempValue.amountUSD = textIntoDouble ?? 0
+        
+    }
+    
+    
+//    func reloadTextWith (outTextField:UITextField, amount:Double, inRate:Double) {
+//
+//        if let input = outTextField.text {
+//            let amountt = Double(input) ?? 0
+//            let double = calculateWith(inAmount: amountt, inRate: <#T##Double#>, outRate: <#T##Double#>)
+//            let string = String(double)
+//            outTextField.text = string
+//        }
+//
+//
+//    }
+    
 }
 
