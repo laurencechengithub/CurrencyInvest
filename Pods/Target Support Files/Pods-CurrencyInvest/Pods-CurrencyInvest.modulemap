@@ -1,6 +1,0 @@
-framework module Pods_CurrencyInvest {
-  umbrella header "Pods-CurrencyInvest-umbrella.h"
-
-  export *
-  module * { export * }
-}
