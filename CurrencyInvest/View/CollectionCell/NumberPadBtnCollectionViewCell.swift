@@ -1,5 +1,5 @@
 //
-//  BirthDayBtnCollectionViewCell.swift
+//  NumberPadBtnCollectionViewCell.swift
 //  re
 //
 //  Created by Laurence  Chen on 2018/9/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BirthDayBtnCollectionViewCell: UICollectionViewCell {
+class NumberPadBtnCollectionViewCell: UICollectionViewCell {
     
     var numLabel:UILabel!
     
@@ -28,7 +28,7 @@ class BirthDayBtnCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderColor = UIColor.navigationBarRed.cgColor
         contentView.layer.cornerRadius = 6
         
-        numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+        numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         numLabel.backgroundColor = UIColor.clear
         numLabel.textAlignment = .center
         numLabel.textColor = UIColor.navigationBarRed

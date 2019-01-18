@@ -11,11 +11,13 @@ import NotificationCenter
 
 class MainViewController: UIViewController {
     
-    
-
+    var scrollView:UIScrollView!
     var topView:UIView!
     var btmView:UIView!
     var currencyPicker:UIPickerView!
+    var currencyOneView:UIView!
+    var currencyTwoView:UIView!
+    
     
     var textFieldOne = UITextField()
     var textFieldTwo = UITextField()
@@ -105,8 +107,6 @@ class MainViewController: UIViewController {
         currencyPicker.dataSource = self
         
         
-
-        
     }
 
     
@@ -121,16 +121,16 @@ extension MainViewController: UIPickerViewDelegate {
         switch component {
         case 0:
             let countryString = "USD\( currencyOneKey[row])"
-            GlobalTempValue.CurrencyOneName = countryString
-            GlobalTempValue.CurrencyOneRate = currencyOneQuotes["\(countryString)"] ?? 1.0
-            textFieldOne.placeholder = GlobalTempValue.CurrencyOneName // need change to label
+            Global.CurrencyOneName = countryString
+            Global.CurrencyOneRate = currencyOneQuotes["\(countryString)"] ?? 1.0
+            textFieldOne.placeholder = Global.CurrencyOneName // need change to label
             // TBD 設定國旗圖案
         case 1:
             let countryString = "USD\( currencyTwoKey[row])"
  
-            GlobalTempValue.CurrencyTwoName = countryString
-            GlobalTempValue.CurrencyTwoRate = currencyTwoQuotes["\(countryString)"] ?? 1.0
-            textFieldTwo.placeholder = GlobalTempValue.CurrencyTwoName // need change to label
+            Global.CurrencyTwoName = countryString
+            Global.CurrencyTwoRate = currencyTwoQuotes["\(countryString)"] ?? 1.0
+            textFieldTwo.placeholder = Global.CurrencyTwoName // need change to label
             // TBD 設定國旗圖案
         default:
             return
@@ -197,11 +197,11 @@ extension MainViewController: UITextFieldDelegate {
         print("textFieldDidEndEditing")
         
         if textField == textFieldOne {
-            mainViewModel.calculateUSD(textField: textFieldOne, inRate: GlobalTempValue.CurrencyOneRate)
-            textFieldTwo.text = String (GlobalTempValue.amountUSD * GlobalTempValue.CurrencyTwoRate)
+            mainViewModel.calculateUSD(textField: textFieldOne, inRate: Global.CurrencyOneRate)
+            textFieldTwo.text = String (Global.amountUSD * Global.CurrencyTwoRate)
         }else if textField == textFieldTwo {
-            mainViewModel.calculateUSD(textField: textFieldTwo, inRate: GlobalTempValue.CurrencyTwoRate)
-            textFieldOne.text = String (GlobalTempValue.amountUSD * GlobalTempValue.CurrencyOneRate)
+            mainViewModel.calculateUSD(textField: textFieldTwo, inRate: Global.CurrencyTwoRate)
+            textFieldOne.text = String (Global.amountUSD * Global.CurrencyOneRate)
         }
        
     }

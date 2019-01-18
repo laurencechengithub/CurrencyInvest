@@ -55,7 +55,7 @@ class MainViewModel {
             return
         }
         let textIntoDouble = Double(text)
-        GlobalTempValue.amountUSD = textIntoDouble ?? 0
+        Global.amountUSD = textIntoDouble ?? 0
         
     }
     

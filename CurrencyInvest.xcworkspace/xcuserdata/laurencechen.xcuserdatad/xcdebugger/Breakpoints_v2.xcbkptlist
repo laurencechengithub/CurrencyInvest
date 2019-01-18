@@ -145,38 +145,6 @@
             endingLineNumber = "29"
             landmarkName = "getQuote()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CurrencyInvest.EntryViewViewController.getQuote() -&gt; ()"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/EntryViewViewController.swift"
-                  timestampString = "568288798.141868"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "101">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in CurrencyInvest.EntryViewViewController.getQuote() -&gt; ()"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/EntryViewViewController.swift"
-                  timestampString = "568288798.144523"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CurrencyInvest/ViewModel/MainViewModel.swift"
-            timestampString = "568288798.076851"
+            timestampString = "569478277.216014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
-            landmarkName = "getQuotes()"
-            landmarkType = "7">
+            landmarkName = "MainViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -209,68 +177,6 @@
             endingLineNumber = "19"
             landmarkName = "MainViewController"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CurrencyInvest.MainViewController.labelTwo.getter : __C.UILabel"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/MainViewController.swift"
-                  timestampString = "568288798.155254"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "114">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CurrencyInvest.MainViewController.labelTwo.setter : __C.UILabel"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/MainViewController.swift"
-                  timestampString = "568288798.157249"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "128">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CurrencyInvest.MainViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; CurrencyInvest.MainViewController"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/MainViewController.swift"
-                  timestampString = "568288798.159407"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "441">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CurrencyInvest.MainViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CurrencyInvest.MainViewController&gt;"
-                  moduleName = "CurrencyInvest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurencechen/Dropbox/CurrencyInvest/CurrencyInvest/View/MainViewController.swift"
-                  timestampString = "568288798.161759"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "404">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -280,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CurrencyInvest/ViewModel/MainViewModel.swift"
-            timestampString = "568288798.0769449"
+            timestampString = "569478277.216877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -296,13 +202,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CurrencyInvest/ViewModel/MainViewModel.swift"
-            timestampString = "568288798.0769989"
+            timestampString = "569478277.21719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
-            landmarkName = "getQuotes()"
+            landmarkName = "getQuotesKey()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CurrencyInvest.MainViewModel.getQuotesKey() -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "CurrencyInvest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurencechen/CurrencyInvest/CurrencyInvest/ViewModel/MainViewModel.swift"
+                  timestampString = "569478277.255332"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "389">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.String, Swift.String) -&gt; Swift.Bool in CurrencyInvest.MainViewModel.getQuotesKey() -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "CurrencyInvest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurencechen/CurrencyInvest/CurrencyInvest/ViewModel/MainViewModel.swift"
+                  timestampString = "569478277.258309"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -344,13 +282,87 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CurrencyInvest/ViewModel/MainViewModel.swift"
-            timestampString = "568288828.172231"
+            timestampString = "569478277.21754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "getQuotes()"
+            landmarkName = "getQuotesKey()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyInvest/Controller/EntryViewViewController.swift"
+            timestampString = "569478277.217824"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "toMainView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyInvest/Controller/MainViewController.swift"
+            timestampString = "569478215.731503"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "initData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyInvest/Controller/MainViewController.swift"
+            timestampString = "569478215.731555"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "initView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyInvest/Controller/EntryViewViewController.swift"
+            timestampString = "569478277.218156"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "toMainView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

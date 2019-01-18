@@ -96,7 +96,7 @@ class NumberPadViewController: UIViewController {
         }
     }
 
-    weak var selfDesignDelegate : BirthDayViewControllerDelegate?
+    weak var selfDesignDelegate : NumberPadViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -141,7 +141,7 @@ class NumberPadViewController: UIViewController {
     
         let btnCollectionViewVerticalBlank:CGFloat = 10 + closeBtn.frame.height + topLabel.frame.height + topLabel.frame.height + 10
         btnCollectionView = UICollectionView(frame: CGRect(x: 10, y: topLabel.frame.maxY + 5 , width: centerView.frame.width - 20 , height: centerView.frame.height - btnCollectionViewVerticalBlank), collectionViewLayout: flow)
-        btnCollectionView.register(BirthDayBtnCollectionViewCell.self, forCellWithReuseIdentifier: "BirthDayCell")
+        btnCollectionView.register(NumberPadBtnCollectionViewCell.self, forCellWithReuseIdentifier: "BirthDayCell")
         btnCollectionView.delegate = self
         btnCollectionView.dataSource = self
         btnCollectionView.backgroundColor = UIColor.white
@@ -166,7 +166,7 @@ extension NumberPadViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BirthDayCell", for: indexPath) as! BirthDayBtnCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BirthDayCell", for: indexPath) as! NumberPadBtnCollectionViewCell
         
 //        if let keyboard = Keyboard.init(rawValue: indexPath.row + 1) {
 //
