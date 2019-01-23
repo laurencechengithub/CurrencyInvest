@@ -25,13 +25,13 @@ class NumberPadBtnCollectionViewCell: UICollectionViewCell {
         
         contentView.backgroundColor = UIColor.white
         contentView.layer.borderWidth = 2
-        contentView.layer.borderColor = UIColor.navigationBarRed.cgColor
+        contentView.layer.borderColor = UIColor.reNavigationBarRed.cgColor
         contentView.layer.cornerRadius = 6
         
         numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         numLabel.backgroundColor = UIColor.clear
         numLabel.textAlignment = .center
-        numLabel.textColor = UIColor.navigationBarRed
+        numLabel.textColor = UIColor.reNavigationBarRed
         numLabel.font = UIFont.boldSystemFont(ofSize: 34)
         numLabel.center = contentView.center
         

@@ -22,13 +22,17 @@ class EntryViewViewController: UIViewController {
  
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.toMainView ()
+    }
+    
     func initView() {
         //        SwiftSpinner.show("Loading")
     }
     
     func getData () {
 
-            self.toMainView ()
+        
         
 //        entryViewViewModel.getQuotes()
 //        entryViewViewModel.quotesCompleteHandler = { (flag) in
