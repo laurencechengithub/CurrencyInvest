@@ -255,26 +255,10 @@ class MainViewController: UIViewController, NumberPadDelegate {
         print(numberPadView.frame.origin.y)
             
         
-        UIView.animate(withDuration: 1.5) {
+        UIView.animate(withDuration: 1.2) {
             
             self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.h
         }
-        
-        
-//        switch recongizer.view {
-//        case labelOne:
-//            focusedLabel = .LabelOneInFocus
-//        case labelTwo:
-//            focusedLabel = .LabelTwoInFocus
-//        default:
-//            focusedLabel = .LabelThreeInFocus
-//        }
-        
-        
-        
-        
-    
-        
         
     }
     
@@ -285,6 +269,13 @@ class MainViewController: UIViewController, NumberPadDelegate {
         print(enteredString)
     }
     
+    func okBtnTapped(bool: Bool) {
+        if bool == true {
+            UIView.animate(withDuration: 1.2, animations: {
+                self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.h
+            })
+        }
+    }
     
     
     

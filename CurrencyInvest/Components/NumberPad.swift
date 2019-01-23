@@ -11,8 +11,8 @@ import UIKit
 
 protocol NumberPadDelegate {
     func getNumberWith(numString:String)
+    func okBtnTapped(bool:Bool)
 }
-
 
 
 class NumberPad : UIView {
@@ -36,6 +36,7 @@ class NumberPad : UIView {
     
     var numberPadDelegate:NumberPadDelegate!
     var btnCollectionView:UICollectionView!
+    var OkBtnTappedHandler : ((Bool)->())?
     
     enum KeyBoardBtnType: Int, CaseIterable {
         
@@ -122,10 +123,33 @@ class NumberPad : UIView {
 extension NumberPad: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
   
-        if let selectedString = KeyBoardBtnType.init(rawValue: indexPath.row + 1)?.description {
-            numberPadDelegate.getNumberWith(numString: selectedString)
-            print(" selectedString \(selectedString)")
+//        if let selectedString = KeyBoardBtnType.init(rawValue: indexPath.row + 1)?.description {
+//            numberPadDelegate.getNumberWith(numString: selectedString)
+//
+//            if selectedString == "OK" {
+//                numberPadDelegate.okBtnTapped(bool: true)
+//            }
+//
+//            print(" selectedString \(selectedString)")
+//        }
+        
+        
+        if let selectedKeyBoardBtnType = KeyBoardBtnType.init(rawValue: indexPath.row + 1) {
+            
+            switch selectedKeyBoardBtnType {
+            case .Ok:
+                numberPadDelegate.okBtnTapped(bool: true)
+            case .Back:
+                print("more")
+            default:
+                let selectedString = selectedKeyBoardBtnType.description
+                numberPadDelegate.getNumberWith(numString: selectedString)
+            }
+            
+            
         }
+        
+        
         
     }
 }
