@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol NumberPadDelegate {
-    func getNumberWith(numString:String)
+    func getNumberWith(numString:String,numInt:Int)
     func okBtnTapped(bool:Bool)
 }
 
@@ -37,21 +37,27 @@ class NumberPad : UIView {
     var numberPadDelegate:NumberPadDelegate!
     var btnCollectionView:UICollectionView!
     var OkBtnTappedHandler : ((Bool)->())?
+    var itemSizeWidth:CGFloat!
+    var itemSizeHeight:CGFloat!
     
     enum KeyBoardBtnType: Int, CaseIterable {
         
         case One = 1
-        case Two
-        case Three
-        case Four
-        case Five
-        case Six
-        case Seven
-        case Eight
-        case Nine
-        case Back
-        case Zero
-        case Ok
+        case Two = 2
+        case Three = 3
+        case Delete = 4
+        case Four = 5
+        case Five = 6
+        case Six = 7
+        case K = 8
+        case Seven = 9
+        case Eight = 10
+        case Nine = 11
+        case TenK = 12
+        case Zero = 13
+        case Dot = 14
+        case Ok = 15
+        case HundredK = 16
         
         //static var count: Int { return Keyboard.Ok.rawValue}
         
@@ -78,14 +84,20 @@ class NumberPad : UIView {
                     return "8"
                 case .Nine:
                     return "9"
-                case .Back:
-                    //                    return "BIRTHDAY_REWRITE".localized
-                    return "Del."
+                case .Delete:
+                    return "←"
                 case .Zero:
                     return "0"
                 case .Ok:
                     return "OK"
-                    
+                case .Dot:
+                    return "."
+                case .K:
+                    return "K"
+                case .TenK:
+                    return "10K"
+                case .HundredK:
+                    return "100K"
                 }
                 
             }
@@ -98,8 +110,8 @@ class NumberPad : UIView {
         let flow = UICollectionViewFlowLayout()
         flow.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
   
-        let itemSizeWidth = (self.frame.width - 10)/3
-        let itemSizeHeight = (self.frame.height - 10)/4
+        itemSizeWidth = (self.frame.width - 10)/4
+        itemSizeHeight = (self.frame.height - 10)/4
         print(itemSizeWidth)
         print(itemSizeHeight)
         flow.itemSize = CGSize(width: itemSizeWidth, height: itemSizeHeight)
@@ -122,46 +134,40 @@ class NumberPad : UIView {
 
 extension NumberPad: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-  
-//        if let selectedString = KeyBoardBtnType.init(rawValue: indexPath.row + 1)?.description {
-//            numberPadDelegate.getNumberWith(numString: selectedString)
-//
-//            if selectedString == "OK" {
-//                numberPadDelegate.okBtnTapped(bool: true)
-//            }
-//
-//            print(" selectedString \(selectedString)")
-//        }
-        
         
         if let selectedKeyBoardBtnType = KeyBoardBtnType.init(rawValue: indexPath.row + 1) {
             
             switch selectedKeyBoardBtnType {
             case .Ok:
                 numberPadDelegate.okBtnTapped(bool: true)
-            case .Back:
+            case .Delete:
                 print("more")
+            case .K:
+                print("numberPadDelegate.KBtnTapped")
+            case .TenK:
+                print("numberPadDelegate.TenKBtnTapped")
+            case .Dot:
+                print("numberPadDelegate.DotBtnTapped")
             default:
                 let selectedString = selectedKeyBoardBtnType.description
-                numberPadDelegate.getNumberWith(numString: selectedString)
+                let selectedInt = selectedKeyBoardBtnType.rawValue
+                numberPadDelegate.getNumberWith(numString: selectedString, numInt: selectedInt)
             }
-            
-            
         }
-        
-        
-        
     }
+    
+    
 }
 
 
-extension NumberPad: UICollectionViewDataSource {
+extension NumberPad: UICollectionViewDataSource  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return KeyBoardBtnType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PadBtnCell", for: indexPath) as! NumberPadCollectionViewCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PadBtnCell", for: indexPath) as! NumberPadCollectionViewCell
         
         if let BtnString = KeyBoardBtnType.init(rawValue: indexPath.row + 1 )?.description {
             cell.numLabel.text = BtnString
@@ -171,9 +177,23 @@ extension NumberPad: UICollectionViewDataSource {
         return cell
         
     }
-    
-    
 }
+
+
+//extension NumberPad: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        if indexPath.row == 14 {
+//            return CGSize(width: itemSizeWidth * 2 + 2, height: itemSizeHeight)
+//        }
+//
+//        return CGSize(width: itemSizeWidth, height: itemSizeHeight)
+//
+//    }
+//
+//}
+
 
 
 class NumberPadCollectionViewCell: UICollectionViewCell {

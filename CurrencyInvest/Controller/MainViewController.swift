@@ -32,7 +32,7 @@ class MainViewController: UIViewController, NumberPadDelegate {
     let mainViewModel = MainViewModel()
     var numberPadViewTopAnchor:NSLayoutConstraint!
 //    var currentthree = [String:Double]()
-    var focusedLabel:LabelType!
+    var focusedLabel:LabelType?
     var h:CGFloat!
     
     enum LabelType: Int {
@@ -46,7 +46,6 @@ class MainViewController: UIViewController, NumberPadDelegate {
         
         didSet{
             print("didset")
-            print(focusedLabel)
             if let focusedLabel = focusedLabel {
                 switch focusedLabel {
                 case .LabelOneInFocus :
@@ -159,10 +158,13 @@ class MainViewController: UIViewController, NumberPadDelegate {
         nameOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
         nameOne.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameOne.backgroundColor = UIColor.ciDarkGunMetal
-        nameOne.layer.borderWidth = 1
-        nameOne.layer.borderColor = UIColor.white.cgColor
-        nameOne.layer.cornerRadius = 20
-        nameOne.text = Global.CurrencyOneName
+//        nameOne.layer.borderWidth = 1
+//        nameOne.layer.borderColor = UIColor.white.cgColor
+//        nameOne.layer.cornerRadius = 20
+        nameOne.text = Global.NameOne
+        nameOne.textColor = UIColor.ciIsabelline
+        nameOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        nameOne.font = UIFont.boldSystemFont(ofSize: 30)
         
         labelOne.translatesAutoresizingMaskIntoConstraints = false
         labelOne.topAnchor.constraint(equalTo: nameOne.bottomAnchor, constant: 10).isActive = true
@@ -170,15 +172,16 @@ class MainViewController: UIViewController, NumberPadDelegate {
         labelOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelOne.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor, constant: -10).isActive = true
         labelOne.backgroundColor = UIColor.clear
-        labelOne.layer.borderWidth = 3
-        labelOne.layer.borderColor = UIColor.white.cgColor
-        labelOne.layer.cornerRadius = 20
+//        labelOne.layer.borderWidth = 3
+//        labelOne.layer.borderColor = UIColor.white.cgColor
+//        labelOne.layer.cornerRadius = 20
         labelOne.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
         labelOne.addGestureRecognizer(tapGesture)
-        labelOne.textColor = UIColor.white
+        labelOne.textColor = UIColor.ciMaize
         labelOne.font = UIFont.boldSystemFont(ofSize: 30)
         labelOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        labelOne.text = String(Global.AmountOne)
         
         
         nameTwo.translatesAutoresizingMaskIntoConstraints = false
@@ -187,11 +190,12 @@ class MainViewController: UIViewController, NumberPadDelegate {
         nameTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
         nameTwo.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameTwo.backgroundColor = UIColor.ciDarkGunMetal
-        nameTwo.layer.borderWidth = 1
-        nameTwo.layer.borderColor = UIColor.white.cgColor
-        nameTwo.layer.cornerRadius = 20
-        nameTwo.text = Global.CurrencyTwoName
-        
+//        nameTwo.layer.borderWidth = 1
+//        nameTwo.layer.borderColor = UIColor.white.cgColor
+//        nameTwo.layer.cornerRadius = 20
+        nameTwo.text = Global.NameTwo
+        nameTwo.textColor = UIColor.ciIsabelline
+        nameTwo.font = UIFont.boldSystemFont(ofSize: 30)
         
         labelTwo.translatesAutoresizingMaskIntoConstraints = false
         labelTwo.topAnchor.constraint(equalTo: nameTwo.bottomAnchor, constant: 10).isActive = true
@@ -199,15 +203,16 @@ class MainViewController: UIViewController, NumberPadDelegate {
         labelTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelTwo.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor, constant: -10).isActive = true
         labelTwo.backgroundColor = UIColor.clear
-        labelTwo.layer.borderWidth = 3
-        labelTwo.layer.borderColor = UIColor.white.cgColor
-        labelTwo.layer.cornerRadius = 20
+//        labelTwo.layer.borderWidth = 3
+//        labelTwo.layer.borderColor = UIColor.white.cgColor
+//        labelTwo.layer.cornerRadius = 20
         labelTwo.isUserInteractionEnabled = true
         let tapGestureTwo = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
         labelTwo.addGestureRecognizer(tapGestureTwo)
-        labelTwo.textColor = UIColor.white
+        labelTwo.textColor = UIColor.ciMaize
         labelTwo.font = UIFont.boldSystemFont(ofSize: 30)
         labelTwo.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        labelTwo.text = String(Global.AmountTwo)
         
         labelThree.translatesAutoresizingMaskIntoConstraints = false
         labelThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 10).isActive = true
@@ -228,6 +233,7 @@ class MainViewController: UIViewController, NumberPadDelegate {
         currencyPicker.backgroundColor = UIColor.ciDarkGunMetal
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
+        
 
 
         
@@ -243,12 +249,15 @@ class MainViewController: UIViewController, NumberPadDelegate {
     
     //MARK: Self Designed Function
     @objc func showNumberPad (_ recongizer:UIGestureRecognizer) {
+    
         
         print("func showNumberPad")
         if recongizer.view == labelOne {
             focusedLabel = .LabelOneInFocus
+            labelOne.text = ""
         } else if recongizer.view == labelTwo {
             focusedLabel = .LabelTwoInFocus
+            labelTwo.text = ""
         } else {
             print("else")
         }
@@ -262,8 +271,7 @@ class MainViewController: UIViewController, NumberPadDelegate {
         
     }
     
-    
-    func getNumberWith(numString: String) {
+    func getNumberWith(numString: String, numInt: Int) {
         print("get string \(numString)")
         enteredString = numString
         print(enteredString)
@@ -275,9 +283,54 @@ class MainViewController: UIViewController, NumberPadDelegate {
                 self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.h
             })
         }
+        
+        if let focusLabel = focusedLabel {
+            
+            switch focusLabel {
+            case .LabelOneInFocus:
+                if let text = labelOne.text {
+                    
+                    Global.AmountOne = Double(text)!
+                    
+                    Global.AmountTwo = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
+                    
+                    Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
+                    updateAllLabel()
+                }else {
+                    Global.AmountOne = 0.0
+                    Global.AmountTwo = 0.0
+                    Global.AmountThree = 0.0
+                }
+                
+            case .LabelTwoInFocus:
+                if let text = labelTwo.text {
+                    Global.AmountTwo = Double(text)!
+                    
+                    Global.AmountOne = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
+                    
+                    Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
+                    updateAllLabel()
+                    
+                }else {
+                    Global.AmountOne = 0.0
+                    Global.AmountTwo = 0.0
+                    Global.AmountThree = 0.0
+                }
+            case .LabelThreeInFocus:
+                print("three")
+            }
+        }
+        
+        
+        
+        
     }
     
-    
+    func updateAllLabel() {
+        
+        labelOne.text = String(Global.AmountOne)
+        labelTwo.text = String(Global.AmountTwo)
+    }
     
 }
 
@@ -290,16 +343,16 @@ extension MainViewController: UIPickerViewDelegate {
         switch component {
         case 0:
             let countryString = "USD\( currencyOneKey[row])"
-            Global.CurrencyOneName = countryString
-            Global.CurrencyOneRate = currencyOneQuotes["\(countryString)"] ?? 1.0
-            nameOne.text = Global.CurrencyOneName
+            Global.NameOne = currencyOneKey[row]
+            Global.RateOne = currencyOneQuotes["\(countryString)"] ?? 1.0
+            nameOne.text = Global.NameOne
             // TBD 設定國旗圖案
         case 1:
             let countryString = "USD\( currencyTwoKey[row])"
  
-            Global.CurrencyTwoName = countryString
-            Global.CurrencyTwoRate = currencyTwoQuotes["\(countryString)"] ?? 1.0
-            nameTwo.text = Global.CurrencyTwoName
+            Global.NameTwo = currencyTwoKey[row]
+            Global.RateTwo = currencyTwoQuotes["\(countryString)"] ?? 1.0
+            nameTwo.text = Global.NameTwo
             // TBD 設定國旗圖案
         default:
             return

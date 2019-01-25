@@ -34,30 +34,28 @@ class MainViewModel {
     }
     
     
-    func calculateWith (textField: UITextField, inRate:Double, outRate:Double ) -> Double {
+    func calculateWith (inAmount: Double, inRate:Double, outRate:Double ) -> Double {
         
-        if let qty = textField.text {
-            let inAmount = Double(qty) ?? 0
-            let inAmountToUSD = inAmount/inRate
-            let returnAmount = inAmountToUSD * outRate
+            // qty=100 inAmount=100.0
+            let inAmountToUSDAmount = inAmount/inRate //轉換美金
+            let outAmount = inAmountToUSDAmount * outRate 
             
-            return returnAmount
-        } else {
-            return 0
-        }
+            return outAmount
 
     }
+
     
-    func calculateUSD (textField: UITextField, inRate:Double) {
-        
-        guard let text = textField.text else {
-            print("text is nil")
-            return
-        }
-        let textIntoDouble = Double(text)
-        Global.amountUSD = textIntoDouble ?? 0
-        
-    }
+
+//    func calculateUSD (textField: UITextField, inRate:Double) {
+//
+//        guard let text = textField.text else {
+//            print("text is nil")
+//            return
+//        }
+//        let textIntoDouble = Double(text)
+//        Global.amountUSD = textIntoDouble ?? 0
+//
+//    }
     
     
 //    func reloadTextWith (outTextField:UITextField, amount:Double, inRate:Double) {

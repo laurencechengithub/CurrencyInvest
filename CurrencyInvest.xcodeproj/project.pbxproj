@@ -13,6 +13,7 @@
 		5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D081FAD21C74D82002AB7E3 /* RequestManager.swift */; };
 		5D09545621DB6E8000B30D4E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09545521DB6E8000B30D4E /* MainViewModel.swift */; };
 		5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */; };
+		5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F583821F954BF002BCA7C /* UIImageBlurExtension.swift */; };
 		5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4121ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift */; };
 		5D15FF4A21ED87A1002B7CCD /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4921ED87A1002B7CCD /* Global.swift */; };
 		5D15FF4C21ED88C8002B7CCD /* EntryViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4B21ED88C8002B7CCD /* EntryViewViewModel.swift */; };
@@ -73,6 +74,7 @@
 		5D081FAD21C74D82002AB7E3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		5D09545521DB6E8000B30D4E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefualtManager.swift; sourceTree = "<group>"; };
+		5D0F583821F954BF002BCA7C /* UIImageBlurExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageBlurExtension.swift; sourceTree = "<group>"; };
 		5D15FF3F21ED85D0002B7CCD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5D15FF4121ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadBtnCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D15FF4921ED87A1002B7CCD /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -183,6 +185,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		5D0F583A21F954FF002BCA7C /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				5DDEAAF121A7D87300BE58AF /* UILabelExtension.swift */,
+				5DDEAAF021A7D87200BE58AF /* LabelExtension.swift */,
+				5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
 		5D15FF4621ED85E1002B7CCD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,14 +287,13 @@
 				5DDEAAF521A7D87300BE58AF /* DoubleExtension.swift */,
 				5DDEAAED21A7D87200BE58AF /* ImageExtension.swift */,
 				5DDEAAF821A7D87300BE58AF /* IntExtension.swift */,
-				5DDEAAF021A7D87200BE58AF /* LabelExtension.swift */,
 				5DDEAAEE21A7D87200BE58AF /* SearchBarExtension.swift */,
 				5DDEAAF221A7D87300BE58AF /* StringExtension.swift */,
 				5DDEAAF621A7D87300BE58AF /* UIBottonExtension.swift */,
 				5DDEAAF921A7D87300BE58AF /* UICollectionViewExtension.swift */,
+				5D0F583A21F954FF002BCA7C /* UILabel */,
 				5DDEAAEF21A7D87200BE58AF /* UIFontExtension.swift */,
-				5DDEAAF121A7D87300BE58AF /* UILabelExtension.swift */,
-				5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */,
+				5D0F583821F954BF002BCA7C /* UIImageBlurExtension.swift */,
 				5DDEAAF421A7D87300BE58AF /* UITextFieldExtension.swift */,
 				5DDEAAF721A7D87300BE58AF /* UIViewcontrollerExtension.swift */,
 				5DDEAAEC21A7D87200BE58AF /* UIViewExtension.swift */,
@@ -554,6 +565,7 @@
 				5DDEAB0021A7D87300BE58AF /* StringExtension.swift in Sources */,
 				5DDEAB0321A7D87300BE58AF /* DoubleExtension.swift in Sources */,
 				5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */,
+				5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */,
 				5DBDD7D421F190E7001D6B97 /* MainViewController.swift in Sources */,
 				5D09545621DB6E8000B30D4E /* MainViewModel.swift in Sources */,
 				5DDEAAB921A7ABCD00BE58AF /* AppDelegate.swift in Sources */,
