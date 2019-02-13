@@ -13,7 +13,9 @@ target 'CurrencyInvest' do
   pod 'DeviceKit'
   pod 'SwiftSpinner'
   pod 'Kingfisher'
-  
+  pod 'Firebase/Core'
+  pod 'Firebase/DynamicLinks'
+
   target 'CurrencyInvestTests' do
     inherit! :search_paths
     # Pods for testing
