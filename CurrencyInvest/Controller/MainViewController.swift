@@ -95,7 +95,6 @@ class MainViewController: UIViewController, NumberPadDelegate {
     
     func initData () {
         
-        
         currencyOneKey = mainViewModel.getQuotesKey()
         currencyOneQuotes = mainViewModel.getQuotes()
         currencyTwoKey = mainViewModel.getQuotesKey()
@@ -337,14 +336,45 @@ extension MainViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
-        
+        let alertM = AlertManager()
         //變換 picker View title color
         switch component {
         case 0:
+            guard currencyOneKey.count > 0 else {
+                
+//                alertM.alertMessageWithOK(string: "沒有資料") { (Bool) in
+//                    if Bool == true {
+//                        self.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//                    }
+//                }
+                
+                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
+                
+                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
+                    self.dismiss(animated: true, completion: {
+                        
+                    })
+
+                }
+                alert.addAction(actionOne)
+                self.present(alert, animated: true, completion: nil)
+                return nil
+            }
             let titleData = currencyOneKey[row]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
             return myTitle
         case 1:
+            
+            guard currencyTwoKey.count > 0 else {
+                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
+                
+                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(actionOne)
+                self.present(alert, animated: true, completion: nil)
+                return nil
+            }
             let titleData = currencyTwoKey[row]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
             return myTitle

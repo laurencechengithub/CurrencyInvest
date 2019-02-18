@@ -37,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //set rootView
+        let entryViewVC = EntryViewViewController()
+        if let window = self.window {
+            window.rootViewController = entryViewVC
+        }
+        
         //shortcupItem
         if let shortCutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             launchedShortcutItem = shortCutItem
@@ -53,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        saveDataToUserDefault ()
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -76,8 +85,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
+        saveDataToUserDefault ()
 
+    }
+    
+    
+    func saveDataToUserDefault () {
+        UserDefualtManager.sharedInstance.localNameOne = Global.NameOne
+        UserDefualtManager.sharedInstance.localRateOne = Global.RateOne
+        UserDefualtManager.sharedInstance.localAmountOne = Global.AmountOne
+        UserDefualtManager.sharedInstance.localNameTwo = Global.NameTwo
+        UserDefualtManager.sharedInstance.localRateTwo = Global.RateTwo
+        UserDefualtManager.sharedInstance.localAmountTwo = Global.AmountTwo
+    }
+    
     
 }
 

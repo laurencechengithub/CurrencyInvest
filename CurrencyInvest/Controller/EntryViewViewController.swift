@@ -18,12 +18,12 @@ class EntryViewViewController: UIViewController {
         super.viewDidLoad()
         
         initView()
-        getData()
+        getCurrency()
  
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        SwiftSpinner.show(duration: 1.3, title: "Loading")
+        SwiftSpinner.show(duration: 1.8, title: "Loading")
         self.toMainView ()
     }
     
@@ -36,10 +36,8 @@ class EntryViewViewController: UIViewController {
     
     
     
-    func getData () {
+    func getCurrency () {
 
-        
-        
 //        entryViewViewModel.getQuotes()
 //        entryViewViewModel.quotesCompleteHandler = { (flag) in
 //
@@ -57,8 +55,8 @@ class EntryViewViewController: UIViewController {
     
     func toMainView () {
         let vc = MainViewController()
-        self.present(vc, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(vc, animated: true)
+//        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 
