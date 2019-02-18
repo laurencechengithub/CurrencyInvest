@@ -233,8 +233,6 @@ class MainViewController: UIViewController, NumberPadDelegate {
         currencyPicker.backgroundColor = UIColor.ciDarkGunMetal
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
-        
-
 
         
 //        numberPadView.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +245,7 @@ class MainViewController: UIViewController, NumberPadDelegate {
  
     }
     
-    //MARK: Self Designed Function
+//MARK: Self Designed Function
     @objc func showNumberPad (_ recongizer:UIGestureRecognizer) {
     
         
@@ -334,9 +332,29 @@ class MainViewController: UIViewController, NumberPadDelegate {
     
 }
 
+// MARK: Deledate - UIPickerView
 extension MainViewController: UIPickerViewDelegate {
     
-    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        
+        
+        //變換 picker View title color
+        switch component {
+        case 0:
+            let titleData = currencyOneKey[row]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+            return myTitle
+        case 1:
+            let titleData = currencyTwoKey[row]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+            return myTitle
+            
+        default:
+            return nil
+        }
+        
+        
+    }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -367,7 +385,7 @@ extension MainViewController: UIPickerViewDelegate {
 }
 
 
-
+// MARK: DataSource - UIPickerView
 extension MainViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -388,18 +406,20 @@ extension MainViewController: UIPickerViewDataSource {
 
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        switch component {
-        case 0:
-            return currencyOneKey[row]
-        case 1:
-            return currencyTwoKey[row]
-        default:
-            return "nil"
-        }
-
-    }
+    
+// 因為有 attributedTitleForRow 所以下面可以省略
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//
+//        switch component {
+//        case 0:
+//            return currencyOneKey[row]
+//        case 1:
+//            return currencyTwoKey[row]
+//        default:
+//            return "nil"
+//        }
+//
+//    }
     
     
 }

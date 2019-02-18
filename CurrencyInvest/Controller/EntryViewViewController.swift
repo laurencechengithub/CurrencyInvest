@@ -23,12 +23,18 @@ class EntryViewViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        SwiftSpinner.show(duration: 1.3, title: "Loading")
         self.toMainView ()
     }
+    
+    
     
     func initView() {
         //        SwiftSpinner.show("Loading")
     }
+    
+    
+    
     
     func getData () {
 
