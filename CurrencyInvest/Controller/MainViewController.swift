@@ -33,7 +33,8 @@ class MainViewController: UIViewController, NumberPadDelegate {
     var numberPadViewTopAnchor:NSLayoutConstraint!
 //    var currentthree = [String:Double]()
     var focusedLabel:LabelType?
-    var h:CGFloat!
+    var numberPadHeight:CGFloat!
+    var isTyping:Bool = false
     
     enum LabelType: Int {
         
@@ -46,6 +47,9 @@ class MainViewController: UIViewController, NumberPadDelegate {
         
         didSet{
             print("didset")
+            
+            
+            
             if let focusedLabel = focusedLabel {
                 switch focusedLabel {
                 case .LabelOneInFocus :
@@ -81,7 +85,7 @@ class MainViewController: UIViewController, NumberPadDelegate {
         super.viewDidLoad()
         initData()
         initView()
-        
+        updateAllLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,8 +112,8 @@ class MainViewController: UIViewController, NumberPadDelegate {
         currencyOneView = UIView()
         currencyTwoView = UIView()
         currencyThreeView = UIView()
-        h = self.view.frame.height * 0.4
-        numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: h))
+        numberPadHeight = self.view.frame.height * 0.4
+        numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
         numberPadView.numberPadDelegate = self
         
         print(self.view.frame.width)
@@ -247,8 +251,12 @@ class MainViewController: UIViewController, NumberPadDelegate {
 //MARK: Self Designed Function
     @objc func showNumberPad (_ recongizer:UIGestureRecognizer) {
     
+        guard isTyping == false else {
+            return
+        }
+        print("func showNumberPad typing")
+        isTyping = true
         
-        print("func showNumberPad")
         if recongizer.view == labelOne {
             focusedLabel = .LabelOneInFocus
             labelOne.text = ""
@@ -262,12 +270,14 @@ class MainViewController: UIViewController, NumberPadDelegate {
             
         
         UIView.animate(withDuration: 1.2) {
-            
-            self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.h
+            self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.numberPadHeight
         }
         
     }
     
+    
+
+//MARK: NumberPadDelegate
     func getNumberWith(numString: String, numInt: Int) {
         print("get string \(numString)")
         enteredString = numString
@@ -275,9 +285,12 @@ class MainViewController: UIViewController, NumberPadDelegate {
     }
     
     func okBtnTapped(bool: Bool) {
+        
+        isTyping = false
+        
         if bool == true {
             UIView.animate(withDuration: 1.2, animations: {
-                self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.h
+                self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.numberPadHeight
             })
         }
         
@@ -286,48 +299,77 @@ class MainViewController: UIViewController, NumberPadDelegate {
             switch focusLabel {
             case .LabelOneInFocus:
                 if let text = labelOne.text {
+                    if let double = Double(text) {
+                        Global.AmountOne = double
+                        Global.AmountTwo = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
+                        Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
+                        updateAllLabel()
+                    } else if labelOne.text == "" {
+                        resetGlobalAmountToZero ()
+                        updateAllLabel ()
+                    }
+
+                }else  {
                     
-                    Global.AmountOne = Double(text)!
-                    
-                    Global.AmountTwo = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
-                    
-                    Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
-                    updateAllLabel()
-                }else {
-                    Global.AmountOne = 0.0
-                    Global.AmountTwo = 0.0
-                    Global.AmountThree = 0.0
+                    resetGlobalAmountToZero ()
+                    updateAllLabel ()
                 }
                 
             case .LabelTwoInFocus:
+                
                 if let text = labelTwo.text {
-                    Global.AmountTwo = Double(text)!
-                    
-                    Global.AmountOne = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
-                    
-                    Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
+                    if let double = Double(text) {
+                        Global.AmountTwo = double
+                        Global.AmountOne = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
+                        Global.AmountThree = mainViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
+                        updateAllLabel ()
+                        
+                    } else if labelTwo.text == "" {
+
+                        resetGlobalAmountToZero ()
+                        updateAllLabel ()
+                    }
+
+
+                }else  {
+                    resetGlobalAmountToZero ()
                     updateAllLabel()
-                    
-                }else {
-                    Global.AmountOne = 0.0
-                    Global.AmountTwo = 0.0
-                    Global.AmountThree = 0.0
                 }
+                
             case .LabelThreeInFocus:
                 print("three")
             }
         }
         
         
+    }
+    
+    func resetGlobalAmountToZero () {
         
+        print("resetGlobalAmountToZero ()")
+        Global.AmountOne = 0.0
+        Global.AmountTwo = 0.0
+        Global.AmountThree = 0.0
         
     }
     
-    func updateAllLabel() {
+    
+    func updateAllLabel () {
         
-        labelOne.text = String(Global.AmountOne)
-        labelTwo.text = String(Global.AmountTwo)
+        print("updateAllLabel ()")
+        if Global.AmountOne == 0.0 {
+            labelOne.text = "0"
+        }
+        if Global.AmountTwo == 0.0 {
+            labelTwo.text = "0"
+        }
+        if Global.AmountThree == 0.0 {
+            labelThree.text = "0"
+        }
+        
     }
+    
+    
     
 }
 
@@ -336,30 +378,22 @@ extension MainViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
-        let alertM = AlertManager()
         //變換 picker View title color
         switch component {
         case 0:
             guard currencyOneKey.count > 0 else {
                 
-//                alertM.alertMessageWithOK(string: "沒有資料") { (Bool) in
-//                    if Bool == true {
-//                        self.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//                    }
-//                }
-                
-                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
+                let alert = UIAlertController(title: "CurrencyInvest", message: "Fail to Load Data,please check your Internet connection and re", preferredStyle: .alert)
                 
                 let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
                     self.dismiss(animated: true, completion: {
-                        
                     })
-
                 }
                 alert.addAction(actionOne)
                 self.present(alert, animated: true, completion: nil)
                 return nil
             }
+            
             let titleData = currencyOneKey[row]
             let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
             return myTitle

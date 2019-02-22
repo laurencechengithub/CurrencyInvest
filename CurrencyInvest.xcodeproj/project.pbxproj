@@ -21,7 +21,6 @@
 		5D53FEDD21C7730C00A333AA /* CurrencyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */; };
 		5D729E3A21DF61A400A64E42 /* EntryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3921DF61A400A64E42 /* EntryView.storyboard */; };
 		5D729E3E21DF642900A64E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */; };
-		5DBD8CEF221AE9D300CE8161 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBD8CEE221AE9D300CE8161 /* AlertManager.swift */; };
 		5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */; };
 		5DBDD7D421F190E7001D6B97 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF3F21ED85D0002B7CCD /* MainViewController.swift */; };
 		5DBDD7D621F1CAA1001D6B97 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */; };
@@ -84,7 +83,6 @@
 		5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataModel.swift; sourceTree = "<group>"; };
 		5D729E3921DF61A400A64E42 /* EntryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EntryView.storyboard; sourceTree = "<group>"; };
 		5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5DBD8CEE221AE9D300CE8161 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewViewController.swift; sourceTree = "<group>"; };
 		5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		5DDEAAB521A7ABCD00BE58AF /* CurrencyInvest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyInvest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,7 +172,6 @@
 				5D081FAD21C74D82002AB7E3 /* RequestManager.swift */,
 				5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */,
 				5D15FF4921ED87A1002B7CCD /* Global.swift */,
-				5DBD8CEE221AE9D300CE8161 /* AlertManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -549,7 +546,6 @@
 			files = (
 				5DDEAAFE21A7D87300BE58AF /* LabelExtension.swift in Sources */,
 				5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */,
-				5DBD8CEF221AE9D300CE8161 /* AlertManager.swift in Sources */,
 				5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */,
 				5DDEAAFF21A7D87300BE58AF /* UILabelExtension.swift in Sources */,
 				5DDEAB0121A7D87300BE58AF /* ColorExtension.swift in Sources */,
