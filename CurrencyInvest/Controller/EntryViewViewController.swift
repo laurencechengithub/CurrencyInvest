@@ -54,9 +54,16 @@ class EntryViewViewController: UIViewController {
     }
     
     func toMainView () {
-        let vc = MainViewController()
+//        let vc = CurrencyViewController()
+//        self.present(vc, animated: true, completion: nil)
+        
+        let mainS = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainS.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
+        
         self.present(vc, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
     }
     
 

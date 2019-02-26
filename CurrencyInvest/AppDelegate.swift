@@ -125,12 +125,12 @@ extension AppDelegate {
         
         switch shortCutType {
         case ShortcutIdentifier.First.type:
-            reqVC = entryView.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            reqVC = entryView.instantiateViewController(withIdentifier: "MainViewController") as! CurrencyViewController
             
             handled = true
             
         case ShortcutIdentifier.Second.type:
-            reqVC = entryView.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            reqVC = entryView.instantiateViewController(withIdentifier: "MainViewController") as! CurrencyViewController
             handled = true
             
         case ShortcutIdentifier.Dynamic.type:

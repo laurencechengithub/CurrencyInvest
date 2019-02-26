@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="39o-r4-9Zd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,20 +10,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Currency View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrencyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CurrencyViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="738-PU-lYT">
-                                <rect key="frame" x="0.0" y="371" width="375" height="296"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UtW-zM-IoQ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Pe9-qy-Y90"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="JBr-es-Zrj" kind="embed" id="Zya-2x-xv8"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UtW-zM-IoQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H5D-Q7-0j9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="UtW-zM-IoQ" secondAttribute="top" id="YMY-3x-JD9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UtW-zM-IoQ" secondAttribute="trailing" id="bcD-5y-QRJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="pgL-8I-iep"/>
@@ -32,23 +42,110 @@
             </objects>
             <point key="canvasLocation" x="616.79999999999995" y="-59.820089955022496"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Bdt-Qc-i3D">
+        <!--Bit Coin View Controller-->
+        <scene sceneID="nk7-0k-ch3">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="39o-r4-9Zd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6PK-Vq-fiM">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="JQf-tY-wRb"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iTi-B3-wWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="vpq-qK-Bgq" customClass="BitCoinViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LI0-f0-6yE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKi-yc-mot">
+                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="heX-3O-Zvv"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="JBr-es-Zrj" kind="embed" id="Qnd-D9-pIp"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gKi-yc-mot" firstAttribute="leading" secondItem="Qlo-PP-qtw" secondAttribute="leading" id="1nd-K0-T59"/>
+                            <constraint firstItem="Qlo-PP-qtw" firstAttribute="top" secondItem="gKi-yc-mot" secondAttribute="top" id="LpK-G5-f8p"/>
+                            <constraint firstItem="Qlo-PP-qtw" firstAttribute="trailing" secondItem="gKi-yc-mot" secondAttribute="trailing" id="VsR-pD-vOp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Qlo-PP-qtw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rUe-hy-uau" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322.39999999999998" y="-59.820089955022496"/>
+            <point key="canvasLocation" x="1444" y="-55"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="IqW-uU-xLf">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="JBr-es-Zrj" customClass="MainViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ue3-rd-1pY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh0-XP-JyZ">
+                                <rect key="frame" x="305" y="25" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="31l-M1-w10"/>
+                                    <constraint firstAttribute="width" constant="50" id="aDp-Cd-zY3"/>
+                                </constraints>
+                                <state key="normal" title="C"/>
+                                <connections>
+                                    <action selector="bitCoinBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="rxt-6w-Rdr"/>
+                                    <action selector="currencyBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="G7l-LN-4Ip"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv5-Xr-fVL" customClass="UILabelWithPadding" customModule="CurrencyInvest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="245" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <edgeInsets key="layoutMargins" top="8" left="20" bottom="8" right="8"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wb-VZ-YfV">
+                                <rect key="frame" x="245" y="25" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="V9P-v3-8Ov"/>
+                                    <constraint firstAttribute="width" constant="50" id="Vgh-ZO-Sln"/>
+                                </constraints>
+                                <state key="normal" title="B"/>
+                                <connections>
+                                    <action selector="bitCoinBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="MQC-IS-XQN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kh0-XP-JyZ" firstAttribute="leading" secondItem="9Wb-VZ-YfV" secondAttribute="trailing" constant="10" id="Icg-tI-Ijp"/>
+                            <constraint firstItem="kh0-XP-JyZ" firstAttribute="top" secondItem="ue3-rd-1pY" secondAttribute="top" constant="25" id="KCK-Ob-dzH"/>
+                            <constraint firstAttribute="trailing" secondItem="kh0-XP-JyZ" secondAttribute="trailing" constant="20" id="Nee-fH-mTh"/>
+                            <constraint firstItem="9Wb-VZ-YfV" firstAttribute="top" secondItem="ue3-rd-1pY" secondAttribute="top" constant="25" id="ciy-6A-AAA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bitCoinBtn" destination="9Wb-VZ-YfV" id="W8r-St-gZC"/>
+                        <outlet property="currencyBtn" destination="kh0-XP-JyZ" id="rhM-wZ-Wem"/>
+                        <outlet property="titleLabel" destination="bv5-Xr-fVL" id="nEx-Oy-IGj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mcO-DO-76p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141.59999999999999" y="600"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Zya-2x-xv8"/>
+    </inferredMetricsTieBreakers>
 </document>
