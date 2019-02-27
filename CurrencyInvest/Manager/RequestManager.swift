@@ -82,6 +82,35 @@ class RequestManager {
     }
     
     
+    func getBitCoinData (completeHandler:@escaping (BitCoinDataModel)->()) {
+        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
+        Alamofire.request(ethUrl, method: .get).responseJSON { (data) in
+            switch data.result {
+            case .success(let value):
+                let jsonData = JSON(value)
+                completeHandler(BitCoinDataModel(fromJson: jsonData))
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    func getEthCoinData (completeHandler:@escaping (BitCoinDataModel)->()) {
+        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ETHUSD"
+        Alamofire.request(ethUrl, method: .get).responseJSON { (data) in
+            switch data.result {
+            case .success(let value):
+                let jsonData = JSON(value)
+                completeHandler(BitCoinDataModel(fromJson: jsonData))
+        
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        
+    }
     
     
     

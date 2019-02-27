@@ -10,6 +10,8 @@ import UIKit
 import NotificationCenter
 
 class CurrencyViewController: UIViewController, NumberPadDelegate {
+
+    
     
     var currencyPicker:UIPickerView!
     var currencyOneView:UIView!
@@ -369,7 +371,13 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         enteredString = numString
     }
     
+    func tenkBtnTapped(numString: String) {
+        enteredString = numString
+    }
     
+    func hundredBtnTapped(numString: String) {
+        enteredString = numString
+    }
    
     
     
