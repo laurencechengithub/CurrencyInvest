@@ -30,7 +30,7 @@ class EntryViewViewController: UIViewController {
     
     
     func initView() {
-        //        SwiftSpinner.show("Loading")
+        
     }
     
     
@@ -54,15 +54,11 @@ class EntryViewViewController: UIViewController {
     }
     
     func toMainView () {
-//        let vc = CurrencyViewController()
-//        self.present(vc, animated: true, completion: nil)
         
-        let mainS = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainS.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
         
         self.present(vc, animated: true, completion: nil)
-        
-        
         
     }
     

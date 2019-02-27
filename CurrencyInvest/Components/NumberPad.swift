@@ -12,6 +12,9 @@ import UIKit
 protocol NumberPadDelegate {
     func getNumberWith(numString:String,numInt:Int)
     func okBtnTapped(bool:Bool)
+    func kBtnTapped(numString : String)
+    func tenkBtnTapped(numString:String)
+    func hundredBtnTapped(numString:String)
 }
 
 
@@ -143,11 +146,13 @@ extension NumberPad: UICollectionViewDelegate {
             case .Delete:
                 print("more")
             case .K:
-                print("numberPadDelegate.KBtnTapped")
+                numberPadDelegate.kBtnTapped(numString: "000")
             case .TenK:
-                print("numberPadDelegate.TenKBtnTapped")
+                numberPadDelegate.tenkBtnTapped(numString: "0000")
             case .Dot:
                 print("numberPadDelegate.DotBtnTapped")
+            case .HundredK:
+                numberPadDelegate.hundredBtnTapped(numString: "00000")
             default:
                 let selectedString = selectedKeyBoardBtnType.description
                 let selectedInt = selectedKeyBoardBtnType.rawValue

@@ -131,7 +131,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
         
         currencyOneView.translatesAutoresizingMaskIntoConstraints = false
-        currencyOneView.topAnchor.constraint(equalTo: view.topAnchor, constant: 174).isActive = true
+        currencyOneView.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
         currencyOneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         currencyOneView.heightAnchor.constraint(equalToConstant: 118).isActive = true
@@ -272,6 +272,30 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
     }
     
+    func resetGlobalAmountToZero () {
+        
+        print("resetGlobalAmountToZero ()")
+        Global.AmountOne = 0.0
+        Global.AmountTwo = 0.0
+        Global.AmountThree = 0.0
+        
+    }
+    
+    
+    func updateAllLabel () {
+        
+        print("updateAllLabel ()")
+        if Global.AmountOne == 0.0 {
+            labelOne.text = "0"
+        }
+        if Global.AmountTwo == 0.0 {
+            labelTwo.text = "0"
+        }
+        if Global.AmountThree == 0.0 {
+            labelThree.text = "0"
+        }
+        
+    }
     
 
 //MARK: NumberPadDelegate
@@ -341,30 +365,12 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
     }
     
-    func resetGlobalAmountToZero () {
-        
-        print("resetGlobalAmountToZero ()")
-        Global.AmountOne = 0.0
-        Global.AmountTwo = 0.0
-        Global.AmountThree = 0.0
-        
+    func kBtnTapped(numString : String) {
+        enteredString = numString
     }
     
     
-    func updateAllLabel () {
-        
-        print("updateAllLabel ()")
-        if Global.AmountOne == 0.0 {
-            labelOne.text = "0"
-        }
-        if Global.AmountTwo == 0.0 {
-            labelTwo.text = "0"
-        }
-        if Global.AmountThree == 0.0 {
-            labelThree.text = "0"
-        }
-        
-    }
+   
     
     
     

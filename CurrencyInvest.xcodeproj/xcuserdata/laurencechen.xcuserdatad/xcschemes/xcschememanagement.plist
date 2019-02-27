@@ -3,11 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CurrencyInvest.xcscheme_^#shared#^_</key>
+		<key>5DDEAAB421A7ABCD00BE58AF</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>12</integer>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5DDEAAC821A7ABCF00BE58AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5DDEAAD321A7ABCF00BE58AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

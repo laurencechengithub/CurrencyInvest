@@ -45,7 +45,7 @@
         <!--Bit Coin View Controller-->
         <scene sceneID="nk7-0k-ch3">
             <objects>
-                <viewController id="vpq-qK-Bgq" customClass="BitCoinViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BitCoinViewController" id="vpq-qK-Bgq" customClass="BitCoinViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LI0-f0-6yE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +88,6 @@
                                     <constraint firstAttribute="height" constant="50" id="31l-M1-w10"/>
                                     <constraint firstAttribute="width" constant="50" id="aDp-Cd-zY3"/>
                                 </constraints>
-                                <state key="normal" title="C"/>
                                 <connections>
                                     <action selector="bitCoinBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="rxt-6w-Rdr"/>
                                     <action selector="currencyBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="G7l-LN-4Ip"/>
@@ -120,7 +119,6 @@
                                     <constraint firstAttribute="height" constant="50" id="V9P-v3-8Ov"/>
                                     <constraint firstAttribute="width" constant="50" id="Vgh-ZO-Sln"/>
                                 </constraints>
-                                <state key="normal" title="B"/>
                                 <connections>
                                     <action selector="bitCoinBtnTapped:" destination="JBr-es-Zrj" eventType="touchUpInside" id="MQC-IS-XQN"/>
                                 </connections>
@@ -133,6 +131,7 @@
                             <constraint firstAttribute="trailing" secondItem="kh0-XP-JyZ" secondAttribute="trailing" constant="20" id="Nee-fH-mTh"/>
                             <constraint firstItem="9Wb-VZ-YfV" firstAttribute="top" secondItem="ue3-rd-1pY" secondAttribute="top" constant="25" id="ciy-6A-AAA"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="4jD-Z8-HBy"/>
                     </view>
                     <connections>
                         <outlet property="bitCoinBtn" destination="9Wb-VZ-YfV" id="W8r-St-gZC"/>
@@ -146,6 +145,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zya-2x-xv8"/>
+        <segue reference="Qnd-D9-pIp"/>
     </inferredMetricsTieBreakers>
 </document>

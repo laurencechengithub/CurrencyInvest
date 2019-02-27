@@ -24,13 +24,17 @@ class MainViewController: UIViewController {
         titleLabel.textColor = UIColor.ciIsabelline
         titleLabel.text = "Currency"
         
-        bitCoinBtn.layer.cornerRadius = 25
-        bitCoinBtn.layer.borderWidth = 3
-        bitCoinBtn.layer.borderColor = UIColor.ciMaize.cgColor
+        bitCoinBtn.setBackgroundImage(UIImage(named: "bitCoin"), for: .normal)
+        currencyBtn.setBackgroundImage(UIImage(named: "coin"), for: .normal)
+//        bitCoinBtn.layer.cornerRadius = 25
+//        bitCoinBtn.layer.borderWidth = 3
+//        bitCoinBtn.layer.borderColor = UIColor.ciMaize.cgColor
         
-        currencyBtn.layer.cornerRadius = 25
-        currencyBtn.layer.borderWidth = 3
-        currencyBtn.layer.borderColor = UIColor.ciMaize.cgColor
+//        currencyBtn.layer.cornerRadius = 25
+//        currencyBtn.layer.borderWidth = 3
+//        currencyBtn.layer.borderColor = UIColor.ciMaize.cgColor
+        
+        
         
         // Do any additional setup after loading the view.
     }
