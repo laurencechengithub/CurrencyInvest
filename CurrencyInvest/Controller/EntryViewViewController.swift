@@ -11,54 +11,81 @@ import SwiftSpinner
 
 class EntryViewViewController: UIViewController {
     
-//    let mainViewModel = MainViewModel()
     let entryViewViewModel = EntryViewViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initView()
         getCurrency()
  
     }
     
     override func viewDidAppear(_ animated: Bool) {
         SwiftSpinner.show(duration: 1.8, title: "Loading")
-        self.toMainView ()
     }
-    
-    
-    
-    func initView() {
-        
-    }
-    
-    
     
     
     func getCurrency () {
-
+        
+        self.getBitCoin()
+        
 //        entryViewViewModel.getQuotes()
-//        entryViewViewModel.quotesCompleteHandler = { (flag) in
+//        entryViewViewModel.quotesCompleteHandler = { (bool) in
 //
-//            if flag == true {
+//            if bool == true {
 //                DispatchQueue.main.async {
-//                    self.toMainView ()
+//                    self.getBitCoin()
 //                }
 //            } else {
-//                print("get quote not completede")
+//                print("get quote not complete")
 //            }
-//
 //        }
         
     }
     
-    func toMainView () {
+    func getBitCoin() {
+        
+        entryViewViewModel.getBitPrice()
+        entryViewViewModel.bitCompleteHandler = { (bool) in
+            
+            if bool == true {
+                DispatchQueue.main.async {
+                self.getEthCoin()
+                }
+            } else {
+                print("get Bit not complete")
+            }
+            
+        }
+
+    }
+    
+    
+    func getEthCoin() {
+        entryViewViewModel.getEthPrice()
+        entryViewViewModel.ethCompleteHandler = { (bool) in
+        
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.toMainView()
+                }
+            } else {
+                print("get Eth not complete")
+            }
+            
+        }
+    }
+    
+    
+    func toMainView() {
+        
+        entryViewViewModel.saveDataToUserDefault()
+        print (UserDefualtManager.sharedInstance.localCryptoPriceArray)
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
-        
-        self.present(vc, animated: true, completion: nil)
+        let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
+//        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        self.present(CurrencyVC, animated: true, completion: nil)
         
     }
     

@@ -10,6 +10,8 @@
 		5072747E55DAD5512C8F91D3 /* Pods_CurrencyInvest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B4D973DAA9248F31077D75 /* Pods_CurrencyInvest.framework */; };
 		50AC101A89B644DE2ECAD415 /* Pods_CurrencyInvestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CA67A1A0311E2574229920 /* Pods_CurrencyInvestUITests.framework */; };
 		5C776C0A016D5A519234F857 /* Pods_CurrencyInvestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D444C19A559876CADB655E /* Pods_CurrencyInvestTests.framework */; };
+		5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1A2240CB90005047EC /* MasterViewController.swift */; };
+		5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1C2240D77C005047EC /* CountingLabel.swift */; };
 		5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D081FAD21C74D82002AB7E3 /* RequestManager.swift */; };
 		5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */; };
 		5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */; };
@@ -20,9 +22,11 @@
 		5D1FF1F5222512CE00733C7D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F4222512CE00733C7D /* MainViewController.swift */; };
 		5D1FF1F7222517B200733C7D /* BitCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */; };
 		5D1FF1F9222517D300733C7D /* BitCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */; };
-		5D1FF1FB222517F600733C7D /* BitCoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1FA222517F600733C7D /* BitCoinDataModel.swift */; };
+		5D1FF1FB222517F600733C7D /* CryptoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */; };
 		5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */; };
+		5D448681223F978A002CD402 /* SwiftyMessageProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */; };
 		5D53FEDD21C7730C00A333AA /* CurrencyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */; };
+		5D5DF8D0222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5DF8CF222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift */; };
 		5D729E3A21DF61A400A64E42 /* EntryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3921DF61A400A64E42 /* EntryView.storyboard */; };
 		5D729E3E21DF642900A64E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */; };
 		5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */; };
@@ -75,6 +79,8 @@
 		27B4D973DAA9248F31077D75 /* Pods_CurrencyInvest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyInvest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		379BC2C9D05365B6242A3008 /* Pods-CurrencyInvest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyInvest.release.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyInvest/Pods-CurrencyInvest.release.xcconfig"; sourceTree = "<group>"; };
 		55CA67A1A0311E2574229920 /* Pods_CurrencyInvestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyInvestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D06AD1A2240CB90005047EC /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		5D06AD1C2240D77C005047EC /* CountingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
 		5D081FAD21C74D82002AB7E3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefualtManager.swift; sourceTree = "<group>"; };
@@ -86,9 +92,11 @@
 		5D1FF1F4222512CE00733C7D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinViewController.swift; sourceTree = "<group>"; };
 		5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinViewModel.swift; sourceTree = "<group>"; };
-		5D1FF1FA222517F600733C7D /* BitCoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinDataModel.swift; sourceTree = "<group>"; };
+		5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataModel.swift; sourceTree = "<group>"; };
 		5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelPaddingExtension.swift; sourceTree = "<group>"; };
+		5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyMessageProtocal.swift; sourceTree = "<group>"; };
 		5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataModel.swift; sourceTree = "<group>"; };
+		5D5DF8CF222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D729E3921DF61A400A64E42 /* EntryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EntryView.storyboard; sourceTree = "<group>"; };
 		5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */,
-				5D1FF1FA222517F600733C7D /* BitCoinDataModel.swift */,
+				5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,9 +217,10 @@
 			isa = PBXGroup;
 			children = (
 				5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */,
+				5D06AD1A2240CB90005047EC /* MasterViewController.swift */,
+				5D1FF1F4222512CE00733C7D /* MainViewController.swift */,
 				5D15FF3F21ED85D0002B7CCD /* CurrencyViewController.swift */,
 				5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */,
-				5D1FF1F4222512CE00733C7D /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,6 +236,7 @@
 		5D15FF4821ED86AE002B7CCD /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				5D5DF8CF222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift */,
 				5D15FF4121ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift */,
 			);
 			path = CollectionCell;
@@ -317,8 +327,10 @@
 			isa = PBXGroup;
 			children = (
 				5DDEAAE821A7AE9900BE58AF /* DropDownBtn.swift */,
+				5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */,
 				5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */,
 				5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */,
+				5D06AD1C2240D77C005047EC /* CountingLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -512,6 +524,7 @@
 				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -522,6 +535,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -560,9 +574,10 @@
 				5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */,
 				5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */,
 				5DDEAAFF21A7D87300BE58AF /* UILabelPadding.swift in Sources */,
-				5D1FF1FB222517F600733C7D /* BitCoinDataModel.swift in Sources */,
+				5D1FF1FB222517F600733C7D /* CryptoDataModel.swift in Sources */,
 				5DDEAB0121A7D87300BE58AF /* ColorExtension.swift in Sources */,
 				5D1FF1F9222517D300733C7D /* BitCoinViewModel.swift in Sources */,
+				5D5DF8D0222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift in Sources */,
 				5D15FF4C21ED88C8002B7CCD /* EntryViewViewModel.swift in Sources */,
 				5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */,
 				5D53FEDD21C7730C00A333AA /* CurrencyDataModel.swift in Sources */,
@@ -576,9 +591,11 @@
 				5DDEAB0421A7D87300BE58AF /* UIBottonExtension.swift in Sources */,
 				5DDEAAFB21A7D87300BE58AF /* ImageExtension.swift in Sources */,
 				5DDEAB0221A7D87300BE58AF /* UITextFieldExtension.swift in Sources */,
+				5D448681223F978A002CD402 /* SwiftyMessageProtocal.swift in Sources */,
 				5DDEAAE921A7AE9900BE58AF /* DropDownBtn.swift in Sources */,
 				5D15FF4A21ED87A1002B7CCD /* Global.swift in Sources */,
 				5DDEAB0621A7D87300BE58AF /* IntExtension.swift in Sources */,
+				5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */,
 				5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */,
 				5DDEAAEB21A7AECA00BE58AF /* GradientView.swift in Sources */,
 				5DDEAB0021A7D87300BE58AF /* StringExtension.swift in Sources */,
@@ -586,6 +603,7 @@
 				5DDEAB0321A7D87300BE58AF /* DoubleExtension.swift in Sources */,
 				5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */,
 				5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */,
+				5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */,
 				5DBDD7D421F190E7001D6B97 /* CurrencyViewController.swift in Sources */,
 				5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */,
 				5DDEAAB921A7ABCD00BE58AF /* AppDelegate.swift in Sources */,

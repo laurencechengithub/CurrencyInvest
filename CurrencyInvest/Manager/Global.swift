@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 struct Global {
     
     static var amountUSD = 0.0
@@ -24,7 +26,11 @@ struct Global {
     static var RateThree = 0.0
     static var AmountThree = 0.0
     
-    
+    static var isCurrencyPageShowing:Bool = true
+    static var isBitCoinPageShlowing:Bool = false
 }
 
-
+enum coinType:String {
+    case bit = "BTC"
+    case eth = "ETH"
+}

@@ -125,6 +125,76 @@ class UserDefualtManager {
     }
     
     
+    var localBitPrice:Double {
+        
+        get {
+            if let data = userDefault.object(forKey: "bitPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "bitPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    var localEthPrice:Double {
+        
+        get {
+            if let data = userDefault.object(forKey: "ethPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "ethPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    var localCryptoPriceArray:[Double] {
+        
+        get {
+            if let data = userDefault.object(forKey: "localCryptoPriceArray") {
+                return data as! [Double]
+            }
+            return [Double]()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "localCryptoPriceArray")
+            userDefault.synchronize()
+            
+        }
+        
+        
+    }
+    
+    var localCryptoTypeArray:[String] {
+        
+        get {
+            if let data = userDefault.object(forKey: "localCryptoTypeArray") {
+                return data as! [String]
+            }
+            return [String]()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "localCryptoTypeArray")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    
 //    var dataSetOne:[Any] {
 //        get {
 //            if let data = userDefault.object(forKey: "SetOne") {

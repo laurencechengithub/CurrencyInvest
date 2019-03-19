@@ -17,7 +17,9 @@ class RequestManager {
     enum Url:String {
         
         case currency = "http://apilayer.net/api/live?access_key=0c056c4320688c8c947e54ab6f59bfcb"
-        case crypto = ""
+        case cryptoHistryBTC = "https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD"
+        case cryptoBTC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
+        case cryptoETH = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ETHUSD"
     }
     
 //    var currencyDataModel:CurrencyDataModel?
@@ -82,13 +84,14 @@ class RequestManager {
     }
     
     
-    func getBitCoinData (completeHandler:@escaping (BitCoinDataModel)->()) {
-        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
-        Alamofire.request(ethUrl, method: .get).responseJSON { (data) in
+    func getBitCoinData (completeHandler:@escaping (CryptoDataModel)->()) {
+//        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
+
+        Alamofire.request(Url.cryptoBTC.rawValue, method: .get).responseJSON { (data) in
             switch data.result {
             case .success(let value):
                 let jsonData = JSON(value)
-                completeHandler(BitCoinDataModel(fromJson: jsonData))
+                completeHandler(CryptoDataModel(fromJson: jsonData))
             case .failure(let error):
                 print(error)
             }
@@ -96,13 +99,13 @@ class RequestManager {
     }
     
     
-    func getEthCoinData (completeHandler:@escaping (BitCoinDataModel)->()) {
-        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ETHUSD"
-        Alamofire.request(ethUrl, method: .get).responseJSON { (data) in
+    func getEthCoinData (completeHandler:@escaping (CryptoDataModel)->()) {
+//        let ethUrl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ETHUSD"
+        Alamofire.request(Url.cryptoETH.rawValue, method: .get).responseJSON { (data) in
             switch data.result {
             case .success(let value):
                 let jsonData = JSON(value)
-                completeHandler(BitCoinDataModel(fromJson: jsonData))
+                completeHandler(CryptoDataModel(fromJson: jsonData))
         
             case .failure(let error):
                 print(error)

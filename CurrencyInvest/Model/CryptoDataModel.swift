@@ -1,5 +1,5 @@
 //
-//  BitCoinDataModel.swift
+//  CryptoDataModel.swift
 //  CurrencyInvest
 //
 //  Created by Laurence  Chen on 2019/2/26.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct BitCoinDataModel {
+struct CryptoDataModel {
     let ask, bid, last, high: Double
     let low: Double
     let open: Open

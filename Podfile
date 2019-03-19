@@ -15,6 +15,7 @@ target 'CurrencyInvest' do
   pod 'Kingfisher'
   pod 'Firebase/Core'
   pod 'Firebase/DynamicLinks'
+  pod 'SwiftMessages', '>= 3.3'
 
   target 'CurrencyInvestTests' do
     inherit! :search_paths

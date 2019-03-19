@@ -59,6 +59,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SwiftMessages (6.0.0):
+    - SwiftMessages/App (= 6.0.0)
+  - SwiftMessages/App (6.0.0)
   - SwiftSpinner (1.6.2)
   - SwiftyJSON (4.1.0)
 
@@ -68,6 +71,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/DynamicLinks
   - Kingfisher
+  - SwiftMessages (>= 3.3)
   - SwiftSpinner
   - SwiftyJSON
 
@@ -85,6 +89,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Kingfisher
     - nanopb
+    - SwiftMessages
     - SwiftSpinner
     - SwiftyJSON
 
@@ -101,9 +106,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
   SwiftSpinner: 3a4c6dea425e5a31b908a8b1dd5dcd1ad4d96340
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: bfca4beaaa9cbe63eff2074d30d2bf433aafc92f
+PODFILE CHECKSUM: fb69b0d556e4fdf26fe91bbc13a9bbe9393ec8d3
 
 COCOAPODS: 1.5.0

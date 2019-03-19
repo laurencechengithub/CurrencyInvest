@@ -10,9 +10,10 @@ import UIKit
 import NotificationCenter
 
 class CurrencyViewController: UIViewController, NumberPadDelegate {
-
     
     
+    
+    var scrollView = UIScrollView()
     var currencyPicker:UIPickerView!
     var currencyOneView:UIView!
     var currencyTwoView:UIView!
@@ -37,6 +38,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     var numberPadHeight:CGFloat!
     var isTyping:Bool = false
     
+
     enum LabelType: Int {
         
         case LabelOneInFocus
@@ -81,6 +83,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Global.isCurrencyPageShowing = true
         initData()
         initView()
         updateAllLabel()
@@ -134,8 +137,8 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
         currencyOneView.translatesAutoresizingMaskIntoConstraints = false
         currencyOneView.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
-        currencyOneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        currencyOneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         currencyOneView.heightAnchor.constraint(equalToConstant: 118).isActive = true
         currencyOneView.backgroundColor = UIColor.ciDeepKoamaru
         
@@ -170,7 +173,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
         labelOne.translatesAutoresizingMaskIntoConstraints = false
         labelOne.topAnchor.constraint(equalTo: nameOne.bottomAnchor, constant: 10).isActive = true
-        labelOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 10).isActive = true
+        labelOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 30).isActive = true
         labelOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelOne.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor, constant: -10).isActive = true
         labelOne.backgroundColor = UIColor.clear
@@ -184,6 +187,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         labelOne.font = UIFont.boldSystemFont(ofSize: 30)
         labelOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         labelOne.text = String(Global.AmountOne)
+        labelOne.textAlignment = .left
         
         
         nameTwo.translatesAutoresizingMaskIntoConstraints = false
@@ -201,7 +205,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
         labelTwo.translatesAutoresizingMaskIntoConstraints = false
         labelTwo.topAnchor.constraint(equalTo: nameTwo.bottomAnchor, constant: 10).isActive = true
-        labelTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 10).isActive = true
+        labelTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 30).isActive = true
         labelTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelTwo.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor, constant: -10).isActive = true
         labelTwo.backgroundColor = UIColor.clear
@@ -215,6 +219,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         labelTwo.font = UIFont.boldSystemFont(ofSize: 30)
         labelTwo.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         labelTwo.text = String(Global.AmountTwo)
+        labelTwo.textAlignment = .left
         
         labelThree.translatesAutoresizingMaskIntoConstraints = false
         labelThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 10).isActive = true
