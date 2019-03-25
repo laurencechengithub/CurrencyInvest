@@ -216,7 +216,9 @@ class NumberPadCollectionViewCell: UICollectionViewCell {
     
     func initView() {
         
-        contentView.backgroundColor = UIColor.ciDeepKoamaru
+//        contentView.backgroundColor = UIColor.ciDeepKoamaru
+        contentView.backgroundColor = UIColor.ciJet
+        
 //        contentView.layer.borderWidth = 2
 //        contentView.layer.borderColor = UIColor.reNavigationBarRed.cgColor
         contentView.layer.cornerRadius = 6

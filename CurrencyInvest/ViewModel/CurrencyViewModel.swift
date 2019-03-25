@@ -36,26 +36,32 @@ class CurrencyViewModel {
     
     func calculateWith (inAmount: Double, inRate:Double, outRate:Double ) -> Double {
         
-            // qty=100 inAmount=100.0
+        if inRate == 0 || outRate == 0 {
+            return 0
+        } else {
+            
             let inAmountToUSDAmount = inAmount/inRate //轉換美金
-            let outAmount = inAmountToUSDAmount * outRate 
+            let outAmount = inAmountToUSDAmount * outRate
             
             return outAmount
-
+        }
+        
     }
 
-    
+    func aaaa (inAmount: Double, inRate:Double, outRate:Double ) -> Double {
+        
+        if inRate == 0 || outRate == 0 {
+            return 0
+        } else {
+            
+            let inAmountToUSDAmount = inAmount/inRate //轉換美金
+            let outAmount = inAmountToUSDAmount * outRate
+            
+            return outAmount
+        }
+        
+    }
 
-//    func calculateUSD (textField: UITextField, inRate:Double) {
-//
-//        guard let text = textField.text else {
-//            print("text is nil")
-//            return
-//        }
-//        let textIntoDouble = Double(text)
-//        Global.amountUSD = textIntoDouble ?? 0
-//
-//    }
     
     
 //    func reloadTextWith (outTextField:UITextField, amount:Double, inRate:Double) {

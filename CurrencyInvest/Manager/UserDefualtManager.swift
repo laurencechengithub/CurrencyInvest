@@ -68,7 +68,7 @@ class UserDefualtManager {
             if let data = userDefault.object(forKey: "amountOne") {
                 return data as! Double
             }
-            return Double()
+            return 0
         }
         
         set {
@@ -115,7 +115,7 @@ class UserDefualtManager {
             if let data = userDefault.object(forKey: "amountTwo") {
                 return data as! Double
             }
-            return Double()
+            return 0
         }
         
         set {
@@ -123,6 +123,54 @@ class UserDefualtManager {
             userDefault.synchronize()
         }
     }
+    
+
+    var localNameThree:String {
+        get {
+            if let data = userDefault.object(forKey: "nameThree") {
+                return data as! String
+            }
+            return String()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "nameThree")
+            userDefault.synchronize()
+        }
+    }
+    
+    
+    
+    var localRateThree:Double {
+        get {
+            if let data = userDefault.object(forKey: "rateThree") {
+                return data as! Double
+            }
+            return Double()
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "rateThree")
+            userDefault.synchronize()
+        }
+    }
+    
+    
+    
+    var localAmountThree:Double {
+        get {
+            if let data = userDefault.object(forKey: "amountThree") {
+                return data as! Double
+            }
+            return 0
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "amountThree")
+            userDefault.synchronize()
+        }
+    }
+    
     
     
     var localBitPrice:Double {

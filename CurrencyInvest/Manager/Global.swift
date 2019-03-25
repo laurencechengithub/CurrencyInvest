@@ -22,9 +22,9 @@ struct Global {
     static var RateTwo = UserDefualtManager.sharedInstance.localRateTwo
     static var AmountTwo = UserDefualtManager.sharedInstance.localAmountTwo
     
-    static var NameThree = ""
-    static var RateThree = 0.0
-    static var AmountThree = 0.0
+    static var NameThree = UserDefualtManager.sharedInstance.localNameOne
+    static var RateThree = UserDefualtManager.sharedInstance.localRateOne
+    static var AmountThree = UserDefualtManager.sharedInstance.localAmountOne
     
     static var isCurrencyPageShowing:Bool = true
     static var isBitCoinPageShlowing:Bool = false

@@ -11,26 +11,36 @@ import NotificationCenter
 
 class CurrencyViewController: UIViewController, NumberPadDelegate {
     
-    
-    
+
     var scrollView = UIScrollView()
     var currencyPicker:UIPickerView!
     var currencyOneView:UIView!
     var currencyTwoView:UIView!
     var currencyThreeView:UIView!
+    
+    var blackView = UIView()
     var numberPadView:NumberPad!
     
     var labelOne = UILabel()
-    var labelTwo = UILabel()
-    var labelThree = UILabel()
     var nameOne = UILabel()
-    var nameTwo = UILabel()
+    var imageViewOne = UIImageView()
     var currencyOneKey = [String]()
     var currencyOneQuotes = [String:Double]()
+    
+    var labelTwo = UILabel()
+    var nameTwo = UILabel()
+    var imageViewTwo = UIImageView()
     var currencyTwoQuotes = [String:Double]()
     var currencyTwoKey = [String]()
-//    var currencyThreeQuotes = [String:Double]()
-//    var currencyThreeKey = [String]()
+    
+    var labelThree = UILabel()
+    var nameThree = UILabel()
+    var imageViewThree = UIImageView()
+    var currencyThreeQuotes = [String:Double]()
+    var currencyThreeKey = [String]()
+
+    
+
     let currencyViewModel = CurrencyViewModel()
     var numberPadViewTopAnchor:NSLayoutConstraint!
 //    var currentthree = [String:Double]()
@@ -51,19 +61,22 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         didSet{
             print("didset")
             
-            
-            
             if let focusedLabel = focusedLabel {
                 switch focusedLabel {
                 case .LabelOneInFocus :
+                    
+                    print(Global.AmountOne)
+//                    Global.AmountOne = 0
                     if let text = labelOne.text {
                         labelOne.text = text + enteredString
                     } else {
                         labelOne.text = enteredString
                     }
                     
-                case .LabelTwoInFocus :
                     
+                case .LabelTwoInFocus :
+                    print(Global.AmountTwo)
+//                    Global.AmountTwo = 0
                     if let text = labelTwo.text {
                         labelTwo.text = text + enteredString
                     } else {
@@ -71,7 +84,14 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
                     }
          
                 case .LabelThreeInFocus :
-                    print("three")
+                    
+                    print(Global.AmountThree)
+//                    Global.AmountThree = 0
+                    if let text = labelThree.text {
+                        labelThree.text = text + enteredString
+                    } else {
+                        labelThree.text = enteredString
+                    }
 
                 }
             }
@@ -104,6 +124,8 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         currencyOneQuotes = currencyViewModel.getQuotes()
         currencyTwoKey = currencyViewModel.getQuotesKey()
         currencyTwoQuotes = currencyViewModel.getQuotes()
+        currencyThreeKey = currencyViewModel.getQuotesKey()
+        currencyThreeQuotes = currencyViewModel.getQuotes()
     }
     
     func initView () {
@@ -129,10 +151,15 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         
         currencyOneView.addSubview(nameOne)
         currencyOneView.addSubview(labelOne)
+        currencyOneView.addSubview(imageViewOne)
+        
         currencyTwoView.addSubview(nameTwo)
         currencyTwoView.addSubview(labelTwo)
-        currencyThreeView.addSubview(labelThree)
+        currencyTwoView.addSubview(imageViewTwo)
         
+        currencyThreeView.addSubview(labelThree)
+        currencyThreeView.addSubview(nameThree)
+        currencyThreeView.addSubview(imageViewThree)
         
         
         currencyOneView.translatesAutoresizingMaskIntoConstraints = false
@@ -141,45 +168,50 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         currencyOneView.heightAnchor.constraint(equalToConstant: 118).isActive = true
         currencyOneView.backgroundColor = UIColor.ciDeepKoamaru
+        currencyOneView.layer.shadowColor = UIColor.ciMaize.cgColor
+        currencyOneView.layer.shadowOpacity = 0.5
+        currencyOneView.layer.shadowRadius = 5
+        currencyOneView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
         
         currencyTwoView.translatesAutoresizingMaskIntoConstraints = false
-        currencyTwoView.topAnchor.constraint(equalTo: currencyOneView.bottomAnchor, constant: 10).isActive = true
+        currencyTwoView.topAnchor.constraint(equalTo: currencyOneView.bottomAnchor, constant: 20).isActive = true
         currencyTwoView.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor).isActive = true
         currencyTwoView.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor).isActive = true
         currencyTwoView.heightAnchor.constraint(equalToConstant: 118).isActive = true
         currencyTwoView.backgroundColor = UIColor.ciDeepKoamaru
+        currencyTwoView.layer.shadowColor = UIColor.white.cgColor
+        currencyTwoView.layer.shadowOpacity = 0.5
+        currencyTwoView.layer.shadowRadius = 5
+        currencyTwoView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
         
         currencyThreeView.translatesAutoresizingMaskIntoConstraints = false
-        currencyThreeView.topAnchor.constraint(equalTo: currencyTwoView.bottomAnchor, constant: 10).isActive = true
+        currencyThreeView.topAnchor.constraint(equalTo: currencyTwoView.bottomAnchor, constant: 20).isActive = true
         currencyThreeView.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor).isActive = true
         currencyThreeView.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor).isActive = true
         currencyThreeView.heightAnchor.constraint(equalToConstant: 118).isActive = true
         currencyThreeView.backgroundColor = UIColor.ciDeepKoamaru
-        
+        currencyThreeView.layer.shadowColor = UIColor.lightGray.cgColor
+        currencyThreeView.layer.shadowOpacity = 0.5
+        currencyThreeView.layer.shadowRadius = 5
+        currencyThreeView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
         
         nameOne.translatesAutoresizingMaskIntoConstraints = false
-        nameOne.topAnchor.constraint(equalTo: currencyOneView.topAnchor, constant: 10).isActive = true
-        nameOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 10).isActive = true
-        nameOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        nameOne.topAnchor.constraint(equalTo: currencyOneView.topAnchor, constant: 20).isActive = true
+        nameOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 90 ).isActive = true
+        nameOne.heightAnchor.constraint(equalToConstant: 34).isActive = true
         nameOne.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        nameOne.backgroundColor = UIColor.ciDarkGunMetal
-//        nameOne.layer.borderWidth = 1
-//        nameOne.layer.borderColor = UIColor.white.cgColor
-//        nameOne.layer.cornerRadius = 20
+//        nameOne.backgroundColor = UIColor.ciDarkGunMetal
         nameOne.text = Global.NameOne
         nameOne.textColor = UIColor.ciIsabelline
         nameOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         nameOne.font = UIFont.boldSystemFont(ofSize: 30)
         
         labelOne.translatesAutoresizingMaskIntoConstraints = false
-        labelOne.topAnchor.constraint(equalTo: nameOne.bottomAnchor, constant: 10).isActive = true
-        labelOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 30).isActive = true
+        labelOne.topAnchor.constraint(equalTo: nameOne.bottomAnchor, constant: 1).isActive = true
+        labelOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 90).isActive = true
         labelOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelOne.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor, constant: -10).isActive = true
         labelOne.backgroundColor = UIColor.clear
-//        labelOne.layer.borderWidth = 3
-//        labelOne.layer.borderColor = UIColor.white.cgColor
-//        labelOne.layer.cornerRadius = 20
         labelOne.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
         labelOne.addGestureRecognizer(tapGesture)
@@ -189,29 +221,47 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         labelOne.text = String(Global.AmountOne)
         labelOne.textAlignment = .left
         
+        imageViewOne.translatesAutoresizingMaskIntoConstraints = false
+        imageViewOne.topAnchor.constraint(equalTo: currencyOneView.topAnchor, constant: 30).isActive = true
+        imageViewOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 30).isActive = true
+        imageViewOne.heightAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewOne.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewOne.backgroundColor = UIColor.blue
+        imageViewOne.layer.cornerRadius = 29
+        
+        imageViewTwo.translatesAutoresizingMaskIntoConstraints = false
+        imageViewTwo.topAnchor.constraint(equalTo: currencyTwoView.topAnchor, constant: 30).isActive = true
+        imageViewTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 30).isActive = true
+        imageViewTwo.heightAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewTwo.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewTwo.backgroundColor = UIColor.blue
+        imageViewTwo.layer.cornerRadius = 29
+        
+        imageViewThree.translatesAutoresizingMaskIntoConstraints = false
+        imageViewThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 30).isActive = true
+        imageViewThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 30).isActive = true
+        imageViewThree.heightAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewThree.widthAnchor.constraint(equalToConstant: 58).isActive = true
+        imageViewThree.backgroundColor = UIColor.blue
+        imageViewThree.layer.cornerRadius = 29
         
         nameTwo.translatesAutoresizingMaskIntoConstraints = false
         nameTwo.topAnchor.constraint(equalTo: currencyTwoView.topAnchor, constant: 10).isActive = true
-        nameTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 10).isActive = true
-        nameTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        nameTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 90).isActive = true
+        nameTwo.heightAnchor.constraint(equalToConstant: 34).isActive = true
         nameTwo.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        nameTwo.backgroundColor = UIColor.ciDarkGunMetal
-//        nameTwo.layer.borderWidth = 1
-//        nameTwo.layer.borderColor = UIColor.white.cgColor
-//        nameTwo.layer.cornerRadius = 20
+//        nameTwo.backgroundColor = UIColor.ciDarkGunMetal
+        nameTwo.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         nameTwo.text = Global.NameTwo
         nameTwo.textColor = UIColor.ciIsabelline
         nameTwo.font = UIFont.boldSystemFont(ofSize: 30)
         
         labelTwo.translatesAutoresizingMaskIntoConstraints = false
-        labelTwo.topAnchor.constraint(equalTo: nameTwo.bottomAnchor, constant: 10).isActive = true
-        labelTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 30).isActive = true
+        labelTwo.topAnchor.constraint(equalTo: nameTwo.bottomAnchor, constant: 1).isActive = true
+        labelTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 90).isActive = true
         labelTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelTwo.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor, constant: -10).isActive = true
         labelTwo.backgroundColor = UIColor.clear
-//        labelTwo.layer.borderWidth = 3
-//        labelTwo.layer.borderColor = UIColor.white.cgColor
-//        labelTwo.layer.cornerRadius = 20
         labelTwo.isUserInteractionEnabled = true
         let tapGestureTwo = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
         labelTwo.addGestureRecognizer(tapGestureTwo)
@@ -221,15 +271,32 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         labelTwo.text = String(Global.AmountTwo)
         labelTwo.textAlignment = .left
         
+        
+        nameThree.translatesAutoresizingMaskIntoConstraints = false
+        nameThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 10).isActive = true
+        nameThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 90).isActive = true
+        nameThree.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        nameThree.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        nameThree.backgroundColor = UIColor.ciDarkGunMetal
+        nameThree.text = Global.NameThree
+        nameThree.textColor = UIColor.ciIsabelline
+        nameThree.font = UIFont.boldSystemFont(ofSize: 30)
+        nameThree.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        
         labelThree.translatesAutoresizingMaskIntoConstraints = false
-        labelThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 10).isActive = true
-        labelThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 10).isActive = true
+        labelThree.topAnchor.constraint(equalTo: nameThree.bottomAnchor, constant: 5).isActive = true
+        labelThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 90).isActive = true
         labelThree.heightAnchor.constraint(equalToConstant: 44).isActive = true
         labelThree.trailingAnchor.constraint(equalTo: currencyThreeView.trailingAnchor, constant: -10).isActive = true
         labelThree.backgroundColor = UIColor.clear
-        labelThree.layer.borderWidth = 3
-        labelThree.layer.borderColor = UIColor.white.cgColor
-        labelThree.layer.cornerRadius = 20
+        labelThree.isUserInteractionEnabled = true
+        let tapGestureThree = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
+        labelThree.addGestureRecognizer(tapGestureThree)
+        labelThree.textColor = UIColor.ciMaize
+        labelThree.font = UIFont.boldSystemFont(ofSize: 30)
+        labelThree.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        labelThree.text = String(Global.AmountThree)
+        labelThree.textAlignment = .left
         
         
         currencyPicker.translatesAutoresizingMaskIntoConstraints = false
@@ -254,7 +321,9 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     
 //MARK: Self Designed Function
     @objc func showNumberPad (_ recongizer:UIGestureRecognizer) {
-    
+        
+        
+        
         guard isTyping == false else {
             return
         }
@@ -267,17 +336,18 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         } else if recongizer.view == labelTwo {
             focusedLabel = .LabelTwoInFocus
             labelTwo.text = ""
-        } else {
-            print("else")
+        } else if recongizer.view == labelThree {
+            focusedLabel = .LabelThreeInFocus
+            labelThree.text = ""
         }
-        print(numberPadView.frame.origin.y)
+
+        UIView.animate(withDuration: 0.8) {
             
-        
-        UIView.animate(withDuration: 1.2) {
             self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.numberPadHeight
         }
         
     }
+    
     
     func resetGlobalAmountToZero () {
         
@@ -290,16 +360,28 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     
     
     func updateAllLabel () {
-        
+        print(Global.AmountOne)
+        print(Global.AmountTwo)
+        print(Global.AmountThree)
         print("updateAllLabel ()")
-        if Global.AmountOne == 0.0 {
+        
+        if Global.AmountOne == 0 {
             labelOne.text = "0"
+        } else {
+            let roundnum1 = Global.AmountOne.roundToDecimal(2)
+            labelOne.text = "\(roundnum1)"
         }
-        if Global.AmountTwo == 0.0 {
+        if Global.AmountTwo == 0 {
             labelTwo.text = "0"
+        }else {
+            let roundnum2 = Global.AmountTwo.roundToDecimal(2)
+            labelTwo.text = "\(roundnum2)"
         }
-        if Global.AmountThree == 0.0 {
+        if Global.AmountThree == 0 {
             labelThree.text = "0"
+        }else {
+            let roundnum3 = Global.AmountThree.roundToDecimal(2)
+            labelThree.text = "\(roundnum3)"
         }
         
     }
@@ -307,9 +389,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
 
 //MARK: NumberPadDelegate
     func getNumberWith(numString: String, numInt: Int) {
-        print("get string \(numString)")
         enteredString = numString
-        print(enteredString)
     }
     
     func okBtnTapped(bool: Bool) {
@@ -317,7 +397,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         isTyping = false
         
         if bool == true {
-            UIView.animate(withDuration: 1.2, animations: {
+            UIView.animate(withDuration: 0.8, animations: {
                 self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.numberPadHeight
             })
         }
@@ -328,13 +408,18 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
             case .LabelOneInFocus:
                 if let text = labelOne.text {
                     if let double = Double(text) {
+                        
                         Global.AmountOne = double
+                        
+                        print("Global.RateOne \(Global.RateOne)")
+                        print("Global.RateTwo \(Global.RateTwo)")
+                        print("Global.RateThree \(Global.RateThree)")
+                        
                         Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
                         Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
+    
                         updateAllLabel()
-                    } else if labelOne.text == "" {
-                        resetGlobalAmountToZero ()
-                        updateAllLabel ()
+                        
                     }
 
                 }else  {
@@ -348,24 +433,43 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
                 if let text = labelTwo.text {
                     if let double = Double(text) {
                         Global.AmountTwo = double
+                        print("Global.RateOne \(Global.RateOne)")
+                        print("Global.RateTwo \(Global.RateTwo)")
+                        print("Global.RateThree \(Global.RateThree)")
+                        
                         Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
                         Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
+
                         updateAllLabel ()
                         
-                    } else if labelTwo.text == "" {
-
-                        resetGlobalAmountToZero ()
-                        updateAllLabel ()
                     }
 
-
-                }else  {
+                }
+                else  {
                     resetGlobalAmountToZero ()
                     updateAllLabel()
                 }
                 
             case .LabelThreeInFocus:
-                print("three")
+                
+                if let text = labelThree.text {
+                    if let double = Double(text) {
+                        Global.AmountThree = double
+                        print("Global.RateOne \(Global.RateOne)")
+                        print("Global.RateTwo \(Global.RateTwo)")
+                        print("Global.RateThree \(Global.RateThree)")
+                        
+                        Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateOne)
+                        Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateTwo)
+                        updateAllLabel ()
+                        
+                    }
+                    
+
+                }else  {
+                    resetGlobalAmountToZero ()
+                    updateAllLabel()
+                }
             }
         }
         
@@ -429,6 +533,22 @@ extension CurrencyViewController: UIPickerViewDelegate {
             let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
             return myTitle
             
+        case 2:
+            
+            guard currencyThreeKey.count > 0 else {
+                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
+                
+                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(actionOne)
+                self.present(alert, animated: true, completion: nil)
+                return nil
+            }
+            let titleData = currencyThreeKey[row]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
+            return myTitle
+            
         default:
             return nil
         }
@@ -441,17 +561,63 @@ extension CurrencyViewController: UIPickerViewDelegate {
         switch component {
         case 0:
             let countryString = "USD\( currencyOneKey[row])"
+            //更新匯率名字
             Global.NameOne = currencyOneKey[row]
-            Global.RateOne = currencyOneQuotes["\(countryString)"] ?? 1.0
             nameOne.text = Global.NameOne
-            // TBD 設定國旗圖案
+            
+            //更新匯率
+            Global.RateOne = currencyOneQuotes["\(countryString)"] ?? 1.0
+            
+            Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
+            Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
+            
+            updateAllLabel()
+            //設定國旗圖案
+            if let image:UIImage = UIImage(named: "\(Global.NameOne)") {
+                imageViewOne.image = image
+            } else {
+                imageViewOne.image = UIImage(named: "logo")
+            }
+            
         case 1:
             let countryString = "USD\( currencyTwoKey[row])"
- 
+            
+            //更新匯率名字
             Global.NameTwo = currencyTwoKey[row]
-            Global.RateTwo = currencyTwoQuotes["\(countryString)"] ?? 1.0
             nameTwo.text = Global.NameTwo
-            // TBD 設定國旗圖案
+            
+            //更新匯率
+            Global.RateTwo = currencyTwoQuotes["\(countryString)"] ?? 1.0
+            Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
+            Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
+            
+            updateAllLabel ()
+            //設定國旗圖案
+            
+            if let image:UIImage = UIImage(named: "\(Global.NameTwo)") {
+                imageViewTwo.image = image
+            } else {
+                imageViewTwo.image = UIImage(named: "logo")
+            }
+            
+        case 2:
+            let countryString = "USD\( currencyThreeKey[row])"
+            //更新匯率名字
+            Global.NameThree = currencyThreeKey[row]
+            nameThree.text = Global.NameThree
+            
+            //更新匯率
+            Global.RateThree = currencyThreeQuotes["\(countryString)"] ?? 1.0
+            Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateOne)
+            Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateTwo)
+            updateAllLabel ()
+            //設定國旗圖案
+            if let image:UIImage = UIImage(named: "\(Global.NameThree)") {
+                imageViewThree.image = image
+            } else {
+                imageViewThree.image = UIImage(named: "logo")
+            }
+            
         default:
             return
         }
@@ -469,7 +635,7 @@ extension CurrencyViewController: UIPickerViewDelegate {
 extension CurrencyViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return 3
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -479,7 +645,8 @@ extension CurrencyViewController: UIPickerViewDataSource {
             return currencyOneKey.count
         case 1:
             return currencyTwoKey.count
-
+        case 2:
+            return currencyThreeKey.count
         default:
             return 0
         }
