@@ -191,7 +191,6 @@ class UserDefualtManager {
     }
     
     var localEthPrice:Double {
-        
         get {
             if let data = userDefault.object(forKey: "ethPrice") {
                 return data as! Double
@@ -206,6 +205,67 @@ class UserDefualtManager {
         }
         
     }
+    
+    var localLTCPrice:Double {
+        get {
+            if let data = userDefault.object(forKey: "ltcPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        set {
+            userDefault.set(newValue, forKey: "ltcPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    var localXMRPrice:Double {
+        get {
+            if let data = userDefault.object(forKey: "xmrPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        set {
+            userDefault.set(newValue, forKey: "xmrPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    var localXRPPrice:Double {
+        get {
+            if let data = userDefault.object(forKey: "xrpPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        set {
+            userDefault.set(newValue, forKey: "xrpPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
+    var localZECPrice:Double {
+        get {
+            if let data = userDefault.object(forKey: "zecPrice") {
+                return data as! Double
+            }
+            return Double()
+        }
+        set {
+            userDefault.set(newValue, forKey: "zecPrice")
+            userDefault.synchronize()
+            
+        }
+        
+    }
+    
     
     var localCryptoPriceArray:[Double] {
         

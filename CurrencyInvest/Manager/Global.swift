@@ -33,4 +33,8 @@ struct Global {
 enum coinType:String {
     case bit = "BTC"
     case eth = "ETH"
+    case ltc = "LTC"
+    case xmr = "XMR"
+    case xrp = "XRP"
+    case zec = "ZEC"
 }

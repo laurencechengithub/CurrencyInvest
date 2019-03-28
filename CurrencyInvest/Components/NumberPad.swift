@@ -221,7 +221,7 @@ class NumberPadCollectionViewCell: UICollectionViewCell {
         
 //        contentView.layer.borderWidth = 2
 //        contentView.layer.borderColor = UIColor.reNavigationBarRed.cgColor
-        contentView.layer.cornerRadius = 6
+        contentView.layer.cornerRadius = 20
         
         numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         numLabel.backgroundColor = UIColor.clear

@@ -31,12 +31,12 @@ class bitCoinCollectionViewCell: UICollectionViewCell {
         
         bitCoinCellLabelType.translatesAutoresizingMaskIntoConstraints = false
         bitCoinCellLabelType.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
-        bitCoinCellLabelType.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
-        bitCoinCellLabelType.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        bitCoinCellLabelType.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        bitCoinCellLabelType.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -5).isActive = true
+        bitCoinCellLabelType.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        bitCoinCellLabelType.widthAnchor.constraint(equalToConstant: 104).isActive = true
         bitCoinCellLabelType.backgroundColor = UIColor.clear
         bitCoinCellLabelType.textAlignment = .center
-        bitCoinCellLabelType.font = UIFont.boldSystemFont(ofSize: 30)
+        bitCoinCellLabelType.font = UIFont.boldSystemFont(ofSize: 45)
         bitCoinCellLabelType.textColor = UIColor.white
         
     }
@@ -54,7 +54,7 @@ class bitCoinCollectionViewCell: UICollectionViewCell {
         bitCoinCellLabelPrice.leadingAnchor.constraint(equalTo: bitCoinCellLabelType.trailingAnchor, constant: 15).isActive = true
         bitCoinCellLabelPrice.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
         bitCoinCellLabelPrice.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10 ).isActive = true
-    
+        bitCoinCellLabelPrice.textAlignment = .right
         
         
     }

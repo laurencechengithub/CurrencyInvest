@@ -67,7 +67,7 @@ class EntryViewViewController: UIViewController {
         
             if bool == true {
                 DispatchQueue.main.async {
-                    self.toMainView()
+                    self.getLTCCoin()
                 }
             } else {
                 print("get Eth not complete")
@@ -76,7 +76,64 @@ class EntryViewViewController: UIViewController {
         }
     }
     
+    func getLTCCoin() {
+        entryViewViewModel.getLTCPrice()
+        entryViewViewModel.ltcCompleteHandler = { (bool) in
+            
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.getXMRCoin()
+                }
+            } else {
+                print("get Eth not complete")
+            }
+            
+        }
+    }
     
+    func getXMRCoin() {
+        entryViewViewModel.getXMRPrice()
+        entryViewViewModel.xmrCompleteHandler = { (bool) in
+            
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.getXRPCoin()
+                }
+            } else {
+                print("get Eth not complete")
+            }
+            
+        }
+    }
+    
+    func getXRPCoin() {
+        entryViewViewModel.getXRPPrice()
+        entryViewViewModel.xrpCompleteHandler = { (bool) in
+            
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.getZECCoin()
+                }
+            } else {
+                print("get Eth not complete")
+            }
+            
+        }
+    }
+    func getZECCoin() {
+        entryViewViewModel.getZECPrice()
+        entryViewViewModel.zecCompleteHandler = { (bool) in
+            
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.toMainView()
+                }
+            } else {
+                print("get Eth not complete")
+            }
+            
+        }
+    }
     func toMainView() {
         
         entryViewViewModel.saveDataToUserDefault()
