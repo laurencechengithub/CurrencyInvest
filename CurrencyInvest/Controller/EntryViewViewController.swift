@@ -27,7 +27,7 @@ class EntryViewViewController: UIViewController {
     
     func getCurrency () {
         
-        self.getBitCoin()
+        getBitCoin()
         
 //        entryViewViewModel.getQuotes()
 //        entryViewViewModel.quotesCompleteHandler = { (bool) in

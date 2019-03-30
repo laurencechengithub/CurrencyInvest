@@ -19,7 +19,7 @@
 		5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4121ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift */; };
 		5D15FF4A21ED87A1002B7CCD /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4921ED87A1002B7CCD /* Global.swift */; };
 		5D15FF4C21ED88C8002B7CCD /* EntryViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF4B21ED88C8002B7CCD /* EntryViewViewModel.swift */; };
-		5D16417D224CB95100C9A46E /* HBSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16417C224CB95100C9A46E /* HBSegmentedControl.swift */; };
+		5D1ADB79224E0F360091439E /* AnimatedSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1ADB78224E0F360091439E /* AnimatedSegmentControl.swift */; };
 		5D1FF1F5222512CE00733C7D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F4222512CE00733C7D /* MainViewController.swift */; };
 		5D1FF1F7222517B200733C7D /* BitCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */; };
 		5D1FF1F9222517D300733C7D /* BitCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */; };
@@ -90,7 +90,7 @@
 		5D15FF4121ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadBtnCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D15FF4921ED87A1002B7CCD /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		5D15FF4B21ED88C8002B7CCD /* EntryViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewViewModel.swift; sourceTree = "<group>"; };
-		5D16417C224CB95100C9A46E /* HBSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSegmentedControl.swift; sourceTree = "<group>"; };
+		5D1ADB78224E0F360091439E /* AnimatedSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSegmentControl.swift; sourceTree = "<group>"; };
 		5D1FF1F4222512CE00733C7D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinViewController.swift; sourceTree = "<group>"; };
 		5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinViewModel.swift; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */,
 				5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */,
 				5D06AD1C2240D77C005047EC /* CountingLabel.swift */,
-				5D16417C224CB95100C9A46E /* HBSegmentedControl.swift */,
+				5D1ADB78224E0F360091439E /* AnimatedSegmentControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -573,6 +573,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D1ADB79224E0F360091439E /* AnimatedSegmentControl.swift in Sources */,
 				5DDEAAFE21A7D87300BE58AF /* LabelExtension.swift in Sources */,
 				5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */,
 				5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */,
@@ -605,7 +606,6 @@
 				5D1FF1F7222517B200733C7D /* BitCoinViewController.swift in Sources */,
 				5DDEAB0321A7D87300BE58AF /* DoubleExtension.swift in Sources */,
 				5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */,
-				5D16417D224CB95100C9A46E /* HBSegmentedControl.swift in Sources */,
 				5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */,
 				5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */,
 				5DBDD7D421F190E7001D6B97 /* CurrencyViewController.swift in Sources */,

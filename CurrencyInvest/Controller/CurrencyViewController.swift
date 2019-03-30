@@ -13,6 +13,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     
 
     var scrollView = UIScrollView()
+    var backView = UIView()
     var currencyPicker:UIPickerView!
     var currencyOneView:UIView!
     var currencyTwoView:UIView!
@@ -65,8 +66,6 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
                 switch focusedLabel {
                 case .LabelOneInFocus :
                     
-                    print(Global.AmountOne)
-//                    Global.AmountOne = 0
                     if let text = labelOne.text {
                         labelOne.text = text + enteredString
                     } else {
@@ -75,8 +74,6 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
                     
                     
                 case .LabelTwoInFocus :
-                    print(Global.AmountTwo)
-//                    Global.AmountTwo = 0
                     if let text = labelTwo.text {
                         labelTwo.text = text + enteredString
                     } else {
@@ -85,8 +82,6 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
          
                 case .LabelThreeInFocus :
                     
-                    print(Global.AmountThree)
-//                    Global.AmountThree = 0
                     if let text = labelThree.text {
                         labelThree.text = text + enteredString
                     } else {
@@ -131,6 +126,8 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
     func initView () {
         
         view.backgroundColor = UIColor.ciDarkGunMetal
+        
+        
         currencyPicker = UIPickerView()
         currencyOneView = UIView()
         currencyTwoView = UIView()
@@ -139,15 +136,17 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
         numberPadView.numberPadDelegate = self
         
-        print(self.view.frame.width)
-        print(self.view.frame.height)
-        //...
-//        view.addSubview(mainContainerView)
-        view.addSubview(currencyOneView)
-        view.addSubview(currencyTwoView)
-        view.addSubview(currencyThreeView)
-        view.addSubview(currencyPicker)
-        view.addSubview(numberPadView)
+        let viewWidth = view.frame.width
+        backView.frame = CGRect(x: 0, y: 120, width: viewWidth, height: 128)
+        backView.backgroundColor = UIColor.green
+        view.addSubview(backView)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(currencyOneView)
+        scrollView.addSubview(currencyTwoView)
+        scrollView.addSubview(currencyThreeView)
+        scrollView.addSubview(currencyPicker)
+        scrollView.addSubview(numberPadView)
         
         currencyOneView.addSubview(nameOne)
         currencyOneView.addSubview(labelOne)
@@ -161,11 +160,20 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         currencyThreeView.addSubview(nameThree)
         currencyThreeView.addSubview(imageViewThree)
         
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.backgroundColor = UIColor.clear
+        print(backView.frame.maxY)
+        scrollView.contentInset = UIEdgeInsets(top: 128, left: 0, bottom: 0, right: 0)
+        scrollView.setContentOffset(CGPoint(x: 0, y: -128), animated: false)
         
         currencyOneView.translatesAutoresizingMaskIntoConstraints = false
-        currencyOneView.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
-        currencyOneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        currencyOneView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 44).isActive = true
+        currencyOneView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30).isActive = true
+        currencyOneView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30).isActive = true
         currencyOneView.heightAnchor.constraint(equalToConstant: 118).isActive = true
         currencyOneView.backgroundColor = UIColor.ciDeepKoamaru
         currencyOneView.layer.shadowColor = UIColor.ciMaize.cgColor

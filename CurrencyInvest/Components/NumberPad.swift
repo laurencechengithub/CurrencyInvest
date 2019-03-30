@@ -23,7 +23,7 @@ class NumberPad : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print(self.frame)
+//        print(self.frame)
 //        setupView()
     }
     
@@ -32,7 +32,7 @@ class NumberPad : UIView {
     }
     
     override func didMoveToSuperview() {
-        print(self.frame)
+//        print(self.frame)
         setupView()
         
     }
