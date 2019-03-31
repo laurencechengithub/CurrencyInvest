@@ -8,11 +8,15 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class CurrencyViewModel {
     
     private var quotes = UserDefualtManager.sharedInstance.localQuote
-
+    
+    let exchangeContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var savedExchageArray = [Exchange]()
+    
     func getQuotesKey() -> [String] {
         
         var keys = [String]()
@@ -62,6 +66,55 @@ class CurrencyViewModel {
         
     }
 
+    
+    func createNewExchange(amount:Double,name:String,rate:Double) {
+        
+        let context = Exchange(context: exchangeContext)
+        context.rate = amount
+        context.name = name
+        context.amount = rate
+        
+        saveExchange()
+        
+    }
+    
+    func loadFromExchange() {
+        let request : NSFetchRequest<Exchange> = Exchange.fetchRequest()
+        
+        do {
+            savedExchageArray = try exchangeContext.fetch(request)
+        } catch {
+            print("error fatching from context: \(error)")
+        }
+        
+        
+    }
+    
+    func updateExchange(num:Int) {
+        
+        savedExchageArray[num].amount = 99887
+        saveExchange()
+        
+    }
+    
+    func saveExchange() {
+        do {
+            try exchangeContext.save()
+        } catch {
+            print("fail to save to coredata, error: \(error)")
+        }
+    }
+    
+    
+    
+    func deleteExchange(num:Int) {
+        
+        //以下順序很重要 先delete
+        exchangeContext.delete(savedExchageArray[num])
+        savedExchageArray.remove(at: num)
+        
+        saveExchange()
+    }
     
     
 //    func reloadTextWith (outTextField:UITextField, amount:Double, inRate:Double) {

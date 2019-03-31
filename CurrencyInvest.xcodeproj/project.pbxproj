@@ -33,6 +33,7 @@
 		5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */; };
 		5DBDD7D421F190E7001D6B97 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF3F21ED85D0002B7CCD /* CurrencyViewController.swift */; };
 		5DBDD7D621F1CAA1001D6B97 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */; };
+		5DCAB49A224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAB498224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld */; };
 		5DDEAAB921A7ABCD00BE58AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAB821A7ABCD00BE58AF /* AppDelegate.swift */; };
 		5DDEAABE21A7ABCD00BE58AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DDEAABC21A7ABCD00BE58AF /* Main.storyboard */; };
 		5DDEAAC021A7ABCF00BE58AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DDEAABF21A7ABCF00BE58AF /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewViewController.swift; sourceTree = "<group>"; };
 		5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
+		5DCAB499224FFAC500C789AF /* ExchangeDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExchangeDataModel.xcdatamodel; sourceTree = "<group>"; };
 		5DDEAAB521A7ABCD00BE58AF /* CurrencyInvest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyInvest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DDEAAB821A7ABCD00BE58AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DDEAABD21A7ABCD00BE58AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */,
 				5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */,
+				5DCAB498224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 			files = (
 				5D1ADB79224E0F360091439E /* AnimatedSegmentControl.swift in Sources */,
 				5DDEAAFE21A7D87300BE58AF /* LabelExtension.swift in Sources */,
+				5DCAB49A224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld in Sources */,
 				5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */,
 				5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */,
 				5DDEAAFF21A7D87300BE58AF /* UILabelPadding.swift in Sources */,
@@ -941,6 +945,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5DCAB498224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5DCAB499224FFAC500C789AF /* ExchangeDataModel.xcdatamodel */,
+			);
+			currentVersion = 5DCAB499224FFAC500C789AF /* ExchangeDataModel.xcdatamodel */;
+			path = ExchangeDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5DDEAAAD21A7ABCD00BE58AF /* Project object */;
 }
