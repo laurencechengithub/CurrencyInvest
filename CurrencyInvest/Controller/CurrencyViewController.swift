@@ -9,7 +9,7 @@
 import UIKit
 import NotificationCenter
 
-class CurrencyViewController: UIViewController, NumberPadDelegate {
+class CurrencyViewController: UIViewController, NumberPadDelegate, UIScrollViewDelegate {
     
 
     var scrollView = UIScrollView()
@@ -169,6 +169,7 @@ class CurrencyViewController: UIViewController, NumberPadDelegate {
         print(backView.frame.maxY)
         scrollView.contentInset = UIEdgeInsets(top: 128, left: 0, bottom: 0, right: 0)
         scrollView.setContentOffset(CGPoint(x: 0, y: -128), animated: false)
+        scrollView.delegate = self
         
         currencyOneView.translatesAutoresizingMaskIntoConstraints = false
         currencyOneView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 44).isActive = true

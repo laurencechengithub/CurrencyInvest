@@ -48,7 +48,8 @@ class BitCoinViewController: UIViewController {
         bitCoinCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         bitCoinCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         bitCoinCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    
+        bitCoinCollectionView.contentInset = UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0)
+        bitCoinCollectionView.setContentOffset(CGPoint(x: 0, y: -300), animated: false)
     }
     
 }
