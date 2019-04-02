@@ -165,4 +165,9 @@ extension UIColor {
     open class var ciIsabelline:UIColor{
         return UIColor(red: 247/255, green: 235/255, blue: 236/255, alpha: 1)
     }
+    
+    open class var ciButtonGreen:UIColor{
+        return UIColor(red: 87/255, green: 181/255, blue: 96/255, alpha: 1)
+    }
+    
 }

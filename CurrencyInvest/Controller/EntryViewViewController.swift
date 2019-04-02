@@ -136,13 +136,21 @@ class EntryViewViewController: UIViewController {
     }
     func toMainView() {
         
+        
+        
+        
+        
         entryViewViewModel.saveDataToUserDefault()
-        print (UserDefualtManager.sharedInstance.localCryptoPriceArray)
+        
+        
+        
+        
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
+        let currencyTwo = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyTwo") as! CurrencyTwo
+//        let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
 //        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        self.present(CurrencyVC, animated: true, completion: nil)
+        self.present(currencyTwo, animated: true, completion: nil)
         
     }
     

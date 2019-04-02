@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-195" y="-64"/>
         </scene>
-        <!--Currency View Controller-->
+        <!--Currency Two-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="CurrencyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CurrencyViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrencyTwo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CurrencyTwo" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,6 +105,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qnd-D9-pIp"/>
+        <segue reference="Zya-2x-xv8"/>
     </inferredMetricsTieBreakers>
 </document>
