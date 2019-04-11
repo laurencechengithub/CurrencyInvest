@@ -14,6 +14,8 @@ class CurrencyTwo: UIViewController {
 
     var collectionView: UICollectionView!
     let flowLayout = UICollectionViewFlowLayout()
+//    var localNameArray = UserDefualtManager.sharedInstance.localNameArray
+    var localNameArray = ["CNY","AUD","TWD","USD","JPN","MYD","EUR","SGN","SDF","RGT","ZDF","SEH","JYG","QSD","TFS","IJK"]
     
     override func viewDidLoad() {
         
@@ -61,12 +63,14 @@ extension CurrencyTwo: UICollectionViewDelegate {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 13
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseCell", for: indexPath) as! CurrencyCollectionViewCell
+        
+        cell.rateName.text = localNameArray[indexPath.row]
         
         return cell
     }
@@ -80,7 +84,14 @@ extension CurrencyTwo: UICollectionViewDelegate {
     }
     
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = RateTypePicker()
+//        vc.rateNameArray = localNameArray
+        vc.lastSelectedName = localNameArray[indexPath.row]
+        vc.modalTransitionStyle = .crossDissolve
+        self.present(vc, animated: true, completion: nil)
+    }
     
 }
 

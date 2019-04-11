@@ -48,7 +48,7 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
 //        rateName.backgroundColor = UIColor.green
         rateName.text = "USD"
         rateName.textColor = UIColor.ciMaize
-        rateName.font = UIFont.boldSystemFont(ofSize: 26)
+        rateName.font = UIFont.boldSystemFont(ofSize: 20)
         rateName.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         rateName.textAlignment = .left
         
@@ -57,10 +57,10 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         rateAmount.leadingAnchor.constraint(equalTo: self.rateName.trailingAnchor, constant: 10).isActive = true
         rateAmount.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 10).isActive = true
         rateAmount.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
-        rateAmount.backgroundColor = UIColor.gray
+        rateAmount.backgroundColor = UIColor.clear
         rateAmount.text = "132456.4567"
         rateAmount.textAlignment = .right
-        rateAmount.font = UIFont.boldSystemFont(ofSize: 30)
+        rateAmount.font = UIFont.boldSystemFont(ofSize: 24)
         rateAmount.textColor = UIColor.ciMaize
         
         

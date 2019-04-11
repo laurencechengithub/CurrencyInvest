@@ -24,7 +24,7 @@ class CurrencyHeaderCollectionReusableView: UICollectionReusableView {
     
     func setView() {
         
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.ciDarkGunMetal
         self.addSubview(saveBtn)
         
         saveBtn.translatesAutoresizingMaskIntoConstraints = false

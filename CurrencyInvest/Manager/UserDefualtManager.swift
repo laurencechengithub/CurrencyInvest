@@ -302,19 +302,28 @@ class UserDefualtManager {
         
     }
     
+    //======
+    //====== currencyTwo =========
+    //======
     
-//    var dataSetOne:[Any] {
-//        get {
-//            if let data = userDefault.object(forKey: "SetOne") {
-//                return data as! [Any]
-//            }
-//            return [Any]()
-//        }
-//
-//        set {
-//
-//        }
-//    }
+    
+    var localNameArray:[String] {
+        get {
+            if let data = userDefault.object(forKey: "localNameArray") {
+                return data as! [String]
+            }
+            return [String]()
+        }
+
+        set {
+            userDefault.set(newValue, forKey: "localNameArray")
+            userDefault.synchronize()
+            print("localNameArray saved")
+        }
+    }
+    
+    
+    
     
     
     
