@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 
 protocol NumberPadDelegate {
-    func getNumberWith(numString:String,numInt:Int)
+    func numberTapped(numString:String,numInt:Int)
     func okBtnTapped(bool:Bool)
     func kBtnTapped(numString : String)
     func tenkBtnTapped(numString:String)
     func hundredBtnTapped(numString:String)
+    func plusBtnTapped(bool:Bool)
+    func minusBtnTapped(bool:Bool)
+    func divideBtnTapped(bool:Bool)
+    func multiplyBtnTapped(bool:Bool)
+    func deleteBtnTapped(bool:Bool)
+    func dotBtnTapped(bool:Bool)
 }
 
 
@@ -23,8 +29,8 @@ class NumberPad : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        print(self.frame)
-//        setupView()
+        print(self.frame)
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +39,7 @@ class NumberPad : UIView {
     
     override func didMoveToSuperview() {
 //        print(self.frame)
-        setupView()
+//        setupView()
         
     }
     
@@ -49,18 +55,25 @@ class NumberPad : UIView {
         case Two = 2
         case Three = 3
         case Delete = 4
-        case Four = 5
-        case Five = 6
-        case Six = 7
-        case K = 8
-        case Seven = 9
-        case Eight = 10
-        case Nine = 11
-        case TenK = 12
-        case Zero = 13
-        case Dot = 14
-        case Ok = 15
-        case HundredK = 16
+        case plus = 5
+        
+        case Four = 6
+        case Five = 7
+        case Six = 8
+        case K = 9
+        case minus = 10
+        
+        case Seven = 11
+        case Eight = 12
+        case Nine = 13
+        case TenK = 14
+        case multiply = 15
+        
+        case Zero = 16
+        case Dot = 17
+        case Ok = 18
+        case HundredK = 19
+        case divide = 20
         
         //static var count: Int { return Keyboard.Ok.rawValue}
         
@@ -101,6 +114,14 @@ class NumberPad : UIView {
                     return "10K"
                 case .HundredK:
                     return "100K"
+                case .plus:
+                    return "+"
+                case .minus:
+                    return "−"
+                case .multiply:
+                    return "×"
+                case .divide:
+                    return "÷"
                 }
                 
             }
@@ -143,20 +164,28 @@ extension NumberPad: UICollectionViewDelegate {
             switch selectedKeyBoardBtnType {
             case .Ok:
                 numberPadDelegate.okBtnTapped(bool: true)
-            case .Delete:
-                print("more")
             case .K:
                 numberPadDelegate.kBtnTapped(numString: "000")
             case .TenK:
                 numberPadDelegate.tenkBtnTapped(numString: "0000")
             case .Dot:
-                print("numberPadDelegate.DotBtnTapped")
+                numberPadDelegate.dotBtnTapped(bool: true)
             case .HundredK:
                 numberPadDelegate.hundredBtnTapped(numString: "00000")
+            case .Delete:
+                numberPadDelegate.deleteBtnTapped(bool: true)
+            case .divide:
+                numberPadDelegate.divideBtnTapped(bool: true)
+            case .minus:
+                numberPadDelegate.minusBtnTapped(bool: true)
+            case .multiply:
+                numberPadDelegate.multiplyBtnTapped(bool: true)
+            case .plus:
+                numberPadDelegate.plusBtnTapped(bool: true)
             default:
                 let selectedString = selectedKeyBoardBtnType.description
                 let selectedInt = selectedKeyBoardBtnType.rawValue
-                numberPadDelegate.getNumberWith(numString: selectedString, numInt: selectedInt)
+                numberPadDelegate.numberTapped(numString: selectedString, numInt: selectedInt)
             }
         }
     }

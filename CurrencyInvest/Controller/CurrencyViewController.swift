@@ -9,8 +9,8 @@
 import UIKit
 import NotificationCenter
 
-class CurrencyViewController: UIViewController, NumberPadDelegate, UIScrollViewDelegate {
-    
+class CurrencyViewController: UIViewController, UIScrollViewDelegate {
+
 
     var scrollView = UIScrollView()
     var backView = UIView()
@@ -134,7 +134,6 @@ class CurrencyViewController: UIViewController, NumberPadDelegate, UIScrollViewD
         currencyThreeView = UIView()
         numberPadHeight = self.view.frame.height * 0.4
         numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
-        numberPadView.numberPadDelegate = self
         
         let viewWidth = view.frame.width
         backView.frame = CGRect(x: 0, y: 120, width: viewWidth, height: 128)

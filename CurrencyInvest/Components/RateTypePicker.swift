@@ -56,7 +56,6 @@ class RateTypePicker: UIViewController {
 
         initData()
         initView()
-
     }
     
     

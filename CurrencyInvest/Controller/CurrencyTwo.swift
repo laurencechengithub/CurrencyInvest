@@ -11,11 +11,14 @@ import UIKit
 
 
 class CurrencyTwo: UIViewController {
-
+    
     var collectionView: UICollectionView!
     let flowLayout = UICollectionViewFlowLayout()
 //    var localNameArray = UserDefualtManager.sharedInstance.localNameArray
     var localNameArray = ["CNY","AUD","TWD","USD","JPN","MYD","EUR","SGN","SDF","RGT","ZDF","SEH","JYG","QSD","TFS","IJK"]
+    
+    var numberPadHeight:CGFloat!
+    
     
     override func viewDidLoad() {
         
@@ -49,6 +52,10 @@ class CurrencyTwo: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+//        numberPadHeight = self.view.frame.height * 0.4
+//        numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
+//        numberPadView.numberPadDelegate = self
+        
     }
     
 
@@ -69,8 +76,25 @@ extension CurrencyTwo: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseCell", for: indexPath) as! CurrencyCollectionViewCell
-        
+        cell.rateImage.image = UIImage(named: "\(localNameArray[indexPath.row])")
         cell.rateName.text = localNameArray[indexPath.row]
+        cell.smallBackViewTapHandler = { (bool) in
+            if bool == true {
+                let vc = RateTypePicker()
+                //        vc.rateNameArray = localNameArray
+                vc.lastSelectedName = self.localNameArray[indexPath.row]
+                vc.modalTransitionStyle = .crossDissolve
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        cell.rateAmountTapHandler = { (bool) in
+            if bool == true {
+                
+                self.showNumberPad()
+                
+            }
+            
+        }
         
         return cell
     }
@@ -86,12 +110,25 @@ extension CurrencyTwo: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let vc = RateTypePicker()
-//        vc.rateNameArray = localNameArray
-        vc.lastSelectedName = localNameArray[indexPath.row]
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(vc, animated: true, completion: nil)
+
     }
+    
+    func showNumberPad () {
+        
+        var numberPadVC = NumberPadViewController()
+        
+        UIView.animate(withDuration: 0.8) {
+            
+            self.present(numberPadVC, animated: true, completion: {
+                
+            })
+            
+//            self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.numberPadHeight
+        }
+        
+    }
+    
+    
     
 }
 
