@@ -15,11 +15,15 @@ class UserDefualtManager {
     
     private var userDefault = UserDefaults.standard
     
-    var localQuote:[String:Double] {
+    //======
+    //====== currencyTwo =========
+    //======
+    
+    var masterQuotes:[String:Double] {
         
         get {
             
-            if let data = userDefault.object(forKey: "historyQuotes") {
+            if let data = userDefault.object(forKey: "masterQuotes") {
                 return data as! [String : Double]
             }
             
@@ -27,149 +31,76 @@ class UserDefualtManager {
         }
         
         set {
-            userDefault.set(newValue, forKey: "historyQuotes")
+            userDefault.set(newValue, forKey: "masterQuotes")
             userDefault.synchronize()
         }
         
     }
     
-    var localNameOne:String {
+    
+    var masterName:[String] {
         get {
-            if let data = userDefault.object(forKey: "nameOne") {
-                return data as! String
+            if let data = userDefault.object(forKey: "masterName") {
+                return data as! [String]
             }
-            return String()
+            return [String]()
         }
-        
-        set {
-            userDefault.set(newValue, forKey: "nameOne")
-            userDefault.synchronize()
-        }
-    }
-    
-    
-    var localRateOne:Double {
-        get {
-            if let data = userDefault.object(forKey: "rateOne") {
-                return data as! Double
-            }
-            return Double()
-        }
-        
-        set {
-            userDefault.set(newValue, forKey: "rateOne")
-            userDefault.synchronize()
-        }
-    }
-    
-    
-    var localAmountOne:Double {
-        get {
-            if let data = userDefault.object(forKey: "amountOne") {
-                return data as! Double
-            }
-            return 0
-        }
-        
-        set {
-            userDefault.set(newValue, forKey: "amountOne")
-            userDefault.synchronize()
-        }
-    }
-    
-    
-    var localNameTwo:String {
-        get {
-            if let data = userDefault.object(forKey: "nameTwo") {
-                return data as! String
-            }
-            return String()
-        }
-        
-        set {
-            userDefault.set(newValue, forKey: "nameTwo")
-            userDefault.synchronize()
-        }
-    }
-    
-    
-    
-    var localRateTwo:Double {
-        get {
-            if let data = userDefault.object(forKey: "rateTwo") {
-                return data as! Double
-            }
-            return Double()
-        }
-        
-        set {
-            userDefault.set(newValue, forKey: "rateTwo")
-            userDefault.synchronize()
-        }
-    }
-    
 
-    
-    var localAmountTwo:Double {
-        get {
-            if let data = userDefault.object(forKey: "amountTwo") {
-                return data as! Double
-            }
-            return 0
-        }
-        
         set {
-            userDefault.set(newValue, forKey: "amountTwo")
+            userDefault.set(newValue, forKey: "masterName")
             userDefault.synchronize()
+            print("Userdefault: localNameArray saved")
         }
     }
     
-
-    var localNameThree:String {
-        get {
-            if let data = userDefault.object(forKey: "nameThree") {
-                return data as! String
+    var selectedQuotes:[Double] {
+        get{
+            if let data = userDefault.object(forKey: "selectedQuotes") {
+                return data as! [Double]
             }
-            return String()
+            return [Double]()
         }
-        
-        set {
-            userDefault.set(newValue, forKey: "nameThree")
+        set{
+            userDefault.set(newValue, forKey: "selectedQuotes")
             userDefault.synchronize()
+            print("Userdefault: selectedQuotes saved")
         }
     }
-    
-    
-    
-    var localRateThree:Double {
-        get {
-            if let data = userDefault.object(forKey: "rateThree") {
-                return data as! Double
-            }
-            return Double()
-        }
+    var selectedNames:[String] {
         
-        set {
-            userDefault.set(newValue, forKey: "rateThree")
+        get{
+            if let data = userDefault.object(forKey: "selectedNames") {
+                return data as! [String]
+            }
+            return [""]
+        }
+        set{
+            userDefault.set(newValue, forKey: "selectedNames")
             userDefault.synchronize()
+            print("Userdefault: selectedNames saved")
         }
     }
     
     
-    
-    var localAmountThree:Double {
-        get {
-            if let data = userDefault.object(forKey: "amountThree") {
-                return data as! Double
-            }
-            return 0
-        }
+    var selectedAmount:[Double] {
         
-        set {
-            userDefault.set(newValue, forKey: "amountThree")
+        get{
+            if let data = userDefault.object(forKey: "selectedAmount") {
+                return data as! [Double]
+            }
+            return [Double]()
+        }
+        set{
+            userDefault.set(newValue, forKey: "selectedAmount")
             userDefault.synchronize()
+            print("Userdefault: selectedAmount saved")
         }
     }
+    
+    
+    
+    
+    
     
     
     
@@ -301,30 +232,6 @@ class UserDefualtManager {
         }
         
     }
-    
-    //======
-    //====== currencyTwo =========
-    //======
-    
-    
-    var localNameArray:[String] {
-        get {
-            if let data = userDefault.object(forKey: "localNameArray") {
-                return data as! [String]
-            }
-            return [String]()
-        }
-
-        set {
-            userDefault.set(newValue, forKey: "localNameArray")
-            userDefault.synchronize()
-            print("localNameArray saved")
-        }
-    }
-    
-    
-    
-    
     
     
 }

@@ -12,22 +12,18 @@ import Foundation
 
 struct Global {
     
-    static var amountUSD = 0.0
-    
-    static var NameOne = UserDefualtManager.sharedInstance.localNameOne
-    static var RateOne = UserDefualtManager.sharedInstance.localRateOne
-    static var AmountOne = UserDefualtManager.sharedInstance.localAmountOne
-    
-    static var NameTwo = UserDefualtManager.sharedInstance.localNameOne
-    static var RateTwo = UserDefualtManager.sharedInstance.localRateTwo
-    static var AmountTwo = UserDefualtManager.sharedInstance.localAmountTwo
-    
-    static var NameThree = UserDefualtManager.sharedInstance.localNameOne
-    static var RateThree = UserDefualtManager.sharedInstance.localRateOne
-    static var AmountThree = UserDefualtManager.sharedInstance.localAmountOne
+    static var selectedQuotes = [Double]()
+    static var selectedNames = [String]()
+    static var selectedAmounts = [Double]()
+    static var allQuotes = [String:Double]()
+    static var allNames = [String]()
     
     static var isCurrencyPageShowing:Bool = true
     static var isBitCoinPageShlowing:Bool = false
+    
+    static let alphabetArray = ["All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
+
 }
 
 enum coinType:String {

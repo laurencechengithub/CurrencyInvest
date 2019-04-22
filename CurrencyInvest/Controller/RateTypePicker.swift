@@ -15,12 +15,8 @@ protocol RateTypePickerDelegate: class {
 }
 
 class RateTypePicker: UIViewController {
-
-//    var rateNameArray = UserDefualtManager.sharedInstance.localCryptoTypeArray
-    var alphabetArray = ["all","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    var masterNameArray = ["CNY","AUD","TWD","USD","JPN","MYD","EUR","SGN","SDF","RGT","ZDF","SEH","JYG","QSD","TFS","IJK","AHS","ACV","AKH","AYH","CNN"]
     
-    var matchNameArray = [String]()
+
     
     var boardView: UIView = UIView()
 
@@ -36,6 +32,9 @@ class RateTypePicker: UIViewController {
     var selectedTypeNameIndex: Int = 0
 
     //===
+    var currencyVM = CurrencyViewModel()
+    var masterNameArray = [String]()
+    var matchNameArray = [String]()
     var isHaveSelectedName: Bool = false
     var lastSelectedName:String = ""
     var lastSelectedNamePrefix:String = String()
@@ -44,6 +43,7 @@ class RateTypePicker: UIViewController {
     var lastSelectedalphabetIndex:Int = Int()
     var tableViewWidth = CGFloat()
     var tableViewHeight = CGFloat()
+    var returnSelectName:((Bool,String)->())!
     
     weak var rateTypePickerDelegate: RateTypePickerDelegate?
 
@@ -72,12 +72,15 @@ class RateTypePicker: UIViewController {
     }
 
     private func initData() {
-
+        
+        masterNameArray = currencyVM.getQuotesKey()
+        
         if lastSelectedName.isEmpty {
             
             //第一次進來 userdefault沒有直文字
             lastSelectedNameIndex = 0
             lastSelectedalphabetIndex = 0
+            matchNameArray = masterNameArray
             
         } else {
             
@@ -89,7 +92,7 @@ class RateTypePicker: UIViewController {
             
             //左邊要選擇highlight哪一個
             lastSelectedAlphabetPrefix = String(lastSelectedName.prefix(1)) //ex:CNY 的 "C"
-            if let alphabetIndex = alphabetArray.firstIndex(of: lastSelectedAlphabetPrefix) {
+            if let alphabetIndex = Global.alphabetArray.firstIndex(of: lastSelectedAlphabetPrefix) {
                 lastSelectedalphabetIndex = alphabetIndex
                 
             }
@@ -99,19 +102,11 @@ class RateTypePicker: UIViewController {
                 $0.hasPrefix(lastSelectedAlphabetPrefix)
             })
             
-            print(matchNameArray)
-            
             //找出name在matchArray是第幾個index
             if let nameIndex = matchNameArray.firstIndex(of: lastSelectedName) {
                 lastSelectedNameIndex = nameIndex
             }
-            
-            
-
-            
-            
-
-            
+    
             
         }
 
@@ -166,7 +161,7 @@ class RateTypePicker: UIViewController {
         nameLabel.heightAnchor.constraint(equalToConstant: 64).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 128).isActive = true
         nameLabel.textAlignment = .center
-        nameLabel.text = isHaveSelectedName ? masterNameArray[selectedTypeNameIndex] : "Pick a Rate"
+        nameLabel.text = isHaveSelectedName ? masterNameArray[selectedTypeNameIndex] : "Pick.."
         nameLabel.font = UIFont.boldSystemFont(ofSize: 30)
         nameLabel.backgroundColor = UIColor.clear
         nameLabel.layer.cornerRadius = 5
@@ -179,10 +174,10 @@ class RateTypePicker: UIViewController {
         confirmBtn.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: -5).isActive = true
         confirmBtn.heightAnchor.constraint(equalToConstant: 54).isActive = true
         confirmBtn.setTitle("CONFIRM", for: .normal)
-        confirmBtn.setTitleColor(UIColor.darkGray, for: .normal)
+        confirmBtn.setTitleColor(UIColor.white, for: .normal)
         confirmBtn.backgroundColor = UIColor.ciButtonGreen
         confirmBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        confirmBtn.addTarget(self, action: #selector(confirebtn_tapped), for: .touchUpInside)
+        confirmBtn.addTarget(self, action: #selector(confirmbtn_tapped), for: .touchUpInside)
         confirmBtn.layer.cornerRadius = 10
         
         let startRow:IndexPath = IndexPath(row: 0, section: 0)
@@ -195,7 +190,7 @@ class RateTypePicker: UIViewController {
         alphabetTableView.dataSource = self
         alphabetTableView.register(RateTypePickerAlphabetTableViewCell.self, forCellReuseIdentifier: "alphabetCell")
         let alphabetRow: IndexPath = IndexPath(row: lastSelectedalphabetIndex, section: 0)
-        alphabetTableView.scrollToRow(at: alphabetRow, at: .middle, animated: true)
+//        alphabetTableView.scrollToRow(at: alphabetRow, at: .middle, animated: true)
         alphabetTableView.moveRow(at: startRow, to: alphabetRow)
         alphabetTableView.separatorStyle = .none
         alphabetTableView.showsVerticalScrollIndicator = false
@@ -210,7 +205,7 @@ class RateTypePicker: UIViewController {
         rateNameTableView.dataSource = self
         rateNameTableView.register(RateTypePickerAlphabetTableViewCell.self, forCellReuseIdentifier: "alphabetCell")
         let nameRow: IndexPath = IndexPath(row: lastSelectedNameIndex, section: 0)
-        rateNameTableView.scrollToRow(at: nameRow, at: .middle, animated: true)
+//        rateNameTableView.scrollToRow(at: nameRow, at: .middle, animated: true)
         rateNameTableView.moveRow(at: startRow, to: nameRow)
         rateNameTableView.separatorStyle = .none
         rateNameTableView.showsVerticalScrollIndicator = false
@@ -237,14 +232,6 @@ class RateTypePicker: UIViewController {
         viewLine2.backgroundColor = UIColor.ciButtonGreen
         boardView.bringSubviewToFront(viewLine2)
 
-        
-       
-
-
-        
-
-
-      
 
         //下橫線
 //        let viewLine3: UIView = UIView(frame: CGRect(x: 0, y: rateNameTableView.frame.maxY + 4, width: boardViewWidth, height: 1))
@@ -258,12 +245,13 @@ class RateTypePicker: UIViewController {
 
     }
 
-    @objc func confirebtn_tapped(sender: UIButton) {
+    @objc func confirmbtn_tapped(sender: UIButton) {
 
         self.dismiss(animated: true) {
             
-            self.rateTypePickerDelegate?.getRate(name: "\(self.nameLabel.text ?? "")")
-            
+//            self.rateTypePickerDelegate?.getRate(name: "\(self.nameLabel.text ?? "")")
+//            self.returnSelectName(true,"\(self.nameLabel.text ?? "")")
+            self.returnSelectName(true, "\(self.nameLabel.text ?? "error")")
 
         }
     }
@@ -278,7 +266,7 @@ extension RateTypePicker: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableView == alphabetTableView {
-            return alphabetArray.count
+            return Global.alphabetArray.count
         } else {
             if isHaveSelectedName == true {
                 return matchNameArray.count
@@ -302,10 +290,12 @@ extension RateTypePicker: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = UIColor.clear
             
             //不管是不是第一次進 都要load全部字母
-            cell.label.text = alphabetArray[indexPath.row]
+            cell.label.text = Global.alphabetArray[indexPath.row]
 
             if isHaveSelectedName {
                 //已有選擇的時候把對應的字母hight light
+                cell.haveSelected(indexInt: lastSelectedalphabetIndex, selected: indexPath.row == lastSelectedalphabetIndex ? true : false)
+            } else {
                 cell.haveSelected(indexInt: lastSelectedalphabetIndex, selected: indexPath.row == lastSelectedalphabetIndex ? true : false)
             }
             
@@ -358,11 +348,17 @@ extension RateTypePicker: UITableViewDelegate, UITableViewDataSource {
             alphabetTableView.reloadData()
             
             //右邊就要更新array
-            let targetAlphabet:String = alphabetArray[lastSelectedalphabetIndex]
-            matchNameArray = masterNameArray.filter({
-                $0.hasPrefix(targetAlphabet)
-            })
-            print(matchNameArray)
+            if lastSelectedalphabetIndex == 0 {
+                matchNameArray = masterNameArray
+            } else {
+                let targetAlphabet:String = Global.alphabetArray[lastSelectedalphabetIndex]
+                matchNameArray = masterNameArray.filter({
+                    $0.hasPrefix(targetAlphabet)
+                })
+            }
+            
+
+
             
             //右邊index = 0
             lastSelectedNameIndex = 999

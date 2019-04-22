@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        print(Global.isBitCoinPageShlowing)
         
         if Global.isBitCoinPageShlowing == true {
             segmentControl.selectedIndex = 1
@@ -47,18 +47,19 @@ class MainViewController: UIViewController {
     
     @objc func segmentControlValueChanged() {
         
-        if segmentControl.selectedIndex == 0 {
+        if segmentControl.selectedIndex == 0 { //select currency
             
             if Global.isBitCoinPageShlowing == true {
         
                 Global.isBitCoinPageShlowing = false
+                
                 self.dismiss(animated: true, completion: nil)
-    
+                
             } else {
                 print("Currency page is now showing")
 
             }
-            
+            segmentControl.selectedIndex = 0
             
         } else {
             
@@ -66,7 +67,8 @@ class MainViewController: UIViewController {
                 Global.isBitCoinPageShlowing = true
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let BitCoinVC = mainStoryboard.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
-                BitCoinVC.modalTransitionStyle = .flipHorizontal
+//                BitCoinVC.modalPresentationStyle = .custom//會導致segment control 無法跳到segment 0
+                BitCoinVC.modalTransitionStyle = .crossDissolve
                 self.present(BitCoinVC, animated: true, completion: nil)
             } else {
                 print("bitcoin page is now showing")

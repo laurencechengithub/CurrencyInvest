@@ -90,12 +90,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func saveDataToUserDefault () {
-        UserDefualtManager.sharedInstance.localNameOne = Global.NameOne
-        UserDefualtManager.sharedInstance.localRateOne = Global.RateOne
-        UserDefualtManager.sharedInstance.localAmountOne = Global.AmountOne
-        UserDefualtManager.sharedInstance.localNameTwo = Global.NameTwo
-        UserDefualtManager.sharedInstance.localRateTwo = Global.RateTwo
-        UserDefualtManager.sharedInstance.localAmountTwo = Global.AmountTwo
+        
+        UserDefualtManager.sharedInstance.masterQuotes = Global.allQuotes
+        UserDefualtManager.sharedInstance.masterName = Global.allNames
+        UserDefualtManager.sharedInstance.selectedNames = Global.selectedNames
+        UserDefualtManager.sharedInstance.selectedQuotes = Global.selectedQuotes
+        UserDefualtManager.sharedInstance.selectedAmount = Global.selectedAmounts
+        
     }
     
     

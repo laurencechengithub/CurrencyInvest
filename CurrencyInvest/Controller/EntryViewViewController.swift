@@ -27,19 +27,20 @@ class EntryViewViewController: UIViewController {
     
     func getCurrency () {
         
-        getBitCoin()
+//        getBitCoin()
         
-//        entryViewViewModel.getQuotes()
-//        entryViewViewModel.quotesCompleteHandler = { (bool) in
-//
-//            if bool == true {
-//                DispatchQueue.main.async {
-//                    self.getBitCoin()
-//                }
-//            } else {
-//                print("get quote not complete")
-//            }
-//        }
+        //更新 Quotes
+        entryViewViewModel.getQuotes()
+        entryViewViewModel.quotesCompleteHandler = { (bool) in
+
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.getBitCoin()
+                }
+            } else {
+                print("get quote not complete")
+            }
+        }
         
     }
     
@@ -136,21 +137,13 @@ class EntryViewViewController: UIViewController {
     }
     func toMainView() {
         
-        
-        
-        
-        
         entryViewViewModel.saveDataToUserDefault()
         
         
-        
-        
-        
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let currencyTwo = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyTwo") as! CurrencyTwo
-//        let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
+        let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
 //        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        self.present(currencyTwo, animated: true, completion: nil)
+        self.present(CurrencyVC, animated: true, completion: nil)
         
     }
     
