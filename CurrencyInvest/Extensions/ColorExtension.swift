@@ -170,4 +170,8 @@ extension UIColor {
         return UIColor(red: 87/255, green: 181/255, blue: 96/255, alpha: 1)
     }
     
+    open class var ciDownArrowBlue:UIColor{
+        return UIColor(red: 80/255, green: 146/255, blue: 198/255, alpha: 1)
+    }
+    
 }

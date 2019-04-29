@@ -95,7 +95,7 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clear
             label.textAlignment = .center
-            label.font = UIFont(name: "Avenir-Black", size: 26)
+            label.font = UIFont(name: "Avenir-Black", size: 24)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             
@@ -147,7 +147,7 @@ import UIKit
         
         let label = labels[selectedIndex]
         label.textColor = selectedLabelColor
-        
+  
         
         
         

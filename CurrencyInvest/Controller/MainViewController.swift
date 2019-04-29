@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     var segmentControl: AnimatedSegmentControl!
+    @IBOutlet weak var bitLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +20,12 @@ class MainViewController: UIViewController {
         
         let viewWidth = self.view.frame.width
 //        let viewHeight = self.view.frame.height
-        var segmentControlWidth = viewWidth - 20
-        segmentControl = AnimatedSegmentControl(frame: CGRect(x: 10, y: 10, width: segmentControlWidth, height: 48))
+        let segmentControlWidth = viewWidth - 140
+        segmentControl = AnimatedSegmentControl(frame: CGRect(x: 70, y: 85, width: segmentControlWidth, height: 30))
         self.view.addSubview(segmentControl)
         
-        segmentControl.items = ["Currency", "BitCoin"]
-        segmentControl.borderColor = UIColor.lightGray
+        segmentControl.items = ["Currency", "BitPrice"]
+        segmentControl.borderColor = UIColor.clear
         segmentControl.selectedLabelColor = .black
         segmentControl.unselectedLabelColor = .ciMaize
         segmentControl.backgroundColor = UIColor.clear

@@ -10,6 +10,10 @@
 		5072747E55DAD5512C8F91D3 /* Pods_CurrencyInvest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B4D973DAA9248F31077D75 /* Pods_CurrencyInvest.framework */; };
 		50AC101A89B644DE2ECAD415 /* Pods_CurrencyInvestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CA67A1A0311E2574229920 /* Pods_CurrencyInvestUITests.framework */; };
 		5C776C0A016D5A519234F857 /* Pods_CurrencyInvestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D444C19A559876CADB655E /* Pods_CurrencyInvestTests.framework */; };
+		5D0236572272BCCA00C591C5 /* SavedRateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0236562272BCCA00C591C5 /* SavedRateListViewController.swift */; };
+		5D0236592272D44800C591C5 /* SavedRateListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0236582272D44800C591C5 /* SavedRateListDataModel.swift */; };
+		5D02365B2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02365A2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift */; };
+		5D035637226EB76300F91209 /* CollectionViewPassThroughGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035636226EB76300F91209 /* CollectionViewPassThroughGestrue.swift */; };
 		5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1A2240CB90005047EC /* MasterViewController.swift */; };
 		5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1C2240D77C005047EC /* CountingLabel.swift */; };
 		5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D081FAD21C74D82002AB7E3 /* RequestManager.swift */; };
@@ -92,6 +96,10 @@
 		27B4D973DAA9248F31077D75 /* Pods_CurrencyInvest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyInvest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		379BC2C9D05365B6242A3008 /* Pods-CurrencyInvest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyInvest.release.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyInvest/Pods-CurrencyInvest.release.xcconfig"; sourceTree = "<group>"; };
 		55CA67A1A0311E2574229920 /* Pods_CurrencyInvestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyInvestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D0236562272BCCA00C591C5 /* SavedRateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRateListViewController.swift; sourceTree = "<group>"; };
+		5D0236582272D44800C591C5 /* SavedRateListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRateListDataModel.swift; sourceTree = "<group>"; };
+		5D02365A2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewWithTextFieldAndOnTopLabels.swift; sourceTree = "<group>"; };
+		5D035636226EB76300F91209 /* CollectionViewPassThroughGestrue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPassThroughGestrue.swift; sourceTree = "<group>"; };
 		5D06AD1A2240CB90005047EC /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		5D06AD1C2240D77C005047EC /* CountingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
 		5D081FAD21C74D82002AB7E3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -225,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				5D15FF4B21ED88C8002B7CCD /* EntryViewViewModel.swift */,
+				5D0236582272D44800C591C5 /* SavedRateListDataModel.swift */,
 				5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */,
 				5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */,
 			);
@@ -262,6 +271,7 @@
 				5DCAB49B2250B72600C789AF /* CurrencyViewController.swift */,
 				5D11CDDE2254B54100539E42 /* RateTypePicker.swift */,
 				5D0C417622608FE700944CEB /* NumberPadViewController.swift */,
+				5D0236562272BCCA00C591C5 /* SavedRateListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,6 +388,8 @@
 				5D06AD1C2240D77C005047EC /* CountingLabel.swift */,
 				5DBCF96A225F3956006D99F9 /* UIlabelWithLeftImageView.swift */,
 				5D1ADB78224E0F360091439E /* AnimatedSegmentControl.swift */,
+				5D035636226EB76300F91209 /* CollectionViewPassThroughGestrue.swift */,
+				5D02365A2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -618,10 +630,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D1ADB79224E0F360091439E /* AnimatedSegmentControl.swift in Sources */,
+				5D0236592272D44800C591C5 /* SavedRateListDataModel.swift in Sources */,
+				5D02365B2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift in Sources */,
 				5DDEAAFE21A7D87300BE58AF /* LabelExtension.swift in Sources */,
 				5D0B070B2268290C00BCFD5C /* NothingCollectionViewCell.swift in Sources */,
 				5DCAB49A224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld in Sources */,
+				5D035637226EB76300F91209 /* CollectionViewPassThroughGestrue.swift in Sources */,
 				5D11CDDF2254B54100539E42 /* RateTypePicker.swift in Sources */,
+				5D0236572272BCCA00C591C5 /* SavedRateListViewController.swift in Sources */,
 				5D15FF4521ED85D0002B7CCD /* NumberPadBtnCollectionViewCell.swift in Sources */,
 				5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */,
 				5DDEAAFF21A7D87300BE58AF /* UILabelPadding.swift in Sources */,

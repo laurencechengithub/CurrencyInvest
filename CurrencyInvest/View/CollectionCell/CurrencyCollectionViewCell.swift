@@ -16,8 +16,10 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
     var smallBackView = UIView()
     var smallBackViewTapHandler : ((Bool)->())!
     var rateAmountTapHandler : ((Bool)->())!
+    var saveToListBtnHandler : ((Bool)->())!
     var bottomLine = UIView()
     var streightLine = UIView()
+    var saveToListBtn = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +33,7 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
     
     func setView() {
         
-        contentView.backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.ciDarkGunMetal
         
         self.contentView.addSubview(rateImage)
         self.contentView.addSubview(rateName)
@@ -39,9 +41,8 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(smallBackView)
 //        self.contentView.addSubview(bottomLine)
         self.contentView.addSubview(streightLine)
-        
-//        contentView.sendSubviewToBack(smallBackView)
-        
+        self.contentView.addSubview(saveToListBtn)
+
         rateImage.translatesAutoresizingMaskIntoConstraints = false
         rateImage.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 19).isActive = true
         rateImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
@@ -51,20 +52,20 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         
         rateName.translatesAutoresizingMaskIntoConstraints = false
         rateName.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20).isActive = true
-        rateName.leadingAnchor.constraint(equalTo: self.rateImage.trailingAnchor, constant: 0).isActive = true
+        rateName.leadingAnchor.constraint(equalTo: self.rateImage.trailingAnchor, constant: 10).isActive = true
         rateName.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
-        rateName.widthAnchor.constraint(equalToConstant: 108).isActive = true
+        rateName.widthAnchor.constraint(equalToConstant: 78).isActive = true
         rateName.textColor = UIColor.white
         rateName.font = UIFont.boldSystemFont(ofSize: 24)
         rateName.padding = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        rateName.textAlignment = .center
+        rateName.textAlignment = .left
 
         
         rateAmount.translatesAutoresizingMaskIntoConstraints = false
         rateAmount.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
         rateAmount.leadingAnchor.constraint(equalTo: self.rateName.trailingAnchor, constant: 0).isActive = true
         rateAmount.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 10).isActive = true
-        rateAmount.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
+        rateAmount.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -50).isActive = true
         rateAmount.backgroundColor = UIColor.clear
         rateAmount.textAlignment = .right
         rateAmount.font = UIFont.boldSystemFont(ofSize: 20)
@@ -77,7 +78,7 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         smallBackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16).isActive = true
         smallBackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: -10).isActive = true
         smallBackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0).isActive = true
-        smallBackView.widthAnchor.constraint(equalToConstant: 152).isActive = true
+        smallBackView.widthAnchor.constraint(equalToConstant: 122).isActive = true
         smallBackView.backgroundColor = UIColor.clear
 //        smallBackView.layer.borderWidth = 2
 //        smallBackView.layer.borderColor = UIColor.darkGray.cgColor
@@ -85,8 +86,7 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         smallBackView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(smallBackViewTapped))
         smallBackView.addGestureRecognizer(tapGesture)
-        
-        
+
 //        bottomLine.translatesAutoresizingMaskIntoConstraints = false
 //        bottomLine.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
 //        bottomLine.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 2).isActive = true
@@ -96,10 +96,19 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         
         streightLine.translatesAutoresizingMaskIntoConstraints = false
         streightLine.leadingAnchor.constraint(equalTo: self.smallBackView.trailingAnchor, constant: 0).isActive = true
-        streightLine.bottomAnchor.constraint(equalTo: self.rateName.bottomAnchor, constant: 0).isActive = true
+        streightLine.bottomAnchor.constraint(equalTo: self.rateImage.bottomAnchor, constant: 0).isActive = true
         streightLine.widthAnchor.constraint(equalToConstant: 1).isActive = true
         streightLine.heightAnchor.constraint(equalTo: rateName.heightAnchor, constant: 0).isActive = true
         streightLine.backgroundColor = UIColor.ciButtonGreen
+        
+        saveToListBtn.translatesAutoresizingMaskIntoConstraints = false
+        saveToListBtn.topAnchor.constraint(equalTo: rateAmount.topAnchor, constant: 20).isActive = true
+        saveToListBtn.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        saveToListBtn.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        saveToListBtn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        saveToListBtn.setImage(UIImage(named: "download"), for: .normal)
+        saveToListBtn.addTarget(self, action: #selector(saveNewDataToCoreData), for: .touchUpInside)
+        
     }
     
     @objc func smallBackViewTapped() {
@@ -109,5 +118,11 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
     @objc func rateAmountTapped() {
         rateAmountTapHandler(true)
     }
+    
+    @objc func saveNewDataToCoreData() {
+        saveToListBtnHandler(true)
+        
+    }
+    
     
 }

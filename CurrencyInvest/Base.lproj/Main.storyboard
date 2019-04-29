@@ -34,9 +34,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UtW-zM-IoQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Pe9-qy-Y90"/>
+                                    <constraint firstAttribute="height" constant="120" id="Pe9-qy-Y90"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="JBr-es-Zrj" kind="embed" id="Zya-2x-xv8"/>
@@ -66,9 +66,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKi-yc-mot">
-                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="heX-3O-Zvv"/>
+                                    <constraint firstAttribute="height" constant="120" id="heX-3O-Zvv"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="JBr-es-Zrj" kind="embed" id="Qnd-D9-pIp"/>
@@ -88,16 +88,60 @@
             </objects>
             <point key="canvasLocation" x="1444" y="-55"/>
         </scene>
+        <!--Saved Rate List View Controller-->
+        <scene sceneID="gsX-QR-uvg">
+            <objects>
+                <viewController storyboardIdentifier="SavedRateListViewController" id="dCU-Pq-hIN" customClass="SavedRateListViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a68-bw-ZJp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="97o-X9-Pha">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UnK-j5-L1v" firstAttribute="bottom" secondItem="97o-X9-Pha" secondAttribute="bottom" id="4hI-R2-tNF"/>
+                            <constraint firstItem="97o-X9-Pha" firstAttribute="top" secondItem="UnK-j5-L1v" secondAttribute="top" id="5mv-Pv-Fa8"/>
+                            <constraint firstItem="UnK-j5-L1v" firstAttribute="trailing" secondItem="97o-X9-Pha" secondAttribute="trailing" id="6tG-5K-aM3"/>
+                            <constraint firstItem="97o-X9-Pha" firstAttribute="leading" secondItem="UnK-j5-L1v" secondAttribute="leading" id="KFB-2r-BRo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UnK-j5-L1v"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXU-df-Qd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2232" y="-61"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="IqW-uU-xLf">
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="JBr-es-Zrj" customClass="MainViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ue3-rd-1pY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money X Bit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq8-zC-mKt">
+                                <rect key="frame" x="16" y="10" width="259" height="60"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4jD-Z8-HBy" firstAttribute="trailing" secondItem="Pq8-zC-mKt" secondAttribute="trailing" constant="100" id="Tig-WU-k5a"/>
+                            <constraint firstItem="4jD-Z8-HBy" firstAttribute="bottom" secondItem="Pq8-zC-mKt" secondAttribute="bottom" constant="50" id="ZMo-uh-O65"/>
+                            <constraint firstItem="Pq8-zC-mKt" firstAttribute="top" secondItem="4jD-Z8-HBy" secondAttribute="top" constant="10" id="gBJ-qe-wL9"/>
+                            <constraint firstItem="Pq8-zC-mKt" firstAttribute="leading" secondItem="ue3-rd-1pY" secondAttribute="leadingMargin" id="nBC-2e-aBE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4jD-Z8-HBy"/>
                     </view>
+                    <connections>
+                        <outlet property="bitLabel" destination="Pq8-zC-mKt" id="atM-5d-5xP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcO-DO-76p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -105,6 +149,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zya-2x-xv8"/>
+        <segue reference="Qnd-D9-pIp"/>
     </inferredMetricsTieBreakers>
 </document>

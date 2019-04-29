@@ -13,9 +13,12 @@ import UIKit
 class CurrencyViewController: UIViewController {
     
     let currencyViewModel = CurrencyViewModel()
-//    var currencyNames = [String]()
+    let backgdView = UIView()
+    let backListImage = UIImageView()
+    let backBuyMeCoffee = UIImageView()
+    let backRemoveImage = UIImageView()
     
-    var collectionView: UICollectionView!
+    var collectionView: TapThroughCollectionView!
     let flowLayout = UICollectionViewFlowLayout()
     
     var allQuotesWithName = [String:Double]() {
@@ -49,28 +52,70 @@ class CurrencyViewController: UIViewController {
     
     var numberPadHeight:CGFloat!
     var userEnterAmount = Double()
+    var saveDataInputView: UIViewWithTextFieldAndOnTopLabels!
+    lazy var inputText = UITextField()
     
     override func viewDidLoad() {
         
-        allQuotesWithName = currencyViewModel.getQuotes()
-        allNamesArray = currencyViewModel.getQuotesKey()
-        selectedNamesArray = currencyViewModel.lastSelectedName()
-        
-        selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
-        selectedAmountArray = currencyViewModel.lastSelectedAmount()
-        
+        setData()
         self.view.backgroundColor = UIColor.ciDarkGunMetal
+        self.view.addSubview(backgdView)
+        self.backgdView.addSubview(backListImage)
+        self.backgdView.addSubview(backBuyMeCoffee)
+        self.backgdView.addSubview(backRemoveImage)
         
-        flowLayout.sectionInset = UIEdgeInsets(top: 40, left: 0, bottom: 10, right: 0)
+        backgdView.translatesAutoresizingMaskIntoConstraints = false
+        backgdView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        backgdView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
+        backgdView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        backgdView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        backgdView.backgroundColor = UIColor.clear
+        
+        let imageWidth = (self.view.frame.width - 240)/3
+        backListImage.translatesAutoresizingMaskIntoConstraints = false
+        backListImage.leadingAnchor.constraint(equalTo: backgdView.leadingAnchor, constant: 90).isActive = true
+        backListImage.topAnchor.constraint(equalTo: backgdView.topAnchor, constant: 60).isActive = true
+        backListImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backListImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backListImage.backgroundColor = UIColor.clear
+        backListImage.image = UIImage(named: "seeList")
+        let tapGestureList = UITapGestureRecognizer(target: self, action: #selector(askForCoffee))
+        backListImage.addGestureRecognizer(tapGestureList)
+        backListImage.isUserInteractionEnabled = true
+        
+        backBuyMeCoffee.translatesAutoresizingMaskIntoConstraints = false
+        backBuyMeCoffee.leadingAnchor.constraint(equalTo: backListImage.trailingAnchor, constant: 30).isActive = true
+        backBuyMeCoffee.topAnchor.constraint(equalTo: backListImage.topAnchor).isActive = true
+        backBuyMeCoffee.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backBuyMeCoffee.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backBuyMeCoffee.backgroundColor = UIColor.clear
+        backBuyMeCoffee.image = UIImage(named: "buyMeCoffee")
+        let tapGestureCoffee = UITapGestureRecognizer(target: self, action: #selector(showSaveList))
+        backBuyMeCoffee.addGestureRecognizer(tapGestureCoffee)
+        backBuyMeCoffee.isUserInteractionEnabled = true
+        
+        backRemoveImage.translatesAutoresizingMaskIntoConstraints = false
+        backRemoveImage.leadingAnchor.constraint(equalTo: backBuyMeCoffee.trailingAnchor, constant: 30).isActive = true
+        backRemoveImage.topAnchor.constraint(equalTo: backBuyMeCoffee.topAnchor).isActive = true
+        backRemoveImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backRemoveImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backRemoveImage.backgroundColor = UIColor.clear
+        backRemoveImage.image = UIImage(named: "removeListItem")
+        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector(removeLastCell))
+        backRemoveImage.addGestureRecognizer(tapGestureRemove)
+        backRemoveImage.isUserInteractionEnabled = true
+        
+       
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.itemSize = CGSize(width: self.view.frame.width * 0.8 , height: 64)
         flowLayout.minimumLineSpacing = CGFloat(integerLiteral: 30)
         flowLayout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
         flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical //預設
         flowLayout.headerReferenceSize = CGSize(width: self.view.frame.width, height: 54)
-        collectionView = UICollectionView.init(frame: self.view.bounds, collectionViewLayout: flowLayout)
+        collectionView = TapThroughCollectionView.init(frame: self.view.bounds, collectionViewLayout: flowLayout)
         collectionView.register(CurrencyCollectionViewCell.self, forCellWithReuseIdentifier: "reuseCell")
         collectionView.register(NothingCollectionViewCell.self, forCellWithReuseIdentifier: "nothingCell")
-        collectionView.backgroundColor = UIColor.ciDarkGunMetal
+        collectionView.backgroundColor = UIColor.clear
         
         collectionView.register(CurrencyHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
         
@@ -80,22 +125,78 @@ class CurrencyViewController: UIViewController {
         
         self.view.addSubview(collectionView)
         
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 154).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        collectionView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)//collectionView 底下滑到空間
+        collectionView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)//collectionView 底下滑的空間
         collectionView.setContentOffset(CGPoint(x: 0, y: -150), animated: false)// 手機上顯示collectionView顯示的部分
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-//        numberPadHeight = self.view.frame.height * 0.4
-//        numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
-//        numberPadView.numberPadDelegate = self
+
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
 
+    }
+    
+    
+    func setData() {
+        allQuotesWithName = currencyViewModel.getQuotes()
+        allNamesArray = currencyViewModel.getQuotesKey()
+        selectedNamesArray = currencyViewModel.lastSelectedName()
+        
+        selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
+        selectedAmountArray = currencyViewModel.lastSelectedAmount()
+    }
+    
+    @objc func askForCoffee() {
+        //present new view ask for in-app-purchase or show add
+        //close btn
+        //donate btn
+    }
+    
+    @objc func showSaveDataInputView(with Name:String, Rate:Double, Amount:Double) {
+        //create input text
+        let viewWidth = self.view.frame.width
+        saveDataInputView = UIViewWithTextFieldAndOnTopLabels(frame: CGRect(x: 25, y: view.frame.maxY/3, width: viewWidth - 50, height: 180), name: Name, rate: Rate, amount: Amount)
+        
+        UIView.animate(withDuration: 0.8, animations: {
+            self.view.addSubview(self.saveDataInputView)
+        })
+        
+        
+        
+        //didselect load all three array
+    }
+    
+    
+    @objc func showSaveList() {
+        //present new view with tableview
+    }
+    
+    
+    @objc func removeLastCell() {
+        
+        if selectedNamesArray.count > 1 {
+            
+            let count = selectedNamesArray.count
+            let index = selectedNamesArray.index(count, offsetBy: -1)
+            _ = selectedQuotesArray.removeLast()
+            _ = selectedNamesArray.remove(at: index - 1)
+            _ = selectedAmountArray.removeLast()
+            
+        }
+        
+        collectionView.reloadData()
+        
+    }
+    
+    
+    
 }
 
 
@@ -143,7 +244,6 @@ extension CurrencyViewController: UICollectionViewDelegate {
                 }
                 
             }
-            
             return nothingCell
         } else {
             var inRate = 0.0
@@ -151,10 +251,9 @@ extension CurrencyViewController: UICollectionViewDelegate {
             
             cell.rateImage.image = UIImage(named: "\(selectedNamesArray[indexPath.row])")
             cell.rateName.text = selectedNamesArray[indexPath.row]
-//            if selectedAmountArray.count > 0 {
             cell.rateAmount.text = "\(selectedAmountArray[indexPath.row].roundToDecimal(2))"
-//            }
-            cell.smallBackViewTapHandler = { (bool) in //偵測到user點擊國家幣別
+            //偵測到user點擊國家幣別
+            cell.smallBackViewTapHandler = { (bool) in
                 if bool == true {
                     let vc = RateTypePicker()
                     vc.lastSelectedName = self.selectedNamesArray[indexPath.row]
@@ -164,8 +263,9 @@ extension CurrencyViewController: UICollectionViewDelegate {
                     
                     vc.returnSelectName = { (flag,name) in
                         if flag == true {
-                            //show selected rate name
+                            //show selected rate name amd image
                             cell.rateName.text = name
+                            cell.rateImage.image = UIImage(named: "\(name)")
                             //add name into selectedNamesArray
                             self.selectedNamesArray[indexPath.row] = name
                             //base on name findout the rate
@@ -177,7 +277,7 @@ extension CurrencyViewController: UICollectionViewDelegate {
                     
                 }
             }
-            
+            //偵測到user點擊數量
             cell.rateAmountTapHandler = { (bool) in
                 if bool == true {
                     
@@ -209,6 +309,15 @@ extension CurrencyViewController: UICollectionViewDelegate {
                 }
                 
             }
+            //偵測到user點擊儲存
+            cell.saveToListBtnHandler = { (flag) in
+                if flag == true {
+                    self.showSaveDataInputView(with: self.selectedNamesArray[indexPath.row],
+                                          Rate: self.selectedQuotesArray[indexPath.row],
+                                          Amount: self.selectedAmountArray[indexPath.row])
+                }
+            }
+            
             return cell
         }
         
@@ -218,7 +327,7 @@ extension CurrencyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! CurrencyHeaderCollectionReusableView
-    
+        view.backgroundColor = UIColor.ciDarkGunMetal
         return view
     }
     
