@@ -52,7 +52,7 @@ class CurrencyViewController: UIViewController {
     
     var numberPadHeight:CGFloat!
     var userEnterAmount = Double()
-    var saveDataInputView: UIViewWithTextFieldAndOnTopLabels!
+
     lazy var inputText = UITextField()
     
     override func viewDidLoad() {
@@ -71,7 +71,7 @@ class CurrencyViewController: UIViewController {
         backgdView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         backgdView.backgroundColor = UIColor.clear
         
-        let imageWidth = (self.view.frame.width - 240)/3
+        let imageWidth = (self.view.frame.width - 270)/3
         backListImage.translatesAutoresizingMaskIntoConstraints = false
         backListImage.leadingAnchor.constraint(equalTo: backgdView.leadingAnchor, constant: 90).isActive = true
         backListImage.topAnchor.constraint(equalTo: backgdView.topAnchor, constant: 60).isActive = true
@@ -79,31 +79,31 @@ class CurrencyViewController: UIViewController {
         backListImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backListImage.backgroundColor = UIColor.clear
         backListImage.image = UIImage(named: "seeList")
-        let tapGestureList = UITapGestureRecognizer(target: self, action: #selector(askForCoffee))
+        let tapGestureList = UITapGestureRecognizer(target: self, action: #selector(showSaveList))
         backListImage.addGestureRecognizer(tapGestureList)
         backListImage.isUserInteractionEnabled = true
         
         backBuyMeCoffee.translatesAutoresizingMaskIntoConstraints = false
-        backBuyMeCoffee.leadingAnchor.constraint(equalTo: backListImage.trailingAnchor, constant: 30).isActive = true
+        backBuyMeCoffee.leadingAnchor.constraint(equalTo: backListImage.trailingAnchor, constant: 45).isActive = true
         backBuyMeCoffee.topAnchor.constraint(equalTo: backListImage.topAnchor).isActive = true
         backBuyMeCoffee.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backBuyMeCoffee.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backBuyMeCoffee.backgroundColor = UIColor.clear
         backBuyMeCoffee.image = UIImage(named: "buyMeCoffee")
-        let tapGestureCoffee = UITapGestureRecognizer(target: self, action: #selector(showSaveList))
+        let tapGestureCoffee = UITapGestureRecognizer(target: self, action: #selector(askForCoffee))
         backBuyMeCoffee.addGestureRecognizer(tapGestureCoffee)
         backBuyMeCoffee.isUserInteractionEnabled = true
         
         backRemoveImage.translatesAutoresizingMaskIntoConstraints = false
-        backRemoveImage.leadingAnchor.constraint(equalTo: backBuyMeCoffee.trailingAnchor, constant: 30).isActive = true
+        backRemoveImage.leadingAnchor.constraint(equalTo: backBuyMeCoffee.trailingAnchor, constant: 45).isActive = true
         backRemoveImage.topAnchor.constraint(equalTo: backBuyMeCoffee.topAnchor).isActive = true
         backRemoveImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backRemoveImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backRemoveImage.backgroundColor = UIColor.clear
         backRemoveImage.image = UIImage(named: "removeListItem")
-        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector(removeLastCell))
-        backRemoveImage.addGestureRecognizer(tapGestureRemove)
-        backRemoveImage.isUserInteractionEnabled = true
+//        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector())
+//        backRemoveImage.addGestureRecognizer(tapGestureRemove)
+//        backRemoveImage.isUserInteractionEnabled = true
         
        
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -161,21 +161,27 @@ class CurrencyViewController: UIViewController {
     
     @objc func showSaveDataInputView(with Name:String, Rate:Double, Amount:Double) {
         //create input text
-        let viewWidth = self.view.frame.width
-        saveDataInputView = UIViewWithTextFieldAndOnTopLabels(frame: CGRect(x: 25, y: view.frame.maxY/3, width: viewWidth - 50, height: 180), name: Name, rate: Rate, amount: Amount)
+        let mainStoryB:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = mainStoryB.instantiateViewController(withIdentifier: "InputCommentViewController") as! InputCommentViewController
         
-        UIView.animate(withDuration: 0.8, animations: {
-            self.view.addSubview(self.saveDataInputView)
-        })
-        
-        
-        
-        //didselect load all three array
+        vc.amount = Amount
+        vc.name = Name
+        vc.rate = Rate
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true) {
+            
+        }
     }
     
     
     @objc func showSaveList() {
-        //present new view with tableview
+        
+        let mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainSB.instantiateViewController(withIdentifier: "SavedRateListViewController") as! SavedRateListViewController
+        self.present(vc, animated: true) {
+            
+        }
+        
     }
     
     
@@ -186,7 +192,7 @@ class CurrencyViewController: UIViewController {
             let count = selectedNamesArray.count
             let index = selectedNamesArray.index(count, offsetBy: -1)
             _ = selectedQuotesArray.removeLast()
-            _ = selectedNamesArray.remove(at: index - 1)
+            _ = selectedNamesArray.remove(at: index - 1) //刪除右邊倒數第二個
             _ = selectedAmountArray.removeLast()
             
         }
@@ -328,6 +334,23 @@ extension CurrencyViewController: UICollectionViewDelegate {
         
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! CurrencyHeaderCollectionReusableView
         view.backgroundColor = UIColor.ciDarkGunMetal
+        if self.selectedNamesArray.count > 1 {
+            view.deleteBtn.backgroundColor = UIColor.ciButtonGreen
+            view.deleteBtn.isUserInteractionEnabled = true
+        } else {
+            view.deleteBtn.backgroundColor = UIColor.darkGray
+            view.deleteBtn.isUserInteractionEnabled = false
+        }
+        
+        view.btnTappedHandler = { (bool) in
+            if bool == true {
+                
+                if self.selectedNamesArray.count > 1 {
+                    self.removeLastCell()
+                }
+                
+            }
+        }
         return view
     }
     

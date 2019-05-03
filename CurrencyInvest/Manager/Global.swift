@@ -22,7 +22,18 @@ struct Global {
     static var isBitCoinPageShlowing:Bool = false
     
     static let alphabetArray = ["All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-
+    
+//    static var exchangeArray : [Exchange] {
+//        
+//        set {
+//            
+//        }
+//        
+//        get {
+//            
+//        }
+//        
+//    }
 
 }
 

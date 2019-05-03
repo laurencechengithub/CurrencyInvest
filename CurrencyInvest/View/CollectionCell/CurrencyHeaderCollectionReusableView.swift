@@ -10,7 +10,8 @@ import UIKit
 
 class CurrencyHeaderCollectionReusableView: UICollectionReusableView {
     
-    var saveBtn = UIButton()
+    var deleteBtn = UIButton()
+    var btnTappedHandler:((Bool)->())!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,19 +26,23 @@ class CurrencyHeaderCollectionReusableView: UICollectionReusableView {
     func setView() {
         
         self.backgroundColor = UIColor.ciDarkGunMetal
-        self.addSubview(saveBtn)
+        self.addSubview(deleteBtn)
         
-        saveBtn.translatesAutoresizingMaskIntoConstraints = false
-        saveBtn.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        saveBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40).isActive = true
-        saveBtn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40).isActive = true
-        saveBtn.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        saveBtn.backgroundColor = UIColor.ciButtonGreen
-        saveBtn.setTitle("Save current exchange", for: .normal)
-        saveBtn.setTitleColor(UIColor.white, for: .normal)
-        saveBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        saveBtn.layer.cornerRadius = 20
-        
+        deleteBtn.translatesAutoresizingMaskIntoConstraints = false
+        deleteBtn.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        deleteBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 139).isActive = true
+        deleteBtn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -139).isActive = true
+        deleteBtn.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        deleteBtn.backgroundColor = UIColor.ciButtonGreen
+        deleteBtn.setTitle("−", for: .normal)
+        deleteBtn.setTitleColor(UIColor.white, for: .normal)
+        deleteBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 26)
+        deleteBtn.layer.cornerRadius = 20
+        deleteBtn.addTarget(btnTapped, action: #selector(btnTapped), for: .touchUpInside)
+    }
+    
+    @objc func btnTapped() {
+        btnTappedHandler(true)
     }
     
 }

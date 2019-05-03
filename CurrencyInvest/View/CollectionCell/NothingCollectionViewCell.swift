@@ -36,13 +36,14 @@ class NothingCollectionViewCell: UICollectionViewCell {
         plusBtn.translatesAutoresizingMaskIntoConstraints = false
         plusBtn.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
         plusBtn.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        plusBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        plusBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        plusBtn.widthAnchor.constraint(equalToConstant: 140).isActive = true
+        plusBtn.heightAnchor.constraint(equalToConstant: 44).isActive = true
         plusBtn.backgroundColor = UIColor.ciButtonGreen
         plusBtn.setTitle("+", for: .normal)
         plusBtn.titleLabel?.textColor = UIColor.darkGray
         plusBtn.addTarget(self, action: #selector(plusBtnTapped), for: .touchUpInside)
         plusBtn.layer.cornerRadius = 20
+        plusBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 26)
         
         bottomLine.translatesAutoresizingMaskIntoConstraints = false
         bottomLine.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
