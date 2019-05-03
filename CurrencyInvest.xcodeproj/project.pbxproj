@@ -279,13 +279,13 @@
 				5D06AD1A2240CB90005047EC /* MasterViewController.swift */,
 				5D1FF1F4222512CE00733C7D /* MainViewController.swift */,
 				5D15FF3F21ED85D0002B7CCD /* CurrencyViewControllerTwo.swift */,
-				5D45004D227BDF080005B37C /* NoticeViewController.swift */,
 				5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */,
 				5DCAB49B2250B72600C789AF /* CurrencyViewController.swift */,
 				5D11CDDE2254B54100539E42 /* RateTypePicker.swift */,
 				5D0C417622608FE700944CEB /* NumberPadViewController.swift */,
 				5D1256F32277FA6A00162851 /* InputCommentViewController.swift */,
 				5D0236562272BCCA00C591C5 /* SavedRateListViewController.swift */,
+				5D45004D227BDF080005B37C /* NoticeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

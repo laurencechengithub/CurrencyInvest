@@ -79,13 +79,10 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         smallBackView.translatesAutoresizingMaskIntoConstraints = false
         smallBackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16).isActive = true
         smallBackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: -10).isActive = true
-        smallBackView.heightAnchor.constraint(equalToConstant: self.contentView.frame.height).isActive = true
+        smallBackView.heightAnchor.constraint(equalToConstant: self.contentView.frame.height - 16).isActive = true
         smallBackView.trailingAnchor.constraint(equalTo: self.rateName.trailingAnchor, constant: 0).isActive = true
 //        smallBackView.widthAnchor.constraint(equalToConstant: 98).isActive = true
-        smallBackView.backgroundColor = UIColor.green.withAlphaComponent(0.7)
-//        smallBackView.layer.borderWidth = 2
-//        smallBackView.layer.borderColor = UIColor.darkGray.cgColor
-//        smallBackView.layer.cornerRadius = 10
+        smallBackView.backgroundColor = UIColor.green.withAlphaComponent(0)
         smallBackView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(smallBackViewTapped))
         smallBackView.addGestureRecognizer(tapGesture)

@@ -138,7 +138,7 @@ class EntryViewViewController: UIViewController {
     func toMainView() {
         
         entryViewViewModel.saveDataToUserDefault()
-        
+        self.checkedCoffeeBought()
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
@@ -147,6 +147,11 @@ class EntryViewViewController: UIViewController {
         
     }
     
-
+    func checkedCoffeeBought() {
+        
+        Global.isCoffeeBought = UserDefualtManager.sharedInstance.isBought
+        
+    }
+    
 
 }

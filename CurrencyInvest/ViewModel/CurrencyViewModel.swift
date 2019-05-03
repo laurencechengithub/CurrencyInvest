@@ -72,8 +72,8 @@ class CurrencyViewModel {
         var returnArray = [Double]()
         let inAmountAsUSD = inAmount/selectedQuotes[indexPath.row]
        
-        for i in 0..<(selectedNames.count - 1) {
-            
+        for i in 0..<(selectedQuotes.count) {
+            print("i = \(i)")
             let quote = selectedQuotes[i]
             print("quote:\(quote)")
             let outAmount = inAmountAsUSD * quote

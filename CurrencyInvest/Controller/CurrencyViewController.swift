@@ -56,7 +56,6 @@ class CurrencyViewController: UIViewController {
     lazy var inputText = UITextField()
     
     override func viewDidLoad() {
-        
         setData()
         self.view.backgroundColor = UIColor.ciDarkGunMetal
         self.view.addSubview(backgdView)
@@ -101,9 +100,9 @@ class CurrencyViewController: UIViewController {
         backRemoveImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
         backRemoveImage.backgroundColor = UIColor.clear
         backRemoveImage.image = UIImage(named: "removeListItem")
-//        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector())
-//        backRemoveImage.addGestureRecognizer(tapGestureRemove)
-//        backRemoveImage.isUserInteractionEnabled = true
+        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector(removeAllCell))
+        backRemoveImage.addGestureRecognizer(tapGestureRemove)
+        backRemoveImage.isUserInteractionEnabled = true
         
        
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -127,7 +126,7 @@ class CurrencyViewController: UIViewController {
         
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 154).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -155,8 +154,11 @@ class CurrencyViewController: UIViewController {
     
     @objc func askForCoffee() {
         //present new view ask for in-app-purchase or show add
-        //close btn
-        //donate btn
+        let noticeViewController = NoticeViewController()
+        self.present(noticeViewController, animated: true) {
+            
+        }
+
     }
     
     @objc func showSaveDataInputView(with Name:String, Rate:Double, Amount:Double) {
@@ -178,9 +180,7 @@ class CurrencyViewController: UIViewController {
         
         let mainSB = UIStoryboard(name: "Main", bundle: nil)
         let vc = mainSB.instantiateViewController(withIdentifier: "SavedRateListViewController") as! SavedRateListViewController
-        self.present(vc, animated: true) {
-            
-        }
+        self.present(vc, animated: true)
         
     }
     
@@ -201,7 +201,14 @@ class CurrencyViewController: UIViewController {
         
     }
     
-    
+    @objc func removeAllCell() {
+        selectedQuotesArray.removeAll()
+        selectedNamesArray.removeAll()
+        selectedNamesArray.append("")
+        selectedAmountArray.removeAll()
+        
+        collectionView.reloadData()
+    }
     
 }
 
@@ -234,18 +241,16 @@ extension CurrencyViewController: UICollectionViewDelegate {
                         self.selectedQuotesArray.append(inRate)
                         self.selectedAmountArray.append(0)
                         
-                        if self.selectedNamesArray.count < 10 {
+                        if Global.isCoffeeBought == false && self.selectedNamesArray.count < 10 {
                             self.selectedNamesArray.append("")
-                            print(self.selectedNamesArray)
+                            
+                        } else if Global.isCoffeeBought == true && self.selectedNamesArray.count < 15 {
+                            self.selectedNamesArray.append("")
+                            
                         }
                         
-//                        self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
-//                            inAmount: self.userEnterAmount,
-//                            selectedNames: self.selectedNamesArray,
-//                            selectedQuotes:self.selectedQuotesArray,
-//                            indexPath: indexPath )
-    
                         self.reloadData()
+                        
                     }
                 }
                 
@@ -390,11 +395,11 @@ extension CurrencyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         print(contentOffsetY)
-        if contentOffsetY >= -10 {
+        if contentOffsetY >= -2 {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //            collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             flowLayout.sectionHeadersPinToVisibleBounds = true
-        } else if contentOffsetY <= -10 {
+        } else if contentOffsetY < -2 {
             collectionView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
             flowLayout.sectionHeadersPinToVisibleBounds = false
         }

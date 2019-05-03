@@ -51,14 +51,12 @@ class InputCommentViewController: UIViewController {
     }
     
     func toListView() {
-
-        self.dismiss(animated: true) {
-            
-            let mainSB = UIStoryboard(name: "Main", bundle: nil)
-            let vc = mainSB.instantiateViewController(withIdentifier: "SavedRateListViewController") as! SavedRateListViewController
-
-            self.present(vc, animated: true, completion: nil)
-        }
+        
+        let mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainSB.instantiateViewController(withIdentifier: "SavedRateListViewController") as! SavedRateListViewController
+        
+        self.present(vc, animated: true, completion: nil)
+//        self.dismiss(animated: true)
         
     }
     

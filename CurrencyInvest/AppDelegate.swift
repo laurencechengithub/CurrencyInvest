@@ -100,6 +100,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+//    func resetApp() {
+//        UIApplication.shared.windows[0].rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+//    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.

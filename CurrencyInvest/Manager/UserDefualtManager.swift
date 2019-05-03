@@ -15,10 +15,7 @@ class UserDefualtManager {
     
     private var userDefault = UserDefaults.standard
     
-    //======
-    //====== currencyTwo =========
-    //======
-    
+
     var masterQuotes:[String:Double] {
         
         get {
@@ -233,6 +230,20 @@ class UserDefualtManager {
         
     }
     
+    var isBought:Bool {
+        get{
+            if let data = userDefault.object(forKey: "isBought") {
+                return data as! Bool
+            }
+            return false
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "isBought")
+            userDefault.synchronize()
+        }
+        
+    }
     
 }
 
