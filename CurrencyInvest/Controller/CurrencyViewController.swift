@@ -260,7 +260,7 @@ extension CurrencyViewController: UICollectionViewDelegate {
             var inRate = 0.0
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseCell", for: indexPath) as! CurrencyCollectionViewCell
             
-            cell.rateImage.image = UIImage(named: "\(selectedNamesArray[indexPath.row])")
+            cell.setImage(string: "\(selectedNamesArray[indexPath.row])")
             cell.rateName.text = selectedNamesArray[indexPath.row]
             cell.rateAmount.text = "\(selectedAmountArray[indexPath.row].roundToDecimal(2))"
             //偵測到user點擊國家幣別

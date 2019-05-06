@@ -126,5 +126,15 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
         
     }
     
+    func setImage (string:String) {
+        
+        if let image = UIImage(named: string) {
+            rateImage.image = image
+        } else {
+            rateImage.image = UIImage(named: "logo")
+        }
+        
+    }
+    
     
 }
