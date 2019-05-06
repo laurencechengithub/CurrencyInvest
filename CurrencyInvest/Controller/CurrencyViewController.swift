@@ -197,7 +197,7 @@ class CurrencyViewController: UIViewController {
             
         }
         
-        collectionView.reloadData()
+        reloadData()
         
     }
     
@@ -207,7 +207,7 @@ class CurrencyViewController: UIViewController {
         selectedNamesArray.append("")
         selectedAmountArray.removeAll()
         
-        collectionView.reloadData()
+        reloadData()
     }
     
 }

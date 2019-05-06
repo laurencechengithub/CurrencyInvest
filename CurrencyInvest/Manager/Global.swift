@@ -21,6 +21,8 @@ struct Global {
     static var isCurrencyPageShowing:Bool = true
     static var isBitCoinPageShlowing:Bool = false
     static var isCoffeeBought:Bool = false
+    static var isOffLineMode:Bool = false
+    static var isToSetting:Bool = false
     
     static let alphabetArray = ["All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     

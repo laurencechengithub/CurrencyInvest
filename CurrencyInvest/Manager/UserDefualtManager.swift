@@ -46,7 +46,7 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "masterName")
             userDefault.synchronize()
-            print("Userdefault: localNameArray saved")
+            print("Userdefault: masterName saved")
         }
     }
     
@@ -244,6 +244,21 @@ class UserDefualtManager {
         }
         
     }
+    
+    var isFirstTimeEnterApp:Bool {
+        get{
+            if let data = userDefault.object(forKey: "isFirstTimeEnterApp") {
+                return data as! Bool
+            }
+            return true
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "isFirstTimeEnterApp")
+            userDefault.synchronize()
+        }
+    }
+    
     
 }
 

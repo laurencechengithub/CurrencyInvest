@@ -18,6 +18,7 @@
 		5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1C2240D77C005047EC /* CountingLabel.swift */; };
 		5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D081FAD21C74D82002AB7E3 /* RequestManager.swift */; };
 		5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */; };
+		5D0974A7227FEC99005119CE /* DelayFor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0974A6227FEC99005119CE /* DelayFor.swift */; };
 		5D09BA3922531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09BA3822531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift */; };
 		5D0B070B2268290C00BCFD5C /* NothingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */; };
 		5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */; };
@@ -109,6 +110,7 @@
 		5D06AD1C2240D77C005047EC /* CountingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
 		5D081FAD21C74D82002AB7E3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
+		5D0974A6227FEC99005119CE /* DelayFor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayFor.swift; sourceTree = "<group>"; };
 		5D09BA3822531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefualtManager.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				5DDEAAE821A7AE9900BE58AF /* DropDownBtn.swift */,
 				5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */,
 				5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */,
+				5D0974A6227FEC99005119CE /* DelayFor.swift */,
 				5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */,
 				5D06AD1C2240D77C005047EC /* CountingLabel.swift */,
 				5DBCF96A225F3956006D99F9 /* UIlabelWithLeftImageView.swift */,
@@ -676,6 +679,7 @@
 				5D1CD48622645E5B0017E574 /* UILabelHeightAfterText.swift in Sources */,
 				5DCAB49C2250B72600C789AF /* CurrencyViewController.swift in Sources */,
 				5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */,
+				5D0974A7227FEC99005119CE /* DelayFor.swift in Sources */,
 				5D1256F42277FA6A00162851 /* InputCommentViewController.swift in Sources */,
 				5DDEAAFC21A7D87300BE58AF /* SearchBarExtension.swift in Sources */,
 				5DDEAAFD21A7D87300BE58AF /* UIFontExtension.swift in Sources */,
