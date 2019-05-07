@@ -35,13 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
 //        set rootView
-        let entryViewVC = EntryViewViewController()
+        let entrySB = UIStoryboard.init(name: "EntryView", bundle: nil)
+        let vc = entrySB.instantiateViewController(withIdentifier: "EntryViewViewController") as! EntryViewViewController
+        let navigationController:UINavigationController = UINavigationController.init(rootViewController: vc)
+
         if let window = self.window {
-            window.rootViewController = entryViewVC
+            window.rootViewController = navigationController
         }
         
         //shortcupItem
@@ -73,10 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if Global.isToSetting == true {
-            let entrySB = UIStoryboard.init(name: "EntryView", bundle: nil)
-            let vc = entrySB.instantiateViewController(withIdentifier: "EntryViewViewController") as! EntryViewViewController
-            let root = self.window?.rootViewController
-            root?.present(vc, animated: true, completion: nil)
+
+            if let vc = window?.rootViewController {
+                vc.loadView()
+            }
             
         }
         print("applicationWillEnterForeground")
@@ -110,7 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefualtManager.sharedInstance.selectedNames = Global.selectedNames
         UserDefualtManager.sharedInstance.selectedQuotes = Global.selectedQuotes
         UserDefualtManager.sharedInstance.selectedAmount = Global.selectedAmounts
-        
+        UserDefualtManager.sharedInstance.lastEnterAmount = Global.lastEnterAmount
+        UserDefualtManager.sharedInstance.lastIndexPathRow = Global.lastIndexPathRow
     }
     
     
