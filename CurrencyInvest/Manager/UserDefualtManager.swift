@@ -46,7 +46,7 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "masterName")
             userDefault.synchronize()
-            print("Userdefault: masterName saved")
+            dPrint("Userdefault: masterName saved")
         }
     }
     
@@ -60,7 +60,7 @@ class UserDefualtManager {
         set{
             userDefault.set(newValue, forKey: "selectedQuotes")
             userDefault.synchronize()
-            print("Userdefault: selectedQuotes saved")
+            dPrint("Userdefault: selectedQuotes saved")
         }
     }
     var selectedNames:[String] {
@@ -74,7 +74,7 @@ class UserDefualtManager {
         set{
             userDefault.set(newValue, forKey: "selectedNames")
             userDefault.synchronize()
-            print("Userdefault: selectedNames saved")
+            dPrint("Userdefault: selectedNames saved")
         }
     }
     
@@ -90,105 +90,99 @@ class UserDefualtManager {
         set{
             userDefault.set(newValue, forKey: "selectedAmount")
             userDefault.synchronize()
-            print("Userdefault: selectedAmount saved")
+            dPrint("Userdefault: selectedAmount saved")
         }
     }
-    
-    
-    
-    
-    
-    
-    
     
     var localBitPrice:Double {
         
         get {
-            if let data = userDefault.object(forKey: "bitPrice") {
+            if let data = userDefault.object(forKey: "localBitPrice") {
                 return data as! Double
             }
             return Double()
         }
         
         set {
-            userDefault.set(newValue, forKey: "bitPrice")
+            userDefault.set(newValue, forKey: "localBitPrice")
             userDefault.synchronize()
-            
+            dPrint("Userdefault: localBitPrice saved")
         }
         
     }
     
     var localEthPrice:Double {
         get {
-            if let data = userDefault.object(forKey: "ethPrice") {
+            if let data = userDefault.object(forKey: "localEthPrice") {
                 return data as! Double
             }
             return Double()
         }
         
         set {
-            userDefault.set(newValue, forKey: "ethPrice")
+            userDefault.set(newValue, forKey: "localEthPrice")
             userDefault.synchronize()
-            
+            dPrint("Userdefault: localEthPrice saved")
         }
         
     }
     
     var localLTCPrice:Double {
         get {
-            if let data = userDefault.object(forKey: "ltcPrice") {
+            if let data = userDefault.object(forKey: "localLTCPrice") {
                 return data as! Double
             }
             return Double()
         }
         set {
-            userDefault.set(newValue, forKey: "ltcPrice")
+            userDefault.set(newValue, forKey: "localLTCPrice")
             userDefault.synchronize()
-            
+            dPrint("Userdefault: localLTCPrice saved")
         }
         
     }
     
     var localXMRPrice:Double {
         get {
-            if let data = userDefault.object(forKey: "xmrPrice") {
+            if let data = userDefault.object(forKey: "localXMRPrice") {
                 return data as! Double
             }
             return Double()
         }
         set {
-            userDefault.set(newValue, forKey: "xmrPrice")
+            userDefault.set(newValue, forKey: "localXMRPrice")
             userDefault.synchronize()
-            
+            dPrint("Userdefault: localXMRPrice saved")
         }
         
     }
     
     var localXRPPrice:Double {
         get {
-            if let data = userDefault.object(forKey: "xrpPrice") {
+            if let data = userDefault.object(forKey: "localXRPPrice") {
                 return data as! Double
             }
             return Double()
         }
         set {
-            userDefault.set(newValue, forKey: "xrpPrice")
+            userDefault.set(newValue, forKey: "localXRPPrice")
             userDefault.synchronize()
-            
+            dPrint("Userdefault: localXRPPrice saved")
         }
         
     }
     
     var localZECPrice:Double {
         get {
-            if let data = userDefault.object(forKey: "zecPrice") {
+            if let data = userDefault.object(forKey: "localZECPrice") {
                 return data as! Double
             }
             return Double()
         }
         set {
-            userDefault.set(newValue, forKey: "zecPrice")
+            userDefault.set(newValue, forKey: "localZECPrice")
             userDefault.synchronize()
+            dPrint("Userdefault: localZECPrice saved")
             
         }
         
@@ -207,6 +201,7 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "localCryptoPriceArray")
             userDefault.synchronize()
+            dPrint("Userdefault: localCryptoPriceArray saved")
             
         }
         
@@ -225,6 +220,7 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "localCryptoTypeArray")
             userDefault.synchronize()
+            dPrint("Userdefault: localCryptoTypeArray saved")
             
         }
         
@@ -241,6 +237,7 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "isBought")
             userDefault.synchronize()
+            dPrint("Userdefault: isBought saved")
         }
         
     }
@@ -256,6 +253,38 @@ class UserDefualtManager {
         set {
             userDefault.set(newValue, forKey: "isFirstTimeEnterApp")
             userDefault.synchronize()
+            dPrint("Userdefault: isFirstTimeEnterApp saved")
+        }
+    }
+    
+    var lastIndexPathRow:Int {
+        get{
+            if let data = userDefault.object(forKey: "lastIndexPathRow") {
+                return data as! Int
+            }
+            return 0
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "lastIndexPathRow")
+            userDefault.synchronize()
+            dPrint("Userdefault: lastIndexPathRow saved")
+        }
+    }
+    
+    
+    var lastEnterAmount:Double {
+        get{
+            if let data = userDefault.object(forKey: "lastEnterAmount") {
+                return data as! Double
+            }
+            return 0
+        }
+        
+        set {
+            userDefault.set(newValue, forKey: "lastEnterAmount")
+            userDefault.synchronize()
+            dPrint("Userdefault: lastEnterAmount saved")
         }
     }
     

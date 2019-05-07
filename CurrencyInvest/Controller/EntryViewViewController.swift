@@ -16,7 +16,8 @@ class EntryViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = UIColor.black
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -25,8 +26,7 @@ class EntryViewViewController: UIViewController {
         
         
         if isConnectedToNetWork() {
-            print("Internet Connection Available!")
-            
+            dPrint("Internet Connection Available!")
             getCurrency()
         } else {
 //            perform(<#T##aSelector: Selector##Selector#>, with: <#T##Any?#>, afterDelay: <#T##TimeInterval#>)
@@ -94,7 +94,7 @@ class EntryViewViewController: UIViewController {
             if UIApplication.shared.canOpenURL(settingURL) {
                 Global.isToSetting = true
                 UIApplication.shared.open(settingURL, completionHandler: { (bool) in
-                    print("Settings opened: \(bool)")
+                    dPrint("Settings opened: \(bool)")
                 })
             }
             
@@ -117,21 +117,21 @@ class EntryViewViewController: UIViewController {
     
     
     func getCurrency () {
-        
-//        getBitCoin()
-        
         //更新 Quotes
-        entryViewViewModel.getQuotes()
-        entryViewViewModel.quotesCompleteHandler = { (bool) in
-
-            if bool == true {
-                DispatchQueue.main.async {
-                    self.getBitCoin()
-                }
-            } else {
-                self.showAlert(string: "Get Currency Fail")
-            }
-        }
+        getBitCoin()
+        
+        
+//        entryViewViewModel.getQuotes()
+//        entryViewViewModel.quotesCompleteHandler = { (bool) in
+//
+//            if bool == true {
+//                DispatchQueue.main.async {
+//                    self.getBitCoin()
+//                }
+//            } else {
+//                self.showAlert(string: "Get Currency Fail")
+//            }
+//        }
         
     }
     
@@ -242,7 +242,7 @@ class EntryViewViewController: UIViewController {
                 if UIApplication.shared.canOpenURL(settingURL) {
                     Global.isToSetting = true
                     UIApplication.shared.open(settingURL, completionHandler: { (bool) in
-                        print("Settings opened: \(bool)")
+                        dPrint("Settings opened: \(bool)")
                     })
     
                 }
@@ -258,8 +258,9 @@ class EntryViewViewController: UIViewController {
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let CurrencyVC = mainStoryboard.instantiateViewController(withIdentifier: "CurrencyViewController") as! CurrencyViewController
-//        let vc = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        self.present(CurrencyVC, animated: true, completion: nil)
+        
+        self.navigationController?.pushViewController(CurrencyVC, animated: true)
+        
         
     }
     

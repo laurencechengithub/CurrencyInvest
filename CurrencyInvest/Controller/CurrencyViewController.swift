@@ -51,12 +51,13 @@ class CurrencyViewController: UIViewController {
     }
     
     var numberPadHeight:CGFloat!
-    var userEnterAmount = Double()
-
+//    var userEnterAmount = Double()
+//    var lastIndexPath = IndexPath()
     lazy var inputText = UITextField()
     
     override func viewDidLoad() {
         setData()
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.ciDarkGunMetal
         self.view.addSubview(backgdView)
         self.backgdView.addSubview(backListImage)
@@ -155,10 +156,12 @@ class CurrencyViewController: UIViewController {
     @objc func askForCoffee() {
         //present new view ask for in-app-purchase or show add
         let noticeViewController = NoticeViewController()
-        self.present(noticeViewController, animated: true) {
-            
-        }
-
+//        self.present(noticeViewController, animated: true) {
+//
+//        }
+        
+        self.navigationController?.pushViewController(noticeViewController, animated: true)
+        
     }
     
     @objc func showSaveDataInputView(with Name:String, Rate:Double, Amount:Double) {
@@ -239,7 +242,14 @@ extension CurrencyViewController: UICollectionViewDelegate {
                         inRate = self.allQuotesWithName["USD\(name)"] ?? 0
                         //save to selectedQuotes
                         self.selectedQuotesArray.append(inRate)
-                        self.selectedAmountArray.append(0)
+//                        self.selectedAmountArray.append(0)
+                        
+                        //再算一次幣別amount
+                        self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
+                            inAmount: Global.lastEnterAmount,
+                            selectedNames: Global.selectedNames,
+                            selectedQuotes: Global.selectedQuotes,
+                            indexPathRow: Global.lastIndexPathRow )
                         
                         if Global.isCoffeeBought == false && self.selectedNamesArray.count < 10 {
                             self.selectedNamesArray.append("")
@@ -276,15 +286,28 @@ extension CurrencyViewController: UICollectionViewDelegate {
                         if flag == true {
                             //show selected rate name amd image
                             cell.rateName.text = name
-                            cell.rateImage.image = UIImage(named: "\(name)")
+                            cell.setImage(string: name)
                             //add name into selectedNamesArray
                             self.selectedNamesArray[indexPath.row] = name
                             //base on name findout the rate
                             inRate = self.allQuotesWithName["USD\(name)"] ?? 0
                             //save to selectedQuotes
                             self.selectedQuotesArray[indexPath.row] = inRate
+                            
+                            //再算一次幣別amount
+                            self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
+                                inAmount: Global.lastEnterAmount,
+                                selectedNames: Global.selectedNames,
+                                selectedQuotes: Global.selectedQuotes,
+                                indexPathRow: Global.lastIndexPathRow )
+                            
+                            self.reloadData()
+                            
                         }
                     }
+                    
+
+                    
                     
                 }
             }
@@ -303,16 +326,16 @@ extension CurrencyViewController: UICollectionViewDelegate {
                     numberPadVC.returnFinalCalculateNumber = { (flag,double) in
                         if flag == true {
                             
-                            self.userEnterAmount = double
+                            //紀錄最後一次收尋時的內容
+                            Global.lastEnterAmount = double
+                            Global.lastIndexPathRow = indexPath.row
+                            //*
                             self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
-                                inAmount: self.userEnterAmount,
+                                inAmount: double,
                                 selectedNames: self.selectedNamesArray,
                                 selectedQuotes:self.selectedQuotesArray,
-                                indexPath: indexPath )
+                                indexPathRow: indexPath.row )
                             cell.rateAmount.text = "\(self.selectedAmountArray[indexPath.row])"
-                            
-                        }else {
-//                            cell.rateAmount.text = String(0)
                             
                         }
                         self.reloadData()
@@ -366,10 +389,10 @@ extension CurrencyViewController: UICollectionViewDelegate {
     
     func reloadData() {
         
-        print("reloadData")
-        print("selectedQuotesArray: \(selectedQuotesArray)")
-        print("selectedNamesArray: \(selectedNamesArray)")
-        print("selectedAmountArray: \(selectedAmountArray)")
+        dPrint("CurrencyView reloadData")
+        dPrint("selectedQuotesArray: \(selectedQuotesArray)")
+        dPrint("selectedNamesArray: \(selectedNamesArray)")
+        dPrint("selectedAmountArray: \(selectedAmountArray)")
         
         collectionView.reloadData()
         
@@ -394,7 +417,7 @@ extension CurrencyViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
-        print(contentOffsetY)
+//        print(contentOffsetY)
         if contentOffsetY >= -2 {
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //            collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)

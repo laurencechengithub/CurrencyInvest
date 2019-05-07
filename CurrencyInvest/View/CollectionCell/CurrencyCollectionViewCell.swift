@@ -113,7 +113,6 @@ class CurrencyCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func smallBackViewTapped() {
-        print("smallBackViewTapped")
         smallBackViewTapHandler(true)
     }
     

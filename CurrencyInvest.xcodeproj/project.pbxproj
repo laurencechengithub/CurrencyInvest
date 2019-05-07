@@ -40,6 +40,7 @@
 		5D1FF1F9222517D300733C7D /* BitCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */; };
 		5D1FF1FB222517F600733C7D /* CryptoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */; };
 		5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */; };
+		5D32D6F822812D380092FF2A /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D32D6F722812D380092FF2A /* NavigationManager.swift */; };
 		5D448681223F978A002CD402 /* SwiftyMessageProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */; };
 		5D45004E227BDF080005B37C /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D45004D227BDF080005B37C /* NoticeViewController.swift */; };
 		5D4C2A9C225B4F5300EEC718 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4C2A9B225B4F5300EEC718 /* DebugPrint.swift */; };
@@ -133,6 +134,7 @@
 		5D1FF1F8222517D300733C7D /* BitCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitCoinViewModel.swift; sourceTree = "<group>"; };
 		5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataModel.swift; sourceTree = "<group>"; };
 		5D2146F721F86E6100AD8F8B /* UILabelPaddingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelPaddingExtension.swift; sourceTree = "<group>"; };
+		5D32D6F722812D380092FF2A /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyMessageProtocal.swift; sourceTree = "<group>"; };
 		5D45004D227BDF080005B37C /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		5D4C2A9B225B4F5300EEC718 /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				5D081FAD21C74D82002AB7E3 /* RequestManager.swift */,
 				5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */,
+				5D32D6F722812D380092FF2A /* NavigationManager.swift */,
 				5D15FF4921ED87A1002B7CCD /* Global.swift */,
 				5D4C2A9B225B4F5300EEC718 /* DebugPrint.swift */,
 				5D1256F7227828A000162851 /* CoreDataManager.swift */,
@@ -677,6 +680,7 @@
 				5DDEAB0721A7D87300BE58AF /* UICollectionViewExtension.swift in Sources */,
 				5DDEAB0521A7D87300BE58AF /* UIViewcontrollerExtension.swift in Sources */,
 				5D1CD48622645E5B0017E574 /* UILabelHeightAfterText.swift in Sources */,
+				5D32D6F822812D380092FF2A /* NavigationManager.swift in Sources */,
 				5DCAB49C2250B72600C789AF /* CurrencyViewController.swift in Sources */,
 				5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */,
 				5D0974A7227FEC99005119CE /* DelayFor.swift in Sources */,

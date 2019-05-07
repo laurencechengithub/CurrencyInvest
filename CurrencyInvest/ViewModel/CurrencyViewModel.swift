@@ -30,7 +30,7 @@ class CurrencyViewModel {
         }
         // abc排序
         keys = keys.sorted(by: {$0 < $1})
-        print(keys)
+        
         
         return keys
     }
@@ -53,6 +53,14 @@ class CurrencyViewModel {
         return UserDefualtManager.sharedInstance.selectedQuotes
     }
     
+    func lastEnterAmount() -> Double {
+        return UserDefualtManager.sharedInstance.lastEnterAmount
+    }
+    
+    func lastEnterIndexPathRow() -> Int {
+        return UserDefualtManager.sharedInstance.lastIndexPathRow
+    }
+    
     func calculateWith (inAmount: Double, inRate:Double, outRate:Double ) -> Double {
         
         if inRate == 0 || outRate == 0 {
@@ -67,15 +75,15 @@ class CurrencyViewModel {
         
     }
 
-    func calculateAllAmount (inAmount: Double, selectedNames:[String], selectedQuotes:[Double], indexPath:IndexPath ) -> [Double] {
+    func calculateAllAmount (inAmount: Double, selectedNames:[String], selectedQuotes:[Double], indexPathRow:Int ) -> [Double] {
         
         var returnArray = [Double]()
-        let inAmountAsUSD = inAmount/selectedQuotes[indexPath.row]
+        let inAmountAsUSD = inAmount/selectedQuotes[indexPathRow]
        
         for i in 0..<(selectedQuotes.count) {
-            print("i = \(i)")
+//            print("i = \(i)")
             let quote = selectedQuotes[i]
-            print("quote:\(quote)")
+//            print("quote:\(quote)")
             let outAmount = inAmountAsUSD * quote
             returnArray.append(outAmount)
         }
@@ -105,7 +113,7 @@ class CurrencyViewModel {
         do {
             savedExchageArray = try exchangeContext.fetch(request)
         } catch {
-            print("error fatching from context: \(error)")
+            dPrint("error fatching from context: \(error)")
         }
         
         
@@ -122,7 +130,7 @@ class CurrencyViewModel {
         do {
             try exchangeContext.save()
         } catch {
-            print("fail to save to coredata, error: \(error)")
+            dPrint("fail to save to coredata, error: \(error)")
         }
     }
     

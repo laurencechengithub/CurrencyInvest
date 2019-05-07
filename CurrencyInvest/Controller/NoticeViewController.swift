@@ -96,19 +96,22 @@ class NoticeViewController: UIViewController {
         } else {
             
             //can't make payment
-            print("SKPaymentQueue.canMakePayments() return false")
+            dPrint("SKPaymentQueue.canMakePayments() return false")
         }
         
     }
     
     
     @objc func cancelBtnTapped() {
-        self.dismiss(animated: true, completion: nil)
+        if let navi = navigationController {
+            navi.popViewController(animated: true)
+        }
+        
     }
     
 }
 
-
+//In app purchase
 extension NoticeViewController: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -116,17 +119,21 @@ extension NoticeViewController: SKPaymentTransactionObserver {
         for transaction in transactions {
             
             if transaction.transactionState == .purchased {
+
+                // give something inreturn to user
+                UserDefualtManager.sharedInstance.isBought = true
                 
                 SKPaymentQueue.default().finishTransaction(transaction)
-                UserDefualtManager.sharedInstance.isBought = true
                 // reload app
-                // give something inreturn to user
+                if let navi = navigationController {
+                    navi.popToRootViewController(animated: true)
+                }
                 
             } else if transaction.transactionState == .failed {
                 
                 if let error = transaction.error {
                     let errordescription = error.localizedDescription
-                    print(errordescription)
+                    dPrint("paymentQueue transactionState == .failed : \(errordescription)")
                 }
                 
                 SKPaymentQueue.default().finishTransaction(transaction)

@@ -29,7 +29,7 @@ class NumberPad : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print(self.frame)
+//        print(self.frame)
         setupView()
     }
     
@@ -136,8 +136,8 @@ class NumberPad : UIView {
   
         itemSizeWidth = (self.frame.width - 10)/5
         itemSizeHeight = (self.frame.height - 10)/5
-        print(itemSizeWidth)
-        print(itemSizeHeight)
+//        print(itemSizeWidth)
+//        print(itemSizeHeight)
         flow.itemSize = CGSize(width: itemSizeWidth, height: itemSizeHeight)
         flow.minimumLineSpacing = 3
         flow.minimumInteritemSpacing = 1.5

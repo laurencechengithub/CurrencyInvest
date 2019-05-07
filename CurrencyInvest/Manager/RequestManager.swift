@@ -39,20 +39,19 @@ class RequestManager {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             guard let theData = data else {
-                print("data is nil")
+                dPrint("RequestManager getCurrecyRate : data is nil")
                 return
             }
             
             do {
                 let modelData = try JSONDecoder().decode(CurrencyDataModel.self,from:theData)
-                print(modelData)
                 
                 completiondHandler(modelData)
                 
             } catch {
                 
                 let showError = error
-                print(showError)
+                dPrint(" getCurrecyRate error : \(showError)")
                 
             }
         
@@ -74,7 +73,7 @@ class RequestManager {
                 let jsonData = JSON(value)
                 completionHandler(jsonData)
             case .failure(let error):
-                print(error)
+                dPrint(" baseRequest error : \(error)")
                 completionHandler(nil)
             }
         })

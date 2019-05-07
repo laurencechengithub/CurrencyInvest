@@ -24,7 +24,6 @@ class NumberPadViewController: UIViewController {
     var enterString:String = "" {
         
         didSet {
-            print("didset")
             if let text = numberLabel.text {
                 let newtext = text + enterString
                 
@@ -34,7 +33,7 @@ class NumberPadViewController: UIViewController {
                 numberLabel.text = newtext
                 
                 if numberScrollView.contentSize.width > numberScrollView.bounds.size.width {
-                    print("oh yeah")
+                    
                     let scrollRightEndContentOffset = CGPoint(x: numberScrollView.contentSize.width - numberScrollView.bounds.size.width, y: 0)
                     numberScrollView.setContentOffset(scrollRightEndContentOffset, animated: true)
                 } else {
@@ -118,7 +117,6 @@ extension NumberPadViewController: NumberPadDelegate {
 
 
     func numberTapped(numString: String, numInt: Int) {
-        print("numString:\(numString)")
         enterString = numString
     }
     

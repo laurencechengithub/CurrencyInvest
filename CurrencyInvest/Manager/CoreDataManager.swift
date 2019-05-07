@@ -66,7 +66,7 @@ class CoreDataManager {
             }
             
         } catch {
-            print("getExcahngeList failed")
+            dPrint("getExcahngeList failed")
         }
         
         return exchangeArray
@@ -85,7 +85,7 @@ class CoreDataManager {
         do {
             try managedContext.save()
         } catch {
-            print("deleted but fail to save")
+            dPrint("deleted but fail to save")
         }
         
         
