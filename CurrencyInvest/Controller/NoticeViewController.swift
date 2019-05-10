@@ -19,6 +19,7 @@ class NoticeViewController: UIViewController {
     var productID = "com.llng_intl.MoneyXBit.buyMeCoffee"
     var descriptionLabel = UILabel()
     var isBought = Bool()
+    var restorePurchaceBtn = UIButton()
     
     override func viewDidLoad() {
         setView()
@@ -32,6 +33,7 @@ class NoticeViewController: UIViewController {
         centerBoard.addSubview(descriptionLabel)
         centerBoard.addSubview(cancelBtn)
         centerBoard.addSubview(buyBtn)
+        centerBoard.addSubview(restorePurchaceBtn)
         
         centerBoard.translatesAutoresizingMaskIntoConstraints = false
         centerBoard.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -40,6 +42,25 @@ class NoticeViewController: UIViewController {
         centerBoard.widthAnchor.constraint(equalToConstant: self.view.frame.width * 0.8).isActive = true
         centerBoard.backgroundColor = UIColor.ciDownArrowBlue
         centerBoard.layer.cornerRadius = 10
+        
+        
+        restorePurchaceBtn.translatesAutoresizingMaskIntoConstraints = false
+        restorePurchaceBtn.leadingAnchor.constraint(equalTo: self.centerBoard.leadingAnchor, constant: 10).isActive = true
+        restorePurchaceBtn.topAnchor.constraint(equalTo: self.centerBoard.topAnchor, constant: 5).isActive = true
+        restorePurchaceBtn.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        restorePurchaceBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        restorePurchaceBtn.setTitle("Restore", for: .normal)
+        restorePurchaceBtn.setTitleColor(UIColor.white, for: .normal)
+        restorePurchaceBtn.titleLabel?.backgroundColor = UIColor.clear
+        restorePurchaceBtn.layer.borderWidth = 2
+        restorePurchaceBtn.layer.borderColor = UIColor.white.cgColor
+        restorePurchaceBtn.layer.cornerRadius = 5
+//        if UserDefualtManager.sharedInstance.isBought == true {
+//            restorePurchaceBtn.isHidden = false
+//        } else {
+//            restorePurchaceBtn.isHidden = true
+//        }
+        
         
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
         cancelBtn.topAnchor.constraint(equalTo: centerBoard.topAnchor, constant: 5).isActive = true
@@ -56,7 +77,11 @@ class NoticeViewController: UIViewController {
         descriptionLabel.leadingAnchor.constraint(equalTo: centerBoard.leadingAnchor, constant: 10).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: centerBoard.trailingAnchor, constant: -10).isActive = true
         descriptionLabel.bottomAnchor.constraint(equalTo: centerBoard.bottomAnchor, constant: -64).isActive = true
-        descriptionLabel.text = "Hi Guys! I hope you liked this app, I'm an individual developer, who desires to make human living more convenience. If you find this app useful pls award me a cup of coffee so I can keep coding and won't doze off to sleep..."
+        let attributedText = NSMutableAttributedString(string: "Hi Guys! I hope you liked this app, I'm an individual developer, who desires to make human living more convenience. If you find this app useful pls award me a cup of coffee so I can keep coding and won't doze off to sleep...")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+        descriptionLabel.attributedText = attributedText
         descriptionLabel.backgroundColor = UIColor.clear
         descriptionLabel.textColor = UIColor.white
         descriptionLabel.font = UIFont.boldSystemFont(ofSize: 20)
@@ -137,11 +162,28 @@ extension NoticeViewController: SKPaymentTransactionObserver {
                 }
                 
                 SKPaymentQueue.default().finishTransaction(transaction)
+            } else if transaction.transactionState == .restored {
+                
+                //after checking with app store and knowing this had been purchased
+                UserDefualtManager.sharedInstance.isBought = true
+                SKPaymentQueue.default().finishTransaction(transaction)
+                
+                //hide the restore btn
+                
+                // reload app
+                if let navi = navigationController {
+                    navi.popToRootViewController(animated: true)
+                }
+                
+                
             }
         }
         
     }
     
+    func restoreAction() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
     
 
     

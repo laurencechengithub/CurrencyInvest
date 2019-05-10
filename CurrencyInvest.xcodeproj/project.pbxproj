@@ -20,6 +20,7 @@
 		5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */; };
 		5D0974A7227FEC99005119CE /* DelayFor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0974A6227FEC99005119CE /* DelayFor.swift */; };
 		5D09BA3922531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09BA3822531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift */; };
+		5D0A8A9322857E8B00A164EF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A8A9222857E8B00A164EF /* GradientView.swift */; };
 		5D0B070B2268290C00BCFD5C /* NothingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */; };
 		5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */; };
 		5D0C417722608FE700944CEB /* NumberPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C417622608FE700944CEB /* NumberPadViewController.swift */; };
@@ -62,7 +63,6 @@
 		5DDEAACE21A7ABCF00BE58AF /* CurrencyInvestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAACD21A7ABCF00BE58AF /* CurrencyInvestTests.swift */; };
 		5DDEAAD921A7ABCF00BE58AF /* CurrencyInvestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAD821A7ABCF00BE58AF /* CurrencyInvestUITests.swift */; };
 		5DDEAAE921A7AE9900BE58AF /* DropDownBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAE821A7AE9900BE58AF /* DropDownBtn.swift */; };
-		5DDEAAEB21A7AECA00BE58AF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */; };
 		5DDEAAFA21A7D87300BE58AF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAEC21A7D87200BE58AF /* UIViewExtension.swift */; };
 		5DDEAAFB21A7D87300BE58AF /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAED21A7D87200BE58AF /* ImageExtension.swift */; };
 		5DDEAAFC21A7D87300BE58AF /* SearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEAAEE21A7D87200BE58AF /* SearchBarExtension.swift */; };
@@ -113,6 +113,7 @@
 		5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		5D0974A6227FEC99005119CE /* DelayFor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayFor.swift; sourceTree = "<group>"; };
 		5D09BA3822531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		5D0A8A9222857E8B00A164EF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefualtManager.swift; sourceTree = "<group>"; };
 		5D0C417622608FE700944CEB /* NumberPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +162,6 @@
 		5DDEAAD821A7ABCF00BE58AF /* CurrencyInvestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInvestUITests.swift; sourceTree = "<group>"; };
 		5DDEAADA21A7ABCF00BE58AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DDEAAE821A7AE9900BE58AF /* DropDownBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownBtn.swift; sourceTree = "<group>"; };
-		5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5DDEAAEC21A7D87200BE58AF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		5DDEAAED21A7D87200BE58AF /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		5DDEAAEE21A7D87200BE58AF /* SearchBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarExtension.swift; sourceTree = "<group>"; };
@@ -403,8 +403,8 @@
 			children = (
 				5DDEAAE821A7AE9900BE58AF /* DropDownBtn.swift */,
 				5D448680223F978A002CD402 /* SwiftyMessageProtocal.swift */,
-				5DDEAAEA21A7AECA00BE58AF /* GradientView.swift */,
 				5D0974A6227FEC99005119CE /* DelayFor.swift */,
+				5D0A8A9222857E8B00A164EF /* GradientView.swift */,
 				5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */,
 				5D06AD1C2240D77C005047EC /* CountingLabel.swift */,
 				5DBCF96A225F3956006D99F9 /* UIlabelWithLeftImageView.swift */,
@@ -653,6 +653,7 @@
 			files = (
 				5D1ADB79224E0F360091439E /* AnimatedSegmentControl.swift in Sources */,
 				5D0236592272D44800C591C5 /* SavedRateListDataModel.swift in Sources */,
+				5D0A8A9322857E8B00A164EF /* GradientView.swift in Sources */,
 				5D02365B2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift in Sources */,
 				5DDEAAFE21A7D87300BE58AF /* LabelExtension.swift in Sources */,
 				5D0B070B2268290C00BCFD5C /* NothingCollectionViewCell.swift in Sources */,
@@ -698,7 +699,6 @@
 				5DDEAB0621A7D87300BE58AF /* IntExtension.swift in Sources */,
 				5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */,
 				5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */,
-				5DDEAAEB21A7AECA00BE58AF /* GradientView.swift in Sources */,
 				5DDEAB0021A7D87300BE58AF /* StringExtension.swift in Sources */,
 				5D1FF1F7222517B200733C7D /* BitCoinViewController.swift in Sources */,
 				5DDEAB0321A7D87300BE58AF /* DoubleExtension.swift in Sources */,
