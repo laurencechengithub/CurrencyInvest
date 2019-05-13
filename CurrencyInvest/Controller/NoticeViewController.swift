@@ -52,14 +52,12 @@ class NoticeViewController: UIViewController {
         restorePurchaceBtn.setTitle("Restore", for: .normal)
         restorePurchaceBtn.setTitleColor(UIColor.white, for: .normal)
         restorePurchaceBtn.titleLabel?.backgroundColor = UIColor.clear
-        restorePurchaceBtn.layer.borderWidth = 2
-        restorePurchaceBtn.layer.borderColor = UIColor.white.cgColor
-        restorePurchaceBtn.layer.cornerRadius = 5
-//        if UserDefualtManager.sharedInstance.isBought == true {
-//            restorePurchaceBtn.isHidden = false
-//        } else {
-//            restorePurchaceBtn.isHidden = true
-//        }
+        restorePurchaceBtn.addTarget(self, action: #selector(restoreAction), for: .touchUpInside)
+        if UserDefualtManager.sharedInstance.isBought == true {
+            restorePurchaceBtn.isHidden = false
+        } else {
+            restorePurchaceBtn.isHidden = true
+        }
         
         
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -181,7 +179,7 @@ extension NoticeViewController: SKPaymentTransactionObserver {
         
     }
     
-    func restoreAction() {
+    @objc func restoreAction() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     

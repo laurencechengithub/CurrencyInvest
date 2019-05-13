@@ -148,9 +148,10 @@ class CurrencyViewController: UIViewController {
         allQuotesWithName = currencyViewModel.getQuotes()
         allNamesArray = currencyViewModel.getQuotesKey()
         selectedNamesArray = currencyViewModel.lastSelectedName()
-        
         selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
         selectedAmountArray = currencyViewModel.lastSelectedAmount()
+        Global.lastEnterAmount = currencyViewModel.lastEnterAmount()
+        Global.lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
     }
     
     @objc func askForCoffee() {
