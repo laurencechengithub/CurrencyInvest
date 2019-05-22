@@ -39,3 +39,32 @@ enum coinType:String {
     case xrp = "XRP"
     case zec = "ZEC"
 }
+
+enum crytoType {
+    case BTC
+    case ETC
+    case LTC
+    case XMR
+    case XRP
+    case ZWC
+    
+    var string:String {
+        get {
+            switch self {
+            case .BTC:
+                return "BTCUSD"
+            case .ETC:
+                return "ETCUSD"
+            case .LTC:
+                return "LTCUSD"
+            case .XMR:
+                return "XMRUSD"
+            case .XRP:
+                return "XRPUSD"
+            case .ZWC:
+                return "ZWCUSD"
+            }
+        }
+    }
+    
+}

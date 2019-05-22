@@ -122,5 +122,13 @@ class EntryViewViewModel {
     }
     
     
+    func getCryptoHistoryFor(type:crytoType) {
+        
+        RequestManager.sharedInstance.getHistoryFor(cryptoName: type) { (data) in
+            print(data)
+            print("end")
+        }
+        
+    }
     
 }

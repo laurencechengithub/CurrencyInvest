@@ -50,6 +50,7 @@
 		5D5DF8D0222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5DF8CF222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift */; };
 		5D729E3A21DF61A400A64E42 /* EntryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3921DF61A400A64E42 /* EntryView.storyboard */; };
 		5D729E3E21DF642900A64E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */; };
+		5DB97A37228EBE0B00ECFD2C /* CryptoHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB97A36228EBE0B00ECFD2C /* CryptoHistoryDataModel.swift */; };
 		5DBCF96B225F3956006D99F9 /* UIlabelWithLeftImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBCF96A225F3956006D99F9 /* UIlabelWithLeftImageView.swift */; };
 		5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */; };
 		5DBDD7D421F190E7001D6B97 /* CurrencyViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15FF3F21ED85D0002B7CCD /* CurrencyViewControllerTwo.swift */; };
@@ -144,6 +145,7 @@
 		5D5DF8CF222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bitCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D729E3921DF61A400A64E42 /* EntryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EntryView.storyboard; sourceTree = "<group>"; };
 		5D729E3D21DF642900A64E42 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5DB97A36228EBE0B00ECFD2C /* CryptoHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHistoryDataModel.swift; sourceTree = "<group>"; };
 		5DBCF96A225F3956006D99F9 /* UIlabelWithLeftImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIlabelWithLeftImageView.swift; sourceTree = "<group>"; };
 		5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewViewController.swift; sourceTree = "<group>"; };
 		5DBDD7D521F1CAA1001D6B97 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				5D53FEDC21C7730C00A333AA /* CurrencyDataModel.swift */,
 				5D1FF1FA222517F600733C7D /* CryptoDataModel.swift */,
+				5DB97A36228EBE0B00ECFD2C /* CryptoHistoryDataModel.swift */,
 				5DCAB498224FFAC500C789AF /* ExchangeDataModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -671,6 +674,7 @@
 				5D1FF1F9222517D300733C7D /* BitCoinViewModel.swift in Sources */,
 				5D5DF8D0222D2E7A00E979C5 /* bitCoinCollectionViewCell.swift in Sources */,
 				5D09BA3922531B5C00E2F8D2 /* CurrencyHeaderCollectionReusableView.swift in Sources */,
+				5DB97A37228EBE0B00ECFD2C /* CryptoHistoryDataModel.swift in Sources */,
 				5D15FF4C21ED88C8002B7CCD /* EntryViewViewModel.swift in Sources */,
 				5DBDD7D321F18CC3001D6B97 /* EntryViewViewController.swift in Sources */,
 				5D53FEDD21C7730C00A333AA /* CurrencyDataModel.swift in Sources */,

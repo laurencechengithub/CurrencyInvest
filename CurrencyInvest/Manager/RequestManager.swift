@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+
+
 class RequestManager {
     
     static let sharedInstance = RequestManager()
@@ -17,7 +19,7 @@ class RequestManager {
     enum Url:String {
         
         case currency = "http://apilayer.net/api/live?access_key=0c056c4320688c8c947e54ab6f59bfcb"
-        case cryptoHistryBTC = "https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD"
+        case cryptoHistry = "https://apiv2.bitcoinaverage.com/indices/global/history/"
         case cryptoBTC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
         case cryptoETH = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ETHUSD"
         case cryptoLTC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/LTCUSD"
@@ -25,6 +27,9 @@ class RequestManager {
         case cryptoXRP = "https://apiv2.bitcoinaverage.com/indices/global/ticker/XRPUSD"
         case cryptoZEC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ZECUSD"
     }
+    
+
+    
     
 //    var currencyDataModel:CurrencyDataModel?
 
@@ -58,6 +63,87 @@ class RequestManager {
         }.resume()
         
     }
+    
+    func getHistoryFor(cryptoName:crytoType ,completeHandler:@escaping (_ responseJSON:[CryptoHistoryDataModel]) -> () ) {
+        
+        guard var urlComponent = URLComponents(string: "\(Url.cryptoHistry.rawValue)\(cryptoName.string)") else {
+            return
+        }
+        urlComponent.queryItems = [
+            URLQueryItem(name: "period", value: "monthly"),
+            URLQueryItem(name: "format", value: "json")
+        ]
+        
+        guard let theURL = urlComponent.url else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: theURL) { (data, response, error) in
+            guard let theDate = data else {
+                dPrint("URLSession.shared.dataTask ==> data is nil")
+                return
+            }
+            
+            do {
+                let decodedData = try JSONDecoder().decode([CryptoHistoryDataModel].self, from: theDate)
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                
+                var dataArray = [CryptoHistoryDataModel]()
+                
+                for data in decodedData {
+                    let given = data.time
+                    guard let date = dateFormatter.date(from: given) else {
+                        return
+                    }
+                    dateFormatter.dateFormat = "HH:mm:ss"
+                    let result = dateFormatter.string(from: date)
+                    print(result)
+                    
+                    if result == "23:00:00" {
+                        dataArray.append(data)
+                    }
+                }
+                print(dataArray)
+                
+                
+                completeHandler(decodedData)
+            }catch{
+                let showerror = error
+                dPrint("getHistoryBTC error : \(showerror)")
+            }
+            
+            
+        }.resume()
+        
+        
+//        guard let url = URL(string: "\(Url.cryptoHistry.rawValue)\(cryptoName.string)") else {
+//            return
+//        }
+        
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            guard let data = data else {
+//                dPrint("getHistoryBTC data is nil")
+//                return
+//            }
+//
+//            do {
+//                let decodeData = try JSONDecoder().decode(CryptoHistoryDataModel.self, from: data)
+//                completeHandler(decodeData)
+//            } catch {
+//                let showerror = error
+//                dPrint("getHistoryBTC error : \(showerror)")
+//            }
+//        }.resume()
+      
+        
+    }
+    
+    
+    
+    
+    
 
     @discardableResult private func baseRequest (url:String,
                       isSwiftSpinner:Bool,
@@ -85,7 +171,7 @@ class RequestManager {
     
     func getBitCoinData (completeHandler:@escaping (CryptoDataModel?)->()) {
         
-        baseRequest(url: Url.cryptoBTC.rawValue, isSwiftSpinner: true, method: .get) { (JsonData) in
+        baseRequest(url: "\(Url.cryptoBTC.rawValue)", isSwiftSpinner: true, method: .get) { (JsonData) in
             
             guard let json = JsonData else {
                 completeHandler(nil)

@@ -118,22 +118,30 @@ class EntryViewViewController: UIViewController {
     
     func getCurrency () {
         //更新 Quotes
-        getBitCoin()
+//        getBitCoin()
+//        getBitHistory()
         
-        
-//        entryViewViewModel.getQuotes()
-//        entryViewViewModel.quotesCompleteHandler = { (bool) in
-//
-//            if bool == true {
-//                DispatchQueue.main.async {
-//                    self.getBitCoin()
-//                }
-//            } else {
-//                self.showAlert(string: "Get Currency Fail")
-//            }
-//        }
+        entryViewViewModel.getQuotes()
+        entryViewViewModel.quotesCompleteHandler = { (bool) in
+
+            if bool == true {
+                DispatchQueue.main.async {
+                    self.getBitCoin()
+                }
+            } else {
+                self.showAlert(string: "Get Currency Fail")
+            }
+        }
         
     }
+    
+    func getBitHistory() {
+        
+        let btc:crytoType = .BTC
+        entryViewViewModel.getCryptoHistoryFor(type: btc)
+        
+    }
+    
     
     func getBitCoin() {
         
