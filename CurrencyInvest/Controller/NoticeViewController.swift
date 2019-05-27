@@ -54,9 +54,9 @@ class NoticeViewController: UIViewController {
         restorePurchaceBtn.titleLabel?.backgroundColor = UIColor.clear
         restorePurchaceBtn.addTarget(self, action: #selector(restoreAction), for: .touchUpInside)
         if UserDefualtManager.sharedInstance.isBought == true {
-            restorePurchaceBtn.isHidden = false
-        } else {
             restorePurchaceBtn.isHidden = true
+        } else {
+            restorePurchaceBtn.isHidden = false
         }
         
         
@@ -145,7 +145,7 @@ extension NoticeViewController: SKPaymentTransactionObserver {
 
                 // give something inreturn to user
                 UserDefualtManager.sharedInstance.isBought = true
-                
+                dPrint("paymentQueue transactionState == .purchased")
                 SKPaymentQueue.default().finishTransaction(transaction)
                 // reload app
                 if let navi = navigationController {
@@ -165,7 +165,7 @@ extension NoticeViewController: SKPaymentTransactionObserver {
                 //after checking with app store and knowing this had been purchased
                 UserDefualtManager.sharedInstance.isBought = true
                 SKPaymentQueue.default().finishTransaction(transaction)
-                
+                dPrint("paymentQueue transactionState == .restored")
                 //hide the restore btn
                 
                 // reload app
