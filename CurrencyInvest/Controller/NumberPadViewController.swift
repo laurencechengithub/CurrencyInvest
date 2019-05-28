@@ -17,11 +17,12 @@ class NumberPadViewController: UIViewController {
     
     var returnFinalCalculateNumber:((Bool,Double)->())!
     var numberScrollView = UIScrollView()
-    var numberLabel = UILabel()
-    var numberLabelWidthConstrant = NSLayoutConstraint()
-    var calculateResultLabel = UILabel()
-    var padView: NumberPad!
-    var enterString:String = "" {
+    fileprivate var numberLabel = UILabel()
+    fileprivate var numberLabelWidthConstrant = NSLayoutConstraint()
+    fileprivate var calculateResultLabel = UILabel()
+    fileprivate var padView: NumberPad!
+    fileprivate var decimalCount:Int = 0
+    fileprivate var enterString:String = "" {
         
         didSet {
             if let text = numberLabel.text {
@@ -121,7 +122,7 @@ extension NumberPadViewController: NumberPadDelegate {
     }
     
     func okBtnTapped(bool: Bool) {
-        
+        decimalCount = 0
         guard numberLabel.text != "" else {
             self.dismiss(animated: true) {
                 self.returnFinalCalculateNumber(false,0)
@@ -156,37 +157,44 @@ extension NumberPadViewController: NumberPadDelegate {
     
     func equalBtnTapped(bool: Bool) {
         if bool == true {
-            if let numericString = numberLabel.text {
-                //calculate mathmatical logic
-                let expression = NSExpression(format: numericString)
-                let result = expression.expressionValue(with: nil, context: nil) as! NSNumber
-                let doubleNum = Double(truncating: result)
-                
-                calculateResultLabel.text = String(doubleNum.roundToDecimal(2))
+            decimalCount = 0
+            calculateResultLabel.text = String(calculateResult())
+            numberLabel.text = calculateResultLabel.text
+            
+            //算完結果如果有小數點 需要另變換decimalCount
+            _ = calculateResultLabel.text?.map(){
+                if $0 == "." {
+                    decimalCount += 1
+                }
             }
+            
         }
     }
     
     func plusBtnTapped(bool: Bool) {
         if bool == true {
+            decimalCount = 0
             enterString = "+"
         }
     }
     
     func minusBtnTapped(bool: Bool) {
         if bool == true {
+            decimalCount = 0
             enterString = "-"
         }
     }
     
     func divideBtnTapped(bool: Bool) {
         if bool == true {
+            decimalCount = 0
             enterString = "/"
         }
     }
     
     func multiplyBtnTapped(bool: Bool) {
         if bool == true {
+            decimalCount = 0
             enterString = "*"
         }
     }
@@ -195,6 +203,9 @@ extension NumberPadViewController: NumberPadDelegate {
         if bool == true {
             if let text = numberLabel.text {
                 var newtext = ""
+                if text.suffix(1) == "." {
+                    decimalCount = 0
+                }
                 newtext = String(text.dropLast())
                 numberLabel.text = newtext
             }
@@ -203,6 +214,7 @@ extension NumberPadViewController: NumberPadDelegate {
     
     func clearBtnTapped(bool: Bool) {
         if bool == true {
+            decimalCount = 0
             numberLabel.text = ""
         }
     }
@@ -211,8 +223,39 @@ extension NumberPadViewController: NumberPadDelegate {
     
     func dotBtnTapped(bool: Bool) {
         if bool == true {
-            enterString = "."
+            
+            
+            if decimalCount < 1 {
+                enterString = "."
+                decimalCount += 1
+            } else {
+                // handleing if when user enter "." for the second time ex: 23.45.3
+                let result = calculateResult()
+                // result 去除小數點知之後 如就跟原本result一樣表示原本result沒有小數點 => isInt == true
+                let isInt = floor(result) == result
+                
+                if isInt == false {
+                    return
+                }
+                
+            }
+            
         }
     }
+    
+    func calculateResult() -> Double {
+        if let numericString = numberLabel.text {
+            //calculate mathmatical logic
+            let expression = NSExpression(format: numericString)
+            let result = expression.expressionValue(with: nil, context: nil) as! NSNumber
+            let doubleNum = Double(truncating: result)
+            
+            
+            return doubleNum.roundToDecimal(2)
+        } else {
+            return 0
+        }
+    }
+    
     
 }

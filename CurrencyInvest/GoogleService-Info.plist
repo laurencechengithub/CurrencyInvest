@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>58338272297-tb37cpdpkih7eaae6a6edddoj2cvilmr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.58338272297-tb37cpdpkih7eaae6a6edddoj2cvilmr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBKP2H7QlOFhfzXD71S3Vbs6Hspm0Mo9sI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>58338272297</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.llng-intl.MoneyXBit</string>
+	<key>PROJECT_ID</key>
+	<string>llng-currencyinvest</string>
+	<key>STORAGE_BUCKET</key>
+	<string>llng-currencyinvest.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:58338272297:ios:a7ab68cec57b1a54</string>
+	<key>DATABASE_URL</key>
+	<string>https://llng-currencyinvest.firebaseio.com</string>
+</dict>
+</plist>

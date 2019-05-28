@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        set rootView
+        //set rootView
         let entrySB = UIStoryboard.init(name: "EntryView", bundle: nil)
         let vc = entrySB.instantiateViewController(withIdentifier: "EntryViewViewController") as! EntryViewViewController
         let navigationController:UINavigationController = UINavigationController.init(rootViewController: vc)
@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = self.window {
             window.rootViewController = navigationController
         }
+        
+        //FireBase
+        FirebaseApp.configure()
         
         //shortcupItem
         if let shortCutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
@@ -194,12 +197,14 @@ extension AppDelegate {
         guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
         guard let shortCutType = item.type as String? else { return false }
         
+        
         let mainSB = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         var reqVC: UIViewController!
         
+        
         switch shortCutType {
         case ShortcutIdentifier.First.type:
-            reqVC = mainSB.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//            reqVC = mainSB.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             
             handled = true
             
