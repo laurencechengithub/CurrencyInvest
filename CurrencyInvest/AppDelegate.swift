@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,6 +52,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //FireBase
         FirebaseApp.configure()
+        
+        
+        //Firebase cloud message
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self as! UNUserNotificationCenterDelegate
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { granted, error in
+                    if granted {
+                        dPrint("yes")
+                    } else {
+                        dPrint("no")
+                    }
+            })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
         
         //shortcupItem
         if let shortCutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
@@ -309,3 +335,108 @@ extension AppDelegate {
 
 }
 
+
+//MARK: Cloud Message Stack
+extension AppDelegate {
+    
+    /// iOS10 以下的版本接收推播訊息的 delegate
+    ///
+    /// - Parameters:
+    ///   - application: _
+    ///   - userInfo: _
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        
+        // 印出後台送出的推播訊息(JOSN 格式)
+        print("userInfo: \(userInfo)")
+    }
+    
+    
+    /// iOS10 以下的版本接收推播訊息的 delegate
+    ///
+    /// - Parameters:
+    ///   - application: _
+    ///   - userInfo: _
+    ///   - completionHandler: _
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        // 印出後台送出的推播訊息(JOSN 格式)
+        print("userInfo: \(userInfo)")
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    /// 推播失敗的訊息
+    ///
+    /// - Parameters:
+    ///   - application: _
+    ///   - error: _
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+    
+    /// 取得 DeviceToken，通常 for 後台人員推播用
+    ///
+    /// - Parameters:
+    ///   - application: _
+    ///   - deviceToken: _
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        // 將 Data 轉成 String
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print("deviceTokenString: \(deviceTokenString)")
+        
+        // 將 Device Token 送到 Server 端...
+        
+    }
+    
+    
+}
+
+@available(iOS 10, *)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    /// App 在前景時，推播送出時即會觸發的 delegate
+    ///
+    /// - Parameters:
+    ///   - center: _
+    ///   - notification: _
+    ///   - completionHandler: _
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        // 印出後台送出的推播訊息(JOSN 格式)
+        let userInfo = notification.request.content.userInfo
+        print("userInfo: \(userInfo)")
+        
+        // 可設定要收到什麼樣式的推播訊息，至少要打開 alert，不然會收不到推播訊息
+        completionHandler([.badge, .sound, .alert])
+    }
+    
+    /// App 在關掉的狀態下或 App 在背景或前景的狀態下，點擊推播訊息時所會觸發的 delegate
+    ///
+    /// - Parameters:
+    ///   - center: _
+    ///   - response: _
+    ///   - completionHandler: _
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        // 印出後台送出的推播訊息(JOSN 格式)
+        let userInfo = response.notification.request.content.userInfo
+        print("userInfo: \(userInfo)")
+        
+        completionHandler()
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+    
+    /// iOS10 含以上的版本用來接收 firebase token 的 delegate
+    ///
+    /// - Parameters:
+    ///   - messaging: _
+    ///   - fcmToken: _
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        
+        // 用來從 firebase 後台推送單一裝置所必須的 firebase token
+        print("Firebase registration token: \(fcmToken)")
+    }
+}
