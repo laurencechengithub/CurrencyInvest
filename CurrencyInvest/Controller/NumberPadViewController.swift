@@ -224,7 +224,6 @@ extension NumberPadViewController: NumberPadDelegate {
     func dotBtnTapped(bool: Bool) {
         if bool == true {
             
-            
             if decimalCount < 1 {
                 enterString = "."
                 decimalCount += 1
@@ -237,7 +236,6 @@ extension NumberPadViewController: NumberPadDelegate {
                 if isInt == false {
                     return
                 }
-                
             }
             
         }
@@ -249,7 +247,6 @@ extension NumberPadViewController: NumberPadDelegate {
             let expression = NSExpression(format: numericString)
             let result = expression.expressionValue(with: nil, context: nil) as! NSNumber
             let doubleNum = Double(truncating: result)
-            
             
             return doubleNum.roundToDecimal(2)
         } else {

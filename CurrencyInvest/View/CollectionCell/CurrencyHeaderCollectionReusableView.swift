@@ -29,9 +29,13 @@ class CurrencyHeaderCollectionReusableView: UICollectionReusableView {
         self.addSubview(deleteBtn)
         
         deleteBtn.translatesAutoresizingMaskIntoConstraints = false
-        deleteBtn.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        deleteBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 139).isActive = true
-        deleteBtn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -139).isActive = true
+//        deleteBtn.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+//        deleteBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 139).isActive = true
+//        deleteBtn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -139).isActive = true
+//        deleteBtn.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        deleteBtn.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        deleteBtn.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        deleteBtn.widthAnchor.constraint(equalToConstant: 140).isActive = true
         deleteBtn.heightAnchor.constraint(equalToConstant: 44).isActive = true
         deleteBtn.backgroundColor = UIColor.ciButtonGreen
         deleteBtn.setTitle("−", for: .normal)

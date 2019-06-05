@@ -34,6 +34,7 @@ class CurrencyViewController: UIViewController {
     }
     
     var selectedQuotesArray = [Double]() {
+        
         didSet {
             Global.selectedQuotes = self.selectedQuotesArray
         }
@@ -51,8 +52,16 @@ class CurrencyViewController: UIViewController {
     }
     
     var numberPadHeight:CGFloat!
-//    var userEnterAmount = Double()
-//    var lastIndexPath = IndexPath()
+    var lastEnterAmount = Double() {
+        didSet {
+            Global.lastEnterAmount = self.lastEnterAmount
+        }
+    }
+    var lastIndexPathRow = Int() {
+        didSet {
+            Global.lastIndexPathRow = self.lastIndexPathRow
+        }
+    }
     lazy var inputText = UITextField()
     
     override func viewDidLoad() {
@@ -150,8 +159,11 @@ class CurrencyViewController: UIViewController {
         selectedNamesArray = currencyViewModel.lastSelectedName()
         selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
         selectedAmountArray = currencyViewModel.lastSelectedAmount()
-        Global.lastEnterAmount = currencyViewModel.lastEnterAmount()
-        Global.lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
+//        Global.lastEnterAmount = currencyViewModel.lastEnterAmount()
+//        Global.lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
+        lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
+        lastEnterAmount = currencyViewModel.lastEnterAmount()
+        
     }
     
     @objc func askForCoffee() {
@@ -206,10 +218,17 @@ class CurrencyViewController: UIViewController {
     }
     
     @objc func removeAllCell() {
-        selectedQuotesArray.removeAll()
-        selectedNamesArray.removeAll()
-        selectedNamesArray.append("")
-        selectedAmountArray.removeAll()
+        
+//        selectedQuotesArray.removeAll()
+//
+//        selectedNamesArray.removeAll()
+//        selectedNamesArray.append("")
+//        selectedAmountArray.removeAll()
+        
+        selectedQuotesArray = [Double]()
+        selectedNamesArray = [""]
+        selectedAmountArray = [Double]()
+        
         
         reloadData()
     }
@@ -328,8 +347,8 @@ extension CurrencyViewController: UICollectionViewDelegate {
                         if flag == true {
                             
                             //紀錄最後一次收尋時的內容
-                            Global.lastEnterAmount = double
-                            Global.lastIndexPathRow = indexPath.row
+                            self.lastEnterAmount = double
+                            self.lastIndexPathRow = indexPath.row
                             //*
                             self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
                                 inAmount: double,

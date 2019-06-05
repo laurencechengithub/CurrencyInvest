@@ -26,6 +26,7 @@
 		5D0B070B2268290C00BCFD5C /* NothingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */; };
 		5D0B741421D1E48B00A56D04 /* UserDefualtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */; };
 		5D0C417722608FE700944CEB /* NumberPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C417622608FE700944CEB /* NumberPadViewController.swift */; };
+		5D0D134422A624BF00032372 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0D134322A624BF00032372 /* PushNotificationManager.swift */; };
 		5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F583821F954BF002BCA7C /* UIImageBlurExtension.swift */; };
 		5D11CDDF2254B54100539E42 /* RateTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D11CDDE2254B54100539E42 /* RateTypePicker.swift */; };
 		5D1256F42277FA6A00162851 /* InputCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1256F32277FA6A00162851 /* InputCommentViewController.swift */; };
@@ -135,6 +136,8 @@
 		5D0B070A2268290C00BCFD5C /* NothingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefualtManager.swift; sourceTree = "<group>"; };
 		5D0C417622608FE700944CEB /* NumberPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadViewController.swift; sourceTree = "<group>"; };
+		5D0D134322A624BF00032372 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		5D0D134522A62E5600032372 /* CurrencyInvest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CurrencyInvest.entitlements; sourceTree = "<group>"; };
 		5D0F583821F954BF002BCA7C /* UIImageBlurExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageBlurExtension.swift; sourceTree = "<group>"; };
 		5D11CDDE2254B54100539E42 /* RateTypePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateTypePicker.swift; sourceTree = "<group>"; };
 		5D1256F32277FA6A00162851 /* InputCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCommentViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				5D081FAD21C74D82002AB7E3 /* RequestManager.swift */,
+				5D0D134322A624BF00032372 /* PushNotificationManager.swift */,
 				5D0B741321D1E48B00A56D04 /* UserDefualtManager.swift */,
 				5D32D6F722812D380092FF2A /* NavigationManager.swift */,
 				5D15FF4921ED87A1002B7CCD /* Global.swift */,
@@ -366,6 +370,7 @@
 		5DDEAAB721A7ABCD00BE58AF /* CurrencyInvest */ = {
 			isa = PBXGroup;
 			children = (
+				5D0D134522A62E5600032372 /* CurrencyInvest.entitlements */,
 				5DDEAAB821A7ABCD00BE58AF /* AppDelegate.swift */,
 				5D09545021DB6CDB00B30D4E /* Manager */,
 				5DDEAAE721A7AE5D00BE58AF /* Components */,
@@ -539,6 +544,9 @@
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					5DDEAAC821A7ABCF00BE58AF = {
@@ -708,6 +716,7 @@
 				5D1CD48822645F090017E574 /* UILabelWidthAfterText.swift in Sources */,
 				5DBDD7D621F1CAA1001D6B97 /* NumberPad.swift in Sources */,
 				5D1FF1F5222512CE00733C7D /* MainViewController.swift in Sources */,
+				5D0D134422A624BF00032372 /* PushNotificationManager.swift in Sources */,
 				5DBCF96B225F3956006D99F9 /* UIlabelWithLeftImageView.swift in Sources */,
 				5DDEAB0721A7D87300BE58AF /* UICollectionViewExtension.swift in Sources */,
 				5DDEAB0521A7D87300BE58AF /* UIViewcontrollerExtension.swift in Sources */,
@@ -909,6 +918,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CurrencyInvest/CurrencyInvest.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47ZWY8XRXM;
@@ -931,6 +941,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CurrencyInvest/CurrencyInvest.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47ZWY8XRXM;

@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 import CoreData
 import UserNotifications
+import FirebaseInstanceID
+import FirebaseMessaging
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -57,18 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Firebase cloud message
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self as! UNUserNotificationCenterDelegate
-            
+            UNUserNotificationCenter.current().delegate = self
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: { granted, error in
                     if granted {
-                        dPrint("yes")
+                        dPrint("UNUserNotificationCenter.current().requestAuthorization granted")
                     } else {
-                        dPrint("no")
+                        dPrint("UNUserNotificationCenter.current().requestAuthorization not granted")
                     }
             })
+            Messaging.messaging().delegate = self
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -283,11 +286,11 @@ extension AppDelegate {
     
     func handleIncomingDynamicLink(_ dynamicLink: DynamicLink ) {
         guard let url = dynamicLink.url else {
-            print("Link has no url")
+            dPrint("Link has no url")
             return
         }
         
-        print("incoming link url:\(url.absoluteString)")
+        dPrint("incoming link url:\(url.absoluteString)")
         
     }
     
@@ -295,10 +298,10 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if let incomingURL = userActivity.webpageURL {
-            print("incoming URL is \(incomingURL)")
+            dPrint("incoming URL is \(incomingURL)")
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { (dynamicLink, error) in
                 guard error == nil else {
-                    print("Found error: \(String(describing: error?.localizedDescription))")
+                    dPrint("Found error: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 
@@ -324,7 +327,7 @@ extension AppDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
-            print("received from custom scheme: \(url.absoluteString)")
+            dPrint("received from custom scheme: \(url.absoluteString)")
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         } else {
@@ -347,7 +350,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         // 印出後台送出的推播訊息(JOSN 格式)
-        print("userInfo: \(userInfo)")
+        dPrint("userInfo: \(userInfo)")
     }
     
     
@@ -360,7 +363,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         // 印出後台送出的推播訊息(JOSN 格式)
-        print("userInfo: \(userInfo)")
+        dPrint("userInfo: \(userInfo)")
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -371,7 +374,7 @@ extension AppDelegate {
     ///   - application: _
     ///   - error: _
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
+        dPrint("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
     /// 取得 DeviceToken，通常 for 後台人員推播用
@@ -383,7 +386,7 @@ extension AppDelegate {
         
         // 將 Data 轉成 String
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("deviceTokenString: \(deviceTokenString)")
+        dPrint("deviceTokenString: \(deviceTokenString)")
         
         // 將 Device Token 送到 Server 端...
         
@@ -405,8 +408,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // 印出後台送出的推播訊息(JOSN 格式)
         let userInfo = notification.request.content.userInfo
-        print("userInfo: \(userInfo)")
+        var apnIntoJSON = JSON(userInfo as! [String: Any])
         
+        dPrint("\(apnIntoJSON["action"])")
         // 可設定要收到什麼樣式的推播訊息，至少要打開 alert，不然會收不到推播訊息
         completionHandler([.badge, .sound, .alert])
     }
@@ -421,7 +425,23 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // 印出後台送出的推播訊息(JOSN 格式)
         let userInfo = response.notification.request.content.userInfo
-        print("userInfo: \(userInfo)")
+        var apnIntoJSON = JSON(userInfo as! [String: Any])
+        dPrint("apnIntoJSON: \(apnIntoJSON)")
+//        apnIntoJSON: {
+//            "google.c.a.udt" : "0",
+//            "google.c.a.c_id" : "6898997494058808575",
+//            "google.c.a.ts" : "1559710800",
+//            "aps" : {
+//                "alert" : {
+//                    "title" : "Money X Bit",
+//                    "body" : "check out BTC price!"
+//                }
+//            },
+//            "gcm.message_id" : "0:1559710800893978%4ccd450b4ccd450b",
+//            "action" : "one",
+//            "gcm.n.e" : "1",
+//            "google.c.a.e" : "1"
+//        }
         
         completionHandler()
     }
@@ -437,6 +457,12 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         
         // 用來從 firebase 後台推送單一裝置所必須的 firebase token
-        print("Firebase registration token: \(fcmToken)")
+        dPrint("Firebase registration token: \(fcmToken)")
     }
+
+    // The callback to handle data message received via FCM for devices running iOS 10 or above.
+    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
+        dPrint(remoteMessage.appData)
+    }
+    
 }
