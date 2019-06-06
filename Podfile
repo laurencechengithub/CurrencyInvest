@@ -13,7 +13,13 @@ target 'CurrencyInvest' do
   pod 'DeviceKit'
   pod 'SwiftSpinner'
   pod 'Kingfisher'
-  
+  pod 'Firebase/Core'
+  pod 'Firebase/DynamicLinks'
+  pod 'SwiftMessages', '>= 3.3'
+  pod 'Fabric', '~> 1.10.1'
+  pod 'Crashlytics', '~> 3.13.1'
+  pod 'Firebase/Messaging'
+
   target 'CurrencyInvestTests' do
     inherit! :search_paths
     # Pods for testing

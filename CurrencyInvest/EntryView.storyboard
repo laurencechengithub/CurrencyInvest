@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G7q-Kj-7dl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="G7q-Kj-7dl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,23 +13,11 @@
         <!--Entry View View Controller-->
         <scene sceneID="YbF-yt-jB0">
             <objects>
-                <viewController id="G7q-Kj-7dl" customClass="EntryViewViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntryViewViewController" id="G7q-Kj-7dl" customClass="EntryViewViewController" customModule="CurrencyInvest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qNS-Gv-IfL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbI-4m-Asi">
-                                <rect key="frame" x="0.0" y="65" width="375" height="128"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.08235294118" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="SbI-4m-Asi" firstAttribute="top" secondItem="dFl-S5-wdP" secondAttribute="top" constant="45" id="6C2-sI-02c"/>
-                            <constraint firstItem="SbI-4m-Asi" firstAttribute="leading" secondItem="qNS-Gv-IfL" secondAttribute="leading" id="NPx-8J-dpP"/>
-                            <constraint firstAttribute="trailing" secondItem="SbI-4m-Asi" secondAttribute="trailing" id="aWi-aW-MkG"/>
-                            <constraint firstItem="dFl-S5-wdP" firstAttribute="bottom" secondItem="SbI-4m-Asi" secondAttribute="bottom" constant="474" id="oAJ-Rn-MgM"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dFl-S5-wdP"/>
                     </view>
                 </viewController>
