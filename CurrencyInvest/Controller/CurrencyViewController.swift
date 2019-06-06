@@ -228,7 +228,8 @@ class CurrencyViewController: UIViewController {
         selectedQuotesArray = [Double]()
         selectedNamesArray = [""]
         selectedAmountArray = [Double]()
-        
+        lastEnterAmount = 0
+        lastIndexPathRow = 0
         
         reloadData()
     }
