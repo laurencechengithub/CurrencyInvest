@@ -12,22 +12,23 @@ import Foundation
 
 struct Global {
     
-    static var amountUSD = 0.0
-    
-    static var NameOne = UserDefualtManager.sharedInstance.localNameOne
-    static var RateOne = UserDefualtManager.sharedInstance.localRateOne
-    static var AmountOne = UserDefualtManager.sharedInstance.localAmountOne
-    
-    static var NameTwo = UserDefualtManager.sharedInstance.localNameOne
-    static var RateTwo = UserDefualtManager.sharedInstance.localRateTwo
-    static var AmountTwo = UserDefualtManager.sharedInstance.localAmountTwo
-    
-    static var NameThree = UserDefualtManager.sharedInstance.localNameOne
-    static var RateThree = UserDefualtManager.sharedInstance.localRateOne
-    static var AmountThree = UserDefualtManager.sharedInstance.localAmountOne
+    static var selectedQuotes = [Double]()
+    static var selectedNames = [String]()
+    static var selectedAmounts = [Double]()
+    static var allQuotes = [String:Double]()
+    static var allNames = [String]()
     
     static var isCurrencyPageShowing:Bool = true
     static var isBitCoinPageShlowing:Bool = false
+    static var isCoffeeBought:Bool = false
+    static var isOffLineMode:Bool = false
+    static var isToSetting:Bool = false
+
+    static let alphabetArray = ["All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
+    static var lastEnterAmount = Double()
+    static var lastIndexPathRow = Int()
+
 }
 
 enum coinType:String {
@@ -37,4 +38,33 @@ enum coinType:String {
     case xmr = "XMR"
     case xrp = "XRP"
     case zec = "ZEC"
+}
+
+enum crytoType {
+    case BTC
+    case ETC
+    case LTC
+    case XMR
+    case XRP
+    case ZWC
+    
+    var string:String {
+        get {
+            switch self {
+            case .BTC:
+                return "BTCUSD"
+            case .ETC:
+                return "ETCUSD"
+            case .LTC:
+                return "LTCUSD"
+            case .XMR:
+                return "XMRUSD"
+            case .XRP:
+                return "XRPUSD"
+            case .ZWC:
+                return "ZWCUSD"
+            }
+        }
+    }
+    
 }

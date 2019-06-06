@@ -1,39 +1,52 @@
 //
 //  GradientView.swift
-//  re
+//  testsegment
 //
-//  Created by BillHsiao on 2017/12/12.
-//  Copyright © 2017年 Re Corporation Limited. All rights reserved.
+//  Created by Laurence  Chen on 2019/5/10.
+//  Copyright © 2019 Laurence  Chen. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 @IBDesignable
 class GradientView: UIView {
     
-    @IBInspectable var firstColor: UIColor = .black
-    @IBInspectable var secondColor: UIColor = .white
-
-    var gradientLayer: CAGradientLayer!
+    @IBInspectable var startColor:   UIColor = .black { didSet { updateColors() }}
+    @IBInspectable var endColor:     UIColor = .white { didSet { updateColors() }}
+    @IBInspectable var startLocation: Double =   0.05 { didSet { updateLocations() }}
+    @IBInspectable var endLocation:   Double =   0.95 { didSet { updateLocations() }}
+    @IBInspectable var horizontalMode:  Bool =  false { didSet { updatePoints() }}
+    @IBInspectable var diagonalMode:    Bool =  false { didSet { updatePoints() }}
+    @IBInspectable var verticleMode:    Bool = false { didSet {updatePoints()}}
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        createGradientLayer()
+    override public class var layerClass: AnyClass { return CAGradientLayer.self }
+    
+    var gradientLayer: CAGradientLayer { return layer as! CAGradientLayer }
+    
+    func updatePoints() {
+        if horizontalMode {
+            gradientLayer.startPoint = diagonalMode ? CGPoint(x: 1, y: 0) : CGPoint(x: 0, y: 0.5)
+            gradientLayer.endPoint   = diagonalMode ? CGPoint(x: 0, y: 1) : CGPoint(x: 1, y: 0.5)
+        } else if diagonalMode {
+            gradientLayer.startPoint = diagonalMode ? CGPoint(x: 0, y: 0) : CGPoint(x: 0.5, y: 0)
+            gradientLayer.endPoint   = diagonalMode ? CGPoint(x: 1, y: 1) : CGPoint(x: 0.5, y: 1)
+        } else if verticleMode {
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
+        }
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        createGradientLayer()
+    func updateLocations() {
+        gradientLayer.locations = [startLocation as NSNumber, endLocation as NSNumber]
     }
-}
-
-extension GradientView {
-    func createGradientLayer() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = bounds
-        gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-        layer.mask = gradientLayer
+    func updateColors() {
+        gradientLayer.colors    = [startColor.cgColor, endColor.cgColor]
+    }
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        updatePoints()
+        updateLocations()
+        updateColors()
     }
 }

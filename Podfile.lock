@@ -1,6 +1,9 @@
 PODS:
   - Alamofire (4.7.3)
+  - Crashlytics (3.13.1):
+    - Fabric (~> 1.10.1)
   - DeviceKit (1.8.1)
+  - Fabric (1.10.1)
   - Firebase/Core (5.9.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.2.0)
@@ -9,6 +12,9 @@ PODS:
   - Firebase/DynamicLinks (5.9.0):
     - Firebase/CoreOnly
     - FirebaseDynamicLinks (= 3.1.0)
+  - Firebase/Messaging (5.9.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.1.2)
   - FirebaseAnalytics (5.2.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.2)
@@ -29,6 +35,11 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMessaging (3.1.2):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleUtilities/Reachability (~> 5.2)
+    - Protobuf (~> 3.1)
   - GoogleAppMeasurement (5.2.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -59,6 +70,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Protobuf (3.8.0)
   - SwiftMessages (6.0.0):
     - SwiftMessages/App (= 6.0.0)
   - SwiftMessages/App (6.0.0)
@@ -67,49 +79,60 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Crashlytics (~> 3.13.1)
   - DeviceKit
+  - Fabric (~> 1.10.1)
   - Firebase/Core
   - Firebase/DynamicLinks
+  - Firebase/Messaging
   - Kingfisher
   - SwiftMessages (>= 3.3)
   - SwiftSpinner
   - SwiftyJSON
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Crashlytics
     - DeviceKit
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseDynamicLinks
     - FirebaseInstanceID
+    - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleUtilities
     - Kingfisher
     - nanopb
+    - Protobuf
     - SwiftMessages
     - SwiftSpinner
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
   DeviceKit: eb29be542f5473b46b1c719011cf7de3ec5264ca
+  Fabric: f6f21452846788bb44595d73e9909d79d328e617
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseAnalyticsInterop: 31b00d2a916918327308b2dff47251eb96f9e4ad
   FirebaseCore: 2a84b6b325792a4319ef71ee18819dcba08d2fd7
   FirebaseDynamicLinks: 33f349103fa71d463688b7671e6a60e00ac6a5af
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
+  FirebaseMessaging: d6feeb06218d2675b4149b0ada925a6b707a74cf
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
   SwiftMessages: da7c981256a65b3e58022d9027a36584cf4eccf5
   SwiftSpinner: 3a4c6dea425e5a31b908a8b1dd5dcd1ad4d96340
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: fb69b0d556e4fdf26fe91bbc13a9bbe9393ec8d3
+PODFILE CHECKSUM: b806cd55bb73ef60f08daf8b1f20dfd07a8ea351
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.7.1

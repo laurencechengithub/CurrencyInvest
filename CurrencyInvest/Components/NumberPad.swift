@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 
 protocol NumberPadDelegate {
-    func getNumberWith(numString:String,numInt:Int)
+    func numberTapped(numString:String,numInt:Int)
     func okBtnTapped(bool:Bool)
     func kBtnTapped(numString : String)
-    func tenkBtnTapped(numString:String)
-    func hundredBtnTapped(numString:String)
+    func clearBtnTapped(bool:Bool)
+    func equalBtnTapped(bool:Bool)
+    func plusBtnTapped(bool:Bool)
+    func minusBtnTapped(bool:Bool)
+    func divideBtnTapped(bool:Bool)
+    func multiplyBtnTapped(bool:Bool)
+    func deleteBtnTapped(bool:Bool)
+    func dotBtnTapped(bool:Bool)
 }
 
 
@@ -23,8 +29,8 @@ class NumberPad : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print(self.frame)
-//        setupView()
+//        print(self.frame)
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,8 +38,8 @@ class NumberPad : UIView {
     }
     
     override func didMoveToSuperview() {
-        print(self.frame)
-        setupView()
+//        print(self.frame)
+//        setupView()
         
     }
     
@@ -49,18 +55,25 @@ class NumberPad : UIView {
         case Two = 2
         case Three = 3
         case Delete = 4
-        case Four = 5
-        case Five = 6
-        case Six = 7
-        case K = 8
-        case Seven = 9
-        case Eight = 10
-        case Nine = 11
-        case TenK = 12
-        case Zero = 13
-        case Dot = 14
-        case Ok = 15
-        case HundredK = 16
+        case plus = 5
+        
+        case Four = 6
+        case Five = 7
+        case Six = 8
+        case clear = 9
+        case minus = 10
+        
+        case Seven = 11
+        case Eight = 12
+        case Nine = 13
+        case K = 14
+        case multiply = 15
+        
+        case Zero = 16
+        case Dot = 17
+        case equal = 18
+        case OK = 19
+        case divide = 20
         
         //static var count: Int { return Keyboard.Ok.rawValue}
         
@@ -91,16 +104,24 @@ class NumberPad : UIView {
                     return "←"
                 case .Zero:
                     return "0"
-                case .Ok:
-                    return "OK"
+                case .OK:
+                    return "↓"
                 case .Dot:
                     return "."
                 case .K:
                     return "K"
-                case .TenK:
-                    return "10K"
-                case .HundredK:
-                    return "100K"
+                case .clear:
+                    return "C"
+                case .equal:
+                    return "="
+                case .plus:
+                    return "+"
+                case .minus:
+                    return "−"
+                case .multiply:
+                    return "×"
+                case .divide:
+                    return "÷"
                 }
                 
             }
@@ -111,15 +132,15 @@ class NumberPad : UIView {
     func setupView() {
 
         let flow = UICollectionViewFlowLayout()
-        flow.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
+        flow.sectionInset = UIEdgeInsets(top: 30, left: 2, bottom: 0, right: 2)
   
-        itemSizeWidth = (self.frame.width - 10)/4
-        itemSizeHeight = (self.frame.height - 10)/4
-        print(itemSizeWidth)
-        print(itemSizeHeight)
+        itemSizeWidth = (self.frame.width - 10)/5
+        itemSizeHeight = (self.frame.height - 10)/5
+//        print(itemSizeWidth)
+//        print(itemSizeHeight)
         flow.itemSize = CGSize(width: itemSizeWidth, height: itemSizeHeight)
         flow.minimumLineSpacing = 3
-        flow.minimumInteritemSpacing = 1
+        flow.minimumInteritemSpacing = 1.5
         
         btnCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0 , width: self.frame.width , height: self.frame.height), collectionViewLayout: flow)
         btnCollectionView.register(NumberPadCollectionViewCell.self, forCellWithReuseIdentifier: "PadBtnCell")
@@ -141,22 +162,30 @@ extension NumberPad: UICollectionViewDelegate {
         if let selectedKeyBoardBtnType = KeyBoardBtnType.init(rawValue: indexPath.row + 1) {
             
             switch selectedKeyBoardBtnType {
-            case .Ok:
+            case .OK:
                 numberPadDelegate.okBtnTapped(bool: true)
-            case .Delete:
-                print("more")
             case .K:
-                numberPadDelegate.kBtnTapped(numString: "000")
-            case .TenK:
-                numberPadDelegate.tenkBtnTapped(numString: "0000")
+                numberPadDelegate.kBtnTapped(numString: "1000")
+            case .clear:
+                numberPadDelegate.clearBtnTapped(bool: true)
             case .Dot:
-                print("numberPadDelegate.DotBtnTapped")
-            case .HundredK:
-                numberPadDelegate.hundredBtnTapped(numString: "00000")
+                numberPadDelegate.dotBtnTapped(bool: true)
+            case .equal:
+                numberPadDelegate.equalBtnTapped(bool: true)
+            case .Delete:
+                numberPadDelegate.deleteBtnTapped(bool: true)
+            case .divide:
+                numberPadDelegate.divideBtnTapped(bool: true)
+            case .minus:
+                numberPadDelegate.minusBtnTapped(bool: true)
+            case .multiply:
+                numberPadDelegate.multiplyBtnTapped(bool: true)
+            case .plus:
+                numberPadDelegate.plusBtnTapped(bool: true)
             default:
                 let selectedString = selectedKeyBoardBtnType.description
                 let selectedInt = selectedKeyBoardBtnType.rawValue
-                numberPadDelegate.getNumberWith(numString: selectedString, numInt: selectedInt)
+                numberPadDelegate.numberTapped(numString: selectedString, numInt: selectedInt)
             }
         }
     }
@@ -227,7 +256,7 @@ class NumberPadCollectionViewCell: UICollectionViewCell {
         numLabel.backgroundColor = UIColor.clear
         numLabel.textAlignment = .center
         numLabel.textColor = UIColor.ciMaize
-        numLabel.font = UIFont.boldSystemFont(ofSize: 34)
+        numLabel.font = UIFont.boldSystemFont(ofSize: 28)
         numLabel.center = contentView.center
         
         self.contentView.addSubview(numLabel)

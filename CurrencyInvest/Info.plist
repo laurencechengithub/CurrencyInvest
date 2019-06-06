@@ -53,9 +53,9 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeAdd</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>This is the first action</string>
+			<string>Currency converter</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>First Action</string>
+			<string>Currency</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER).First</string>
 		</dict>
@@ -63,9 +63,9 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypePause</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>This is second action</string>
+			<string>Crypto Price</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Second Action</string>
+			<string>BitCoin</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Second</string>
 		</dict>

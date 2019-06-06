@@ -9,75 +9,110 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
-    @IBOutlet weak var titleLabel: UILabelWithPadding!
-    @IBOutlet weak var bitCoinBtn: UIButton!
-    @IBOutlet weak var currencyBtn: UIButton!
     
-//    var bitCoinVC = BitCoinViewController()
-//    var currencyVC = CurrencyViewController()
+    var segmentControl: AnimatedSegmentControl!
+    @IBOutlet weak var bitLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.clear
-        titleLabel.backgroundColor = UIColor.clear
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 46)
-        titleLabel.textColor = UIColor.ciIsabelline
         
-        bitCoinBtn.setBackgroundImage(UIImage(named: "bitCoin"), for: .normal)
-        currencyBtn.setBackgroundImage(UIImage(named: "coin"), for: .normal)
-//        bitCoinBtn.layer.cornerRadius = 25
-//        bitCoinBtn.layer.borderWidth = 3
-//        bitCoinBtn.layer.borderColor = UIColor.ciMaize.cgColor
+        let viewWidth = self.view.frame.width
+//        let viewHeight = self.view.frame.height
+        let segmentControlWidth = viewWidth - 140
+        segmentControl = AnimatedSegmentControl(frame: CGRect(x: 70, y: 85, width: segmentControlWidth, height: 30))
+        self.view.addSubview(segmentControl)
         
-//        currencyBtn.layer.cornerRadius = 25
-//        currencyBtn.layer.borderWidth = 3
-//        currencyBtn.layer.borderColor = UIColor.ciMaize.cgColor
+        segmentControl.items = ["Currency", "BitPrice"]
+        segmentControl.borderColor = UIColor.clear
+        segmentControl.selectedLabelColor = .black
+        segmentControl.unselectedLabelColor = .ciMaize
+        segmentControl.backgroundColor = UIColor.clear
+        segmentControl.thumbColor = .ciMaize
+        segmentControl.selectedIndex = 0
+        segmentControl.addTarget(self, action: #selector(segmentControlValueChanged), for: .valueChanged)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print(Global.isBitCoinPageShlowing)
+        
         if Global.isBitCoinPageShlowing == true {
-            titleLabel.text = "BitCoin"
+            segmentControl.selectedIndex = 1
         }else {
-            titleLabel.text = "Currency"
+            segmentControl.selectedIndex = 0
         }
     }
     
     
-    @IBAction func bitCoinBtnTapped(_ sender: UIButton) {
+    @objc func segmentControlValueChanged() {
         
-        if Global.isBitCoinPageShlowing == false {
+        if segmentControl.selectedIndex == 0 { //select currency
             
-            Global.isBitCoinPageShlowing = true
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let BitCoinVC = mainStoryboard.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
-            BitCoinVC.modalTransitionStyle = .flipHorizontal
-            self.present(BitCoinVC, animated: true, completion: nil)
+            if Global.isBitCoinPageShlowing == true {
         
-        } else {
-            print("bitcoin page is now showing")
-        }
-        
-    }
-    
-    
-    @IBAction func currencyBtnTapped(_ sender: UIButton) {
-        
-        if Global.isBitCoinPageShlowing == true {
-            
-            Global.isBitCoinPageShlowing = false
-            self.dismiss(animated: true, completion: nil)
+                Global.isBitCoinPageShlowing = false
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                print("Currency page is now showing")
+
+            }
+            segmentControl.selectedIndex = 0
             
         } else {
-            print("Currency page is now showing")
             
+            if Global.isBitCoinPageShlowing == false {
+                Global.isBitCoinPageShlowing = true
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let BitCoinVC = mainStoryboard.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
+//                BitCoinVC.modalPresentationStyle = .custom//會導致segment control 無法跳到segment 0
+                BitCoinVC.modalTransitionStyle = .crossDissolve
+                self.present(BitCoinVC, animated: true, completion: nil)
+            } else {
+                print("bitcoin page is now showing")
+            }
         }
         
-
         
-
     }
+    
+    
+    
+//    @IBAction func bitCoinBtnTapped(_ sender: UIButton) {
+//
+//        if Global.isBitCoinPageShlowing == false {
+//
+//            Global.isBitCoinPageShlowing = true
+//            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let BitCoinVC = mainStoryboard.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
+//            BitCoinVC.modalTransitionStyle = .flipHorizontal
+//            self.present(BitCoinVC, animated: true, completion: nil)
+//
+//        } else {
+//            print("bitcoin page is now showing")
+//        }
+//
+//    }
+//
+//
+//    @IBAction func currencyBtnTapped(_ sender: UIButton) {
+//
+//        if Global.isBitCoinPageShlowing == true {
+//
+//            Global.isBitCoinPageShlowing = false
+//            self.dismiss(animated: true, completion: nil)
+//
+//        } else {
+//            print("Currency page is now showing")
+//
+//        }
+//
+//
+//
+//
+//    }
 
 }

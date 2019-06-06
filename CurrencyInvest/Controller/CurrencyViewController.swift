@@ -1,699 +1,454 @@
 //
-//  CurrencyViewController.swift
+//  CurrencyTwo.swift
 //  CurrencyInvest
 //
-//  Created by Laurence  Chen on 2019/1/1.
+//  Created by Laurence Chen on 2019/3/31.
 //  Copyright © 2019 Laurence  Chen. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import NotificationCenter
 
-class CurrencyViewController: UIViewController, NumberPadDelegate {
-    
 
-    var scrollView = UIScrollView()
-    var currencyPicker:UIPickerView!
-    var currencyOneView:UIView!
-    var currencyTwoView:UIView!
-    var currencyThreeView:UIView!
+class CurrencyViewController: UIViewController {
     
-    var blackView = UIView()
-    var numberPadView:NumberPad!
-    
-    var labelOne = UILabel()
-    var nameOne = UILabel()
-    var imageViewOne = UIImageView()
-    var currencyOneKey = [String]()
-    var currencyOneQuotes = [String:Double]()
-    
-    var labelTwo = UILabel()
-    var nameTwo = UILabel()
-    var imageViewTwo = UIImageView()
-    var currencyTwoQuotes = [String:Double]()
-    var currencyTwoKey = [String]()
-    
-    var labelThree = UILabel()
-    var nameThree = UILabel()
-    var imageViewThree = UIImageView()
-    var currencyThreeQuotes = [String:Double]()
-    var currencyThreeKey = [String]()
-
-    
-
     let currencyViewModel = CurrencyViewModel()
-    var numberPadViewTopAnchor:NSLayoutConstraint!
-//    var currentthree = [String:Double]()
-    var focusedLabel:LabelType?
-    var numberPadHeight:CGFloat!
-    var isTyping:Bool = false
+    let backgdView = UIView()
+    let backListImage = UIImageView()
+    let backBuyMeCoffee = UIImageView()
+    let backRemoveImage = UIImageView()
     
-
-    enum LabelType: Int {
-        
-        case LabelOneInFocus
-        case LabelTwoInFocus
-        case LabelThreeInFocus
-    }
+    var collectionView: TapThroughCollectionView!
+    let flowLayout = UICollectionViewFlowLayout()
     
-    var enteredString:String = "" {
-        
-        didSet{
-            print("didset")
-            
-            if let focusedLabel = focusedLabel {
-                switch focusedLabel {
-                case .LabelOneInFocus :
-                    
-                    print(Global.AmountOne)
-//                    Global.AmountOne = 0
-                    if let text = labelOne.text {
-                        labelOne.text = text + enteredString
-                    } else {
-                        labelOne.text = enteredString
-                    }
-                    
-                    
-                case .LabelTwoInFocus :
-                    print(Global.AmountTwo)
-//                    Global.AmountTwo = 0
-                    if let text = labelTwo.text {
-                        labelTwo.text = text + enteredString
-                    } else {
-                        labelTwo.text = enteredString
-                    }
-         
-                case .LabelThreeInFocus :
-                    
-                    print(Global.AmountThree)
-//                    Global.AmountThree = 0
-                    if let text = labelThree.text {
-                        labelThree.text = text + enteredString
-                    } else {
-                        labelThree.text = enteredString
-                    }
-
-                }
-            }
-
+    var allQuotesWithName = [String:Double]() {
+        didSet {
+            Global.allQuotes = self.allQuotesWithName
         }
-        
     }
-
+    
+    var allNamesArray = [String]() {
+        didSet{
+            Global.allNames = self.allNamesArray
+        }
+    }
+    
+    var selectedQuotesArray = [Double]() {
+        
+        didSet {
+            Global.selectedQuotes = self.selectedQuotesArray
+        }
+    }
+    var selectedNamesArray = [""] {
+        didSet {
+            Global.selectedNames = self.selectedNamesArray
+        }
+    }
+    var selectedAmountArray = [Double]() {
+        didSet{
+            Global.selectedAmounts = self.selectedAmountArray
+//            collectionView.reloadData()
+        }
+    }
+    
+    var numberPadHeight:CGFloat!
+    var lastEnterAmount = Double() {
+        didSet {
+            Global.lastEnterAmount = self.lastEnterAmount
+        }
+    }
+    var lastIndexPathRow = Int() {
+        didSet {
+            Global.lastIndexPathRow = self.lastIndexPathRow
+        }
+    }
+    lazy var inputText = UITextField()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        Global.isCurrencyPageShowing = true
-        initData()
-        initView()
-        updateAllLabel()
+        setData()
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = UIColor.ciDarkGunMetal
+        self.view.addSubview(backgdView)
+        self.backgdView.addSubview(backListImage)
+        self.backgdView.addSubview(backBuyMeCoffee)
+        self.backgdView.addSubview(backRemoveImage)
+        
+        backgdView.translatesAutoresizingMaskIntoConstraints = false
+        backgdView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        backgdView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
+        backgdView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        backgdView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        backgdView.backgroundColor = UIColor.clear
+        
+        let imageWidth = (self.view.frame.width - 270)/3
+        backListImage.translatesAutoresizingMaskIntoConstraints = false
+        backListImage.leadingAnchor.constraint(equalTo: backgdView.leadingAnchor, constant: 90).isActive = true
+        backListImage.topAnchor.constraint(equalTo: backgdView.topAnchor, constant: 60).isActive = true
+        backListImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backListImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backListImage.backgroundColor = UIColor.clear
+        backListImage.image = UIImage(named: "seeList")
+        let tapGestureList = UITapGestureRecognizer(target: self, action: #selector(showSaveList))
+        backListImage.addGestureRecognizer(tapGestureList)
+        backListImage.isUserInteractionEnabled = true
+        
+        backBuyMeCoffee.translatesAutoresizingMaskIntoConstraints = false
+        backBuyMeCoffee.leadingAnchor.constraint(equalTo: backListImage.trailingAnchor, constant: 45).isActive = true
+        backBuyMeCoffee.topAnchor.constraint(equalTo: backListImage.topAnchor).isActive = true
+        backBuyMeCoffee.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backBuyMeCoffee.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backBuyMeCoffee.backgroundColor = UIColor.clear
+        backBuyMeCoffee.image = UIImage(named: "buyMeCoffee")
+        let tapGestureCoffee = UITapGestureRecognizer(target: self, action: #selector(askForCoffee))
+        backBuyMeCoffee.addGestureRecognizer(tapGestureCoffee)
+        backBuyMeCoffee.isUserInteractionEnabled = true
+        
+        backRemoveImage.translatesAutoresizingMaskIntoConstraints = false
+        backRemoveImage.leadingAnchor.constraint(equalTo: backBuyMeCoffee.trailingAnchor, constant: 45).isActive = true
+        backRemoveImage.topAnchor.constraint(equalTo: backBuyMeCoffee.topAnchor).isActive = true
+        backRemoveImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backRemoveImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        backRemoveImage.backgroundColor = UIColor.clear
+        backRemoveImage.image = UIImage(named: "removeListItem")
+        let tapGestureRemove = UITapGestureRecognizer(target: self, action: #selector(removeAllCell))
+        backRemoveImage.addGestureRecognizer(tapGestureRemove)
+        backRemoveImage.isUserInteractionEnabled = true
+        
+       
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        flowLayout.itemSize = CGSize(width: self.view.frame.width * 0.8 , height: 64)
+        flowLayout.minimumLineSpacing = CGFloat(integerLiteral: 30)
+        flowLayout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical //預設
+        flowLayout.headerReferenceSize = CGSize(width: self.view.frame.width, height: 54)
+        collectionView = TapThroughCollectionView.init(frame: self.view.bounds, collectionViewLayout: flowLayout)
+        collectionView.register(CurrencyCollectionViewCell.self, forCellWithReuseIdentifier: "reuseCell")
+        collectionView.register(NothingCollectionViewCell.self, forCellWithReuseIdentifier: "nothingCell")
+        collectionView.backgroundColor = UIColor.clear
+        
+        collectionView.register(CurrencyHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
+        
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        self.view.addSubview(collectionView)
+        
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        collectionView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)//collectionView 底下滑的空間
+        collectionView.setContentOffset(CGPoint(x: 0, y: -150), animated: false)// 手機上顯示collectionView顯示的部分
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
 
+    }
+    
+    
+    func setData() {
+        allQuotesWithName = currencyViewModel.getQuotes()
+        allNamesArray = currencyViewModel.getQuotesKey()
+        selectedNamesArray = currencyViewModel.lastSelectedName()
+        selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
+        selectedAmountArray = currencyViewModel.lastSelectedAmount()
+//        Global.lastEnterAmount = currencyViewModel.lastEnterAmount()
+//        Global.lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
+        lastIndexPathRow = currencyViewModel.lastEnterIndexPathRow()
+        lastEnterAmount = currencyViewModel.lastEnterAmount()
         
     }
     
-    func initData () {
+    @objc func askForCoffee() {
+        //present new view ask for in-app-purchase or show add
+        let noticeViewController = NoticeViewController()
+//        self.present(noticeViewController, animated: true) {
+//
+//        }
         
-        currencyOneKey = currencyViewModel.getQuotesKey()
-        currencyOneQuotes = currencyViewModel.getQuotes()
-        currencyTwoKey = currencyViewModel.getQuotesKey()
-        currencyTwoQuotes = currencyViewModel.getQuotes()
-        currencyThreeKey = currencyViewModel.getQuotesKey()
-        currencyThreeQuotes = currencyViewModel.getQuotes()
+        self.navigationController?.pushViewController(noticeViewController, animated: true)
+        
     }
     
-    func initView () {
+    @objc func showSaveDataInputView(with Name:String, Rate:Double, Amount:Double) {
+        //create input text
+        let mainStoryB:UIStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = mainStoryB.instantiateViewController(withIdentifier: "InputCommentViewController") as! InputCommentViewController
         
-        view.backgroundColor = UIColor.ciDarkGunMetal
-        currencyPicker = UIPickerView()
-        currencyOneView = UIView()
-        currencyTwoView = UIView()
-        currencyThreeView = UIView()
-        numberPadHeight = self.view.frame.height * 0.4
-        numberPadView = NumberPad(frame: CGRect(x: 0, y: self.view.frame.maxY, width: self.view.frame.width, height: numberPadHeight))
-        numberPadView.numberPadDelegate = self
-        
-        print(self.view.frame.width)
-        print(self.view.frame.height)
-        //...
-//        view.addSubview(mainContainerView)
-        view.addSubview(currencyOneView)
-        view.addSubview(currencyTwoView)
-        view.addSubview(currencyThreeView)
-        view.addSubview(currencyPicker)
-        view.addSubview(numberPadView)
-        
-        currencyOneView.addSubview(nameOne)
-        currencyOneView.addSubview(labelOne)
-        currencyOneView.addSubview(imageViewOne)
-        
-        currencyTwoView.addSubview(nameTwo)
-        currencyTwoView.addSubview(labelTwo)
-        currencyTwoView.addSubview(imageViewTwo)
-        
-        currencyThreeView.addSubview(labelThree)
-        currencyThreeView.addSubview(nameThree)
-        currencyThreeView.addSubview(imageViewThree)
-        
-        
-        currencyOneView.translatesAutoresizingMaskIntoConstraints = false
-        currencyOneView.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
-        currencyOneView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        currencyOneView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        currencyOneView.heightAnchor.constraint(equalToConstant: 118).isActive = true
-        currencyOneView.backgroundColor = UIColor.ciDeepKoamaru
-        currencyOneView.layer.shadowColor = UIColor.ciMaize.cgColor
-        currencyOneView.layer.shadowOpacity = 0.5
-        currencyOneView.layer.shadowRadius = 5
-        currencyOneView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
-        
-        currencyTwoView.translatesAutoresizingMaskIntoConstraints = false
-        currencyTwoView.topAnchor.constraint(equalTo: currencyOneView.bottomAnchor, constant: 20).isActive = true
-        currencyTwoView.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor).isActive = true
-        currencyTwoView.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor).isActive = true
-        currencyTwoView.heightAnchor.constraint(equalToConstant: 118).isActive = true
-        currencyTwoView.backgroundColor = UIColor.ciDeepKoamaru
-        currencyTwoView.layer.shadowColor = UIColor.white.cgColor
-        currencyTwoView.layer.shadowOpacity = 0.5
-        currencyTwoView.layer.shadowRadius = 5
-        currencyTwoView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
-        
-        currencyThreeView.translatesAutoresizingMaskIntoConstraints = false
-        currencyThreeView.topAnchor.constraint(equalTo: currencyTwoView.bottomAnchor, constant: 20).isActive = true
-        currencyThreeView.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor).isActive = true
-        currencyThreeView.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor).isActive = true
-        currencyThreeView.heightAnchor.constraint(equalToConstant: 118).isActive = true
-        currencyThreeView.backgroundColor = UIColor.ciDeepKoamaru
-        currencyThreeView.layer.shadowColor = UIColor.lightGray.cgColor
-        currencyThreeView.layer.shadowOpacity = 0.5
-        currencyThreeView.layer.shadowRadius = 5
-        currencyThreeView.layer.shadowOffset = CGSize(width: 10.0, height: 0.0)
-        
-        nameOne.translatesAutoresizingMaskIntoConstraints = false
-        nameOne.topAnchor.constraint(equalTo: currencyOneView.topAnchor, constant: 20).isActive = true
-        nameOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 90 ).isActive = true
-        nameOne.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        nameOne.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        nameOne.backgroundColor = UIColor.ciDarkGunMetal
-        nameOne.text = Global.NameOne
-        nameOne.textColor = UIColor.ciIsabelline
-        nameOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        nameOne.font = UIFont.boldSystemFont(ofSize: 30)
-        
-        labelOne.translatesAutoresizingMaskIntoConstraints = false
-        labelOne.topAnchor.constraint(equalTo: nameOne.bottomAnchor, constant: 1).isActive = true
-        labelOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 90).isActive = true
-        labelOne.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        labelOne.trailingAnchor.constraint(equalTo: currencyOneView.trailingAnchor, constant: -10).isActive = true
-        labelOne.backgroundColor = UIColor.clear
-        labelOne.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
-        labelOne.addGestureRecognizer(tapGesture)
-        labelOne.textColor = UIColor.ciMaize
-        labelOne.font = UIFont.boldSystemFont(ofSize: 30)
-        labelOne.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        labelOne.text = String(Global.AmountOne)
-        labelOne.textAlignment = .left
-        
-        imageViewOne.translatesAutoresizingMaskIntoConstraints = false
-        imageViewOne.topAnchor.constraint(equalTo: currencyOneView.topAnchor, constant: 30).isActive = true
-        imageViewOne.leadingAnchor.constraint(equalTo: currencyOneView.leadingAnchor, constant: 30).isActive = true
-        imageViewOne.heightAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewOne.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewOne.backgroundColor = UIColor.blue
-        imageViewOne.layer.cornerRadius = 29
-        
-        imageViewTwo.translatesAutoresizingMaskIntoConstraints = false
-        imageViewTwo.topAnchor.constraint(equalTo: currencyTwoView.topAnchor, constant: 30).isActive = true
-        imageViewTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 30).isActive = true
-        imageViewTwo.heightAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewTwo.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewTwo.backgroundColor = UIColor.blue
-        imageViewTwo.layer.cornerRadius = 29
-        
-        imageViewThree.translatesAutoresizingMaskIntoConstraints = false
-        imageViewThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 30).isActive = true
-        imageViewThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 30).isActive = true
-        imageViewThree.heightAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewThree.widthAnchor.constraint(equalToConstant: 58).isActive = true
-        imageViewThree.backgroundColor = UIColor.blue
-        imageViewThree.layer.cornerRadius = 29
-        
-        nameTwo.translatesAutoresizingMaskIntoConstraints = false
-        nameTwo.topAnchor.constraint(equalTo: currencyTwoView.topAnchor, constant: 10).isActive = true
-        nameTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 90).isActive = true
-        nameTwo.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        nameTwo.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        nameTwo.backgroundColor = UIColor.ciDarkGunMetal
-        nameTwo.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        nameTwo.text = Global.NameTwo
-        nameTwo.textColor = UIColor.ciIsabelline
-        nameTwo.font = UIFont.boldSystemFont(ofSize: 30)
-        
-        labelTwo.translatesAutoresizingMaskIntoConstraints = false
-        labelTwo.topAnchor.constraint(equalTo: nameTwo.bottomAnchor, constant: 1).isActive = true
-        labelTwo.leadingAnchor.constraint(equalTo: currencyTwoView.leadingAnchor, constant: 90).isActive = true
-        labelTwo.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        labelTwo.trailingAnchor.constraint(equalTo: currencyTwoView.trailingAnchor, constant: -10).isActive = true
-        labelTwo.backgroundColor = UIColor.clear
-        labelTwo.isUserInteractionEnabled = true
-        let tapGestureTwo = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
-        labelTwo.addGestureRecognizer(tapGestureTwo)
-        labelTwo.textColor = UIColor.ciMaize
-        labelTwo.font = UIFont.boldSystemFont(ofSize: 30)
-        labelTwo.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        labelTwo.text = String(Global.AmountTwo)
-        labelTwo.textAlignment = .left
-        
-        
-        nameThree.translatesAutoresizingMaskIntoConstraints = false
-        nameThree.topAnchor.constraint(equalTo: currencyThreeView.topAnchor, constant: 10).isActive = true
-        nameThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 90).isActive = true
-        nameThree.heightAnchor.constraint(equalToConstant: 34).isActive = true
-        nameThree.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        nameThree.backgroundColor = UIColor.ciDarkGunMetal
-        nameThree.text = Global.NameThree
-        nameThree.textColor = UIColor.ciIsabelline
-        nameThree.font = UIFont.boldSystemFont(ofSize: 30)
-        nameThree.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        
-        labelThree.translatesAutoresizingMaskIntoConstraints = false
-        labelThree.topAnchor.constraint(equalTo: nameThree.bottomAnchor, constant: 5).isActive = true
-        labelThree.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor, constant: 90).isActive = true
-        labelThree.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        labelThree.trailingAnchor.constraint(equalTo: currencyThreeView.trailingAnchor, constant: -10).isActive = true
-        labelThree.backgroundColor = UIColor.clear
-        labelThree.isUserInteractionEnabled = true
-        let tapGestureThree = UITapGestureRecognizer(target: self, action: #selector(showNumberPad))
-        labelThree.addGestureRecognizer(tapGestureThree)
-        labelThree.textColor = UIColor.ciMaize
-        labelThree.font = UIFont.boldSystemFont(ofSize: 30)
-        labelThree.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        labelThree.text = String(Global.AmountThree)
-        labelThree.textAlignment = .left
-        
-        
-        currencyPicker.translatesAutoresizingMaskIntoConstraints = false
-        currencyPicker.topAnchor.constraint(equalTo: currencyThreeView.bottomAnchor, constant: 10).isActive = true
-        currencyPicker.trailingAnchor.constraint(equalTo: currencyThreeView.trailingAnchor).isActive = true
-        currencyPicker.leadingAnchor.constraint(equalTo: currencyThreeView.leadingAnchor).isActive = true
-        currencyPicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
-        currencyPicker.backgroundColor = UIColor.ciDarkGunMetal
-        currencyPicker.delegate = self
-        currencyPicker.dataSource = self
-
-        
-//        numberPadView.translatesAutoresizingMaskIntoConstraints = false
-//        let getViewHeight:CGFloat = self.view.frame.height
-//        numberPadViewTopAnchor = numberPadView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: getViewHeight)
-//        numberPadViewTopAnchor.isActive = true
-//        numberPadView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-//        numberPadView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-//        numberPadView.heightAnchor.constraint(equalToConstant: 250).isActive = true
- 
-    }
-    
-//MARK: Self Designed Function
-    @objc func showNumberPad (_ recongizer:UIGestureRecognizer) {
-        
-        
-        
-        guard isTyping == false else {
-            return
-        }
-        print("func showNumberPad typing")
-        isTyping = true
-        
-        if recongizer.view == labelOne {
-            focusedLabel = .LabelOneInFocus
-            labelOne.text = ""
-        } else if recongizer.view == labelTwo {
-            focusedLabel = .LabelTwoInFocus
-            labelTwo.text = ""
-        } else if recongizer.view == labelThree {
-            focusedLabel = .LabelThreeInFocus
-            labelThree.text = ""
-        }
-
-        UIView.animate(withDuration: 0.8) {
+        vc.amount = Amount
+        vc.name = Name
+        vc.rate = Rate
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true) {
             
-            self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y - self.numberPadHeight
+        }
+    }
+    
+    
+    @objc func showSaveList() {
+        
+        let mainSB = UIStoryboard(name: "Main", bundle: nil)
+        let vc = mainSB.instantiateViewController(withIdentifier: "SavedRateListViewController") as! SavedRateListViewController
+        self.present(vc, animated: true)
+        
+    }
+    
+    
+    @objc func removeLastCell() {
+        
+        if selectedNamesArray.count > 1 {
+            
+            let count = selectedNamesArray.count
+            let index = selectedNamesArray.index(count, offsetBy: -1)
+            _ = selectedQuotesArray.removeLast()
+            _ = selectedNamesArray.remove(at: index - 1) //刪除右邊倒數第二個
+            _ = selectedAmountArray.removeLast()
+            
         }
         
-    }
-    
-    
-    func resetGlobalAmountToZero () {
-        
-        print("resetGlobalAmountToZero ()")
-        Global.AmountOne = 0.0
-        Global.AmountTwo = 0.0
-        Global.AmountThree = 0.0
+        reloadData()
         
     }
     
-    
-    func updateAllLabel () {
-        print(Global.AmountOne)
-        print(Global.AmountTwo)
-        print(Global.AmountThree)
-        print("updateAllLabel ()")
+    @objc func removeAllCell() {
         
-        if Global.AmountOne == 0 {
-            labelOne.text = "0"
+//        selectedQuotesArray.removeAll()
+//
+//        selectedNamesArray.removeAll()
+//        selectedNamesArray.append("")
+//        selectedAmountArray.removeAll()
+        
+        selectedQuotesArray = [Double]()
+        selectedNamesArray = [""]
+        selectedAmountArray = [Double]()
+        lastEnterAmount = 0
+        lastIndexPathRow = 0
+        
+        reloadData()
+    }
+    
+}
+
+
+extension CurrencyViewController: UICollectionViewDelegate {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedNamesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if selectedNamesArray[indexPath.row] == "" {
+            var inRate = 0.0
+            let nothingCell = collectionView.dequeueReusableCell(withReuseIdentifier: "nothingCell", for: indexPath) as! NothingCollectionViewCell
+            
+            nothingCell.plusBtnTapHandler = { (flag) in
+                if flag == true {
+                    let vc = RateTypePicker()
+                    vc.lastSelectedName = ""
+                    vc.modalTransitionStyle = .crossDissolve
+                    self.present(vc, animated: true, completion: nil)
+                    
+                    vc.returnSelectName = { (flag,name) in
+                        self.selectedNamesArray[indexPath.row] = name
+                        //base on name findout the rate and show it at cell
+                        inRate = self.allQuotesWithName["USD\(name)"] ?? 0
+                        //save to selectedQuotes
+                        self.selectedQuotesArray.append(inRate)
+//                        self.selectedAmountArray.append(0)
+                        
+                        //再算一次幣別amount
+                        self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
+                            inAmount: Global.lastEnterAmount,
+                            selectedNames: Global.selectedNames,
+                            selectedQuotes: Global.selectedQuotes,
+                            indexPathRow: Global.lastIndexPathRow )
+                        
+                        if Global.isCoffeeBought == false && self.selectedNamesArray.count < 10 {
+                            self.selectedNamesArray.append("")
+                            
+                        } else if Global.isCoffeeBought == true && self.selectedNamesArray.count < 15 {
+                            self.selectedNamesArray.append("")
+                            
+                        }
+                        
+                        self.reloadData()
+                        
+                    }
+                }
+                
+            }
+            return nothingCell
         } else {
-            let roundnum1 = Global.AmountOne.roundToDecimal(2)
-            labelOne.text = "\(roundnum1)"
-        }
-        if Global.AmountTwo == 0 {
-            labelTwo.text = "0"
-        }else {
-            let roundnum2 = Global.AmountTwo.roundToDecimal(2)
-            labelTwo.text = "\(roundnum2)"
-        }
-        if Global.AmountThree == 0 {
-            labelThree.text = "0"
-        }else {
-            let roundnum3 = Global.AmountThree.roundToDecimal(2)
-            labelThree.text = "\(roundnum3)"
-        }
-        
-    }
-    
-
-//MARK: NumberPadDelegate
-    func getNumberWith(numString: String, numInt: Int) {
-        enteredString = numString
-    }
-    
-    func okBtnTapped(bool: Bool) {
-        
-        isTyping = false
-        
-        if bool == true {
-            UIView.animate(withDuration: 0.8, animations: {
-                self.numberPadView.frame.origin.y = self.numberPadView.frame.origin.y + self.numberPadHeight
-            })
-        }
-        
-        if let focusLabel = focusedLabel {
+            var inRate = 0.0
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseCell", for: indexPath) as! CurrencyCollectionViewCell
             
-            switch focusLabel {
-            case .LabelOneInFocus:
-                if let text = labelOne.text {
-                    if let double = Double(text) {
-                        
-                        Global.AmountOne = double
-                        
-                        print("Global.RateOne \(Global.RateOne)")
-                        print("Global.RateTwo \(Global.RateTwo)")
-                        print("Global.RateThree \(Global.RateThree)")
-                        
-                        Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
-                        Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
-    
-                        updateAllLabel()
-                        
-                    }
-
-                }else  {
+            cell.setImage(string: "\(selectedNamesArray[indexPath.row])")
+            cell.rateName.text = selectedNamesArray[indexPath.row]
+            cell.rateAmount.text = "\(selectedAmountArray[indexPath.row].roundToDecimal(2))"
+            //偵測到user點擊國家幣別
+            cell.smallBackViewTapHandler = { (bool) in
+                if bool == true {
+                    let vc = RateTypePicker()
+                    vc.lastSelectedName = self.selectedNamesArray[indexPath.row]
                     
-                    resetGlobalAmountToZero ()
-                    updateAllLabel ()
-                }
-                
-            case .LabelTwoInFocus:
-                
-                if let text = labelTwo.text {
-                    if let double = Double(text) {
-                        Global.AmountTwo = double
-                        print("Global.RateOne \(Global.RateOne)")
-                        print("Global.RateTwo \(Global.RateTwo)")
-                        print("Global.RateThree \(Global.RateThree)")
-                        
-                        Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
-                        Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
-
-                        updateAllLabel ()
-                        
-                    }
-
-                }
-                else  {
-                    resetGlobalAmountToZero ()
-                    updateAllLabel()
-                }
-                
-            case .LabelThreeInFocus:
-                
-                if let text = labelThree.text {
-                    if let double = Double(text) {
-                        Global.AmountThree = double
-                        print("Global.RateOne \(Global.RateOne)")
-                        print("Global.RateTwo \(Global.RateTwo)")
-                        print("Global.RateThree \(Global.RateThree)")
-                        
-                        Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateOne)
-                        Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateTwo)
-                        updateAllLabel ()
-                        
+                    vc.modalTransitionStyle = .crossDissolve
+                    self.present(vc, animated: true, completion: nil)
+                    
+                    vc.returnSelectName = { (flag,name) in
+                        if flag == true {
+                            //show selected rate name amd image
+                            cell.rateName.text = name
+                            cell.setImage(string: name)
+                            //add name into selectedNamesArray
+                            self.selectedNamesArray[indexPath.row] = name
+                            //base on name findout the rate
+                            inRate = self.allQuotesWithName["USD\(name)"] ?? 0
+                            //save to selectedQuotes
+                            self.selectedQuotesArray[indexPath.row] = inRate
+                            
+                            //再算一次幣別amount
+                            self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
+                                inAmount: Global.lastEnterAmount,
+                                selectedNames: Global.selectedNames,
+                                selectedQuotes: Global.selectedQuotes,
+                                indexPathRow: Global.lastIndexPathRow )
+                            
+                            self.reloadData()
+                            
+                        }
                     }
                     
 
-                }else  {
-                    resetGlobalAmountToZero ()
-                    updateAllLabel()
+                    
+                    
                 }
             }
-        }
-        
-        
-    }
-    
-    func kBtnTapped(numString : String) {
-        enteredString = numString
-    }
-    
-    func tenkBtnTapped(numString: String) {
-        enteredString = numString
-    }
-    
-    func hundredBtnTapped(numString: String) {
-        enteredString = numString
-    }
-   
-    
-    
-    
-}
-
-// MARK: Deledate - UIPickerView
-extension CurrencyViewController: UIPickerViewDelegate {
-    
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        
-        //變換 picker View title color
-        switch component {
-        case 0:
-            guard currencyOneKey.count > 0 else {
-                
-                let alert = UIAlertController(title: "CurrencyInvest", message: "Fail to Load Data,please check your Internet connection and re", preferredStyle: .alert)
-                
-                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: {
-                    })
+            //偵測到user點擊數量
+            cell.rateAmountTapHandler = { (bool) in
+                if bool == true {
+                    
+                    let numberPadVC = NumberPadViewController()
+                    numberPadVC.modalPresentationStyle = .custom
+                    numberPadVC.modalTransitionStyle = .crossDissolve
+                    
+                    UIView.animate(withDuration: 0.8) {
+                        self.present(numberPadVC, animated: true, completion: { })
+                    }
+                    
+                    numberPadVC.returnFinalCalculateNumber = { (flag,double) in
+                        if flag == true {
+                            
+                            //紀錄最後一次收尋時的內容
+                            self.lastEnterAmount = double
+                            self.lastIndexPathRow = indexPath.row
+                            //*
+                            self.selectedAmountArray = self.currencyViewModel.calculateAllAmount(
+                                inAmount: double,
+                                selectedNames: self.selectedNamesArray,
+                                selectedQuotes:self.selectedQuotesArray,
+                                indexPathRow: indexPath.row )
+                            cell.rateAmount.text = "\(self.selectedAmountArray[indexPath.row])"
+                            
+                        }
+                        self.reloadData()
+                    }
                 }
-                alert.addAction(actionOne)
-                self.present(alert, animated: true, completion: nil)
-                return nil
-            }
-            
-            let titleData = currencyOneKey[row]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
-            return myTitle
-        case 1:
-            
-            guard currencyTwoKey.count > 0 else {
-                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
                 
-                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                alert.addAction(actionOne)
-                self.present(alert, animated: true, completion: nil)
-                return nil
             }
-            let titleData = currencyTwoKey[row]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
-            return myTitle
+            //偵測到user點擊儲存
+            cell.saveToListBtnHandler = { (flag) in
+                if flag == true {
+                    self.showSaveDataInputView(with: self.selectedNamesArray[indexPath.row],
+                                          Rate: self.selectedQuotesArray[indexPath.row],
+                                          Amount: self.selectedAmountArray[indexPath.row])
+                }
+            }
             
-        case 2:
-            
-            guard currencyThreeKey.count > 0 else {
-                let alert = UIAlertController(title: "CurrencyInvest", message: "DataBase Empty, Click OK to load from Internet", preferredStyle: .alert)
+            return cell
+        }
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! CurrencyHeaderCollectionReusableView
+        view.backgroundColor = UIColor.ciDarkGunMetal
+        if self.selectedNamesArray.count > 1 {
+            view.deleteBtn.backgroundColor = UIColor.ciButtonGreen
+            view.deleteBtn.isUserInteractionEnabled = true
+        } else {
+            view.deleteBtn.backgroundColor = UIColor.darkGray
+            view.deleteBtn.isUserInteractionEnabled = false
+        }
+        
+        view.btnTappedHandler = { (bool) in
+            if bool == true {
                 
-                let actionOne = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
-                    self.dismiss(animated: true, completion: nil)
+                if self.selectedNamesArray.count > 1 {
+                    self.removeLastCell()
                 }
-                alert.addAction(actionOne)
-                self.present(alert, animated: true, completion: nil)
-                return nil
+                
             }
-            let titleData = currencyThreeKey[row]
-            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
-            return myTitle
-            
-        default:
-            return nil
         }
-        
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        switch component {
-        case 0:
-            let countryString = "USD\( currencyOneKey[row])"
-            //更新匯率名字
-            Global.NameOne = currencyOneKey[row]
-            nameOne.text = Global.NameOne
-            
-            //更新匯率
-            Global.RateOne = currencyOneQuotes["\(countryString)"] ?? 1.0
-            
-            Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateTwo)
-            Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountOne, inRate: Global.RateOne, outRate: Global.RateThree)
-            
-            updateAllLabel()
-            //設定國旗圖案
-            if let image:UIImage = UIImage(named: "\(Global.NameOne)") {
-                imageViewOne.image = image
-            } else {
-                imageViewOne.image = UIImage(named: "logo")
-            }
-            
-        case 1:
-            let countryString = "USD\( currencyTwoKey[row])"
-            
-            //更新匯率名字
-            Global.NameTwo = currencyTwoKey[row]
-            nameTwo.text = Global.NameTwo
-            
-            //更新匯率
-            Global.RateTwo = currencyTwoQuotes["\(countryString)"] ?? 1.0
-            Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateOne)
-            Global.AmountThree = currencyViewModel.calculateWith(inAmount: Global.AmountTwo, inRate: Global.RateTwo, outRate: Global.RateThree)
-            
-            updateAllLabel ()
-            //設定國旗圖案
-            
-            if let image:UIImage = UIImage(named: "\(Global.NameTwo)") {
-                imageViewTwo.image = image
-            } else {
-                imageViewTwo.image = UIImage(named: "logo")
-            }
-            
-        case 2:
-            let countryString = "USD\( currencyThreeKey[row])"
-            //更新匯率名字
-            Global.NameThree = currencyThreeKey[row]
-            nameThree.text = Global.NameThree
-            
-            //更新匯率
-            Global.RateThree = currencyThreeQuotes["\(countryString)"] ?? 1.0
-            Global.AmountOne = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateOne)
-            Global.AmountTwo = currencyViewModel.calculateWith(inAmount: Global.AmountThree, inRate: Global.RateThree, outRate: Global.RateTwo)
-            updateAllLabel ()
-            //設定國旗圖案
-            if let image:UIImage = UIImage(named: "\(Global.NameThree)") {
-                imageViewThree.image = image
-            } else {
-                imageViewThree.image = UIImage(named: "logo")
-            }
-            
-        default:
-            return
-        }
-        
-
-        
-        
-        
-        
-    }
-}
-
-
-// MARK: DataSource - UIPickerView
-extension CurrencyViewController: UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        switch component {
-        case 0:
-            return currencyOneKey.count
-        case 1:
-            return currencyTwoKey.count
-        case 2:
-            return currencyThreeKey.count
-        default:
-            return 0
-        }
-
+        return view
     }
     
     
-// 因為有 attributedTitleForRow 所以下面可以省略
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//
-//        switch component {
-//        case 0:
-//            return currencyOneKey[row]
-//        case 1:
-//            return currencyTwoKey[row]
-//        default:
-//            return "nil"
-//        }
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func reloadData() {
+        
+        dPrint("CurrencyView reloadData")
+        dPrint("selectedQuotesArray: \(selectedQuotesArray)")
+        dPrint("selectedNamesArray: \(selectedNamesArray)")
+        dPrint("selectedAmountArray: \(selectedAmountArray)")
+        
+        collectionView.reloadData()
+        
+    }
     
     
 }
 
 
-//extension MainViewController: UITextFieldDelegate {
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        print("textFieldDidBeginEditing")
-//        labelTwo.text = "textFieldDidBeginEditing"
-//    }
-//
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//
-//        print("textFieldDidEndEditing")
-//
-//        if textField == textFieldOne {
-//            mainViewModel.calculateUSD(textField: textFieldOne, inRate: Global.CurrencyOneRate)
-//            textFieldTwo.text = String (Global.amountUSD * Global.CurrencyTwoRate)
-//        }else if textField == textFieldTwo {
-//            mainViewModel.calculateUSD(textField: textFieldTwo, inRate: Global.CurrencyTwoRate)
-//            textFieldOne.text = String (Global.amountUSD * Global.CurrencyOneRate)
-//        }
-//
-//    }
-//
-//
-//
-//}
+
+extension CurrencyViewController:  UICollectionViewDataSource {
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+}
+
+
+extension CurrencyViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+//        print(contentOffsetY)
+        if contentOffsetY >= -2 {
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+            flowLayout.sectionHeadersPinToVisibleBounds = true
+        } else if contentOffsetY < -2 {
+            collectionView.contentInset = UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
+            flowLayout.sectionHeadersPinToVisibleBounds = false
+        }
+        
+    }
+    
+    
+}

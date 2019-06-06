@@ -44,11 +44,12 @@ class BitCoinViewController: UIViewController {
         self.view.addSubview(bitCoinCollectionView)
         
         bitCoinCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        bitCoinCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 154).isActive = true
+        bitCoinCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
         bitCoinCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         bitCoinCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         bitCoinCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    
+        bitCoinCollectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        bitCoinCollectionView.setContentOffset(CGPoint(x: 0, y: -50), animated: false)
     }
     
 }

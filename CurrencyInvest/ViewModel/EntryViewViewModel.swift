@@ -27,8 +27,10 @@ class EntryViewViewModel {
         
         RequestManager.sharedInstance.getCurrecyRate { (data) in
             self.currencyData = data
-
-            UserDefualtManager.sharedInstance.localQuote = data.quotes
+            
+            //更新 masterQuotes
+            UserDefualtManager.sharedInstance.masterQuotes = data.quotes
+            
             self.quotesCompleteHandler(true)
 
         }
@@ -120,5 +122,13 @@ class EntryViewViewModel {
     }
     
     
+    func getCryptoHistoryFor(type:crytoType) {
+        
+        RequestManager.sharedInstance.getHistoryFor(cryptoName: type) { (data) in
+            print(data)
+            print("end")
+        }
+        
+    }
     
 }
