@@ -15,7 +15,6 @@
 		5D02365B2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02365A2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift */; };
 		5D035637226EB76300F91209 /* CollectionViewPassThroughGestrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035636226EB76300F91209 /* CollectionViewPassThroughGestrue.swift */; };
 		5D067FC5229672E500609B4F /* CryptoHistoryCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D067FC3229672E500609B4F /* CryptoHistoryCoreData.xcdatamodeld */; };
-		5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1A2240CB90005047EC /* MasterViewController.swift */; };
 		5D06AD1D2240D77C005047EC /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06AD1C2240D77C005047EC /* CountingLabel.swift */; };
 		5D081FAE21C74D82002AB7E3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D081FAD21C74D82002AB7E3 /* RequestManager.swift */; };
 		5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */; };
@@ -125,7 +124,6 @@
 		5D02365A2272E2C800C591C5 /* UIViewWithTextFieldAndOnTopLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewWithTextFieldAndOnTopLabels.swift; sourceTree = "<group>"; };
 		5D035636226EB76300F91209 /* CollectionViewPassThroughGestrue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewPassThroughGestrue.swift; sourceTree = "<group>"; };
 		5D067FC4229672E500609B4F /* CryptoHistoryCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CryptoHistoryCoreData.xcdatamodel; sourceTree = "<group>"; };
-		5D06AD1A2240CB90005047EC /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		5D06AD1C2240D77C005047EC /* CountingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
 		5D081FAD21C74D82002AB7E3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		5D09545521DB6E8000B30D4E /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				5DBDD7D121F18CB1001D6B97 /* EntryViewViewController.swift */,
-				5D06AD1A2240CB90005047EC /* MasterViewController.swift */,
 				5D1FF1F4222512CE00733C7D /* MainViewController.swift */,
 				5D1FF1F6222517B200733C7D /* BitCoinViewController.swift */,
 				5DCAB49B2250B72600C789AF /* CurrencyViewController.swift */,
@@ -744,7 +741,6 @@
 				5DDEAB0321A7D87300BE58AF /* DoubleExtension.swift in Sources */,
 				5D2146F821F86E6100AD8F8B /* UILabelPaddingExtension.swift in Sources */,
 				5D0F583921F954BF002BCA7C /* UIImageBlurExtension.swift in Sources */,
-				5D06AD1B2240CB90005047EC /* MasterViewController.swift in Sources */,
 				5D45004E227BDF080005B37C /* NoticeViewController.swift in Sources */,
 				5D09545621DB6E8000B30D4E /* CurrencyViewModel.swift in Sources */,
 				5DDEAAB921A7ABCD00BE58AF /* AppDelegate.swift in Sources */,

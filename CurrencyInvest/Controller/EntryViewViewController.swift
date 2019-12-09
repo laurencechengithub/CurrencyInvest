@@ -227,7 +227,7 @@ class EntryViewViewController: UIViewController {
             if bool == true {
                 DispatchQueue.main.async {
                     UserDefualtManager.sharedInstance.isFirstTimeEnterApp = false
-                    self.toMainView()
+                    self.toCurrencyView()
                 }
             } else {
                 self.showAlert(string: "Get ZECCoin Fail")
@@ -235,7 +235,7 @@ class EntryViewViewController: UIViewController {
             
         }
     }
-    func toMainView() {
+    func toCurrencyView() {
         
         if UserDefualtManager.sharedInstance.isFirstTimeEnterApp == true {
             
