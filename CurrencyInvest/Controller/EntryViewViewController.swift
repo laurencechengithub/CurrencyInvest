@@ -76,7 +76,7 @@ class EntryViewViewController: UIViewController {
         let actionOffline = UIAlertAction(title: "OK", style: .default) { (_) in
             Global.isOffLineMode = true
             
-            self.toMainView()
+            self.toCurrencyView()
         }
         
         let alert = UIAlertController(title: "Internet fail!", message: "Click OK For OffLine mode", preferredStyle: .alert)
@@ -103,7 +103,7 @@ class EntryViewViewController: UIViewController {
         let actionOffline = UIAlertAction(title: "Continue", style: .default) { (_) in
             
             Global.isOffLineMode = true
-            self.toMainView()
+            self.toCurrencyView()
         }
         
         

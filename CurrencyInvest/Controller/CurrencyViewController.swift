@@ -64,7 +64,10 @@ class CurrencyViewController: UIViewController {
     }
     lazy var inputText = UITextField()
     
+    
+    
     override func viewDidLoad() {
+        
         setData()
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.ciDarkGunMetal
@@ -75,9 +78,9 @@ class CurrencyViewController: UIViewController {
         
         backgdView.translatesAutoresizingMaskIntoConstraints = false
         backgdView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        backgdView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
+        backgdView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 144).isActive = true
         backgdView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        backgdView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        backgdView.heightAnchor.constraint(equalToConstant: 144).isActive = true
         backgdView.backgroundColor = UIColor.clear
         
         let imageWidth = (self.view.frame.width - 270)/3
@@ -91,6 +94,7 @@ class CurrencyViewController: UIViewController {
         let tapGestureList = UITapGestureRecognizer(target: self, action: #selector(showSaveList))
         backListImage.addGestureRecognizer(tapGestureList)
         backListImage.isUserInteractionEnabled = true
+
         
         backBuyMeCoffee.translatesAutoresizingMaskIntoConstraints = false
         backBuyMeCoffee.leadingAnchor.constraint(equalTo: backListImage.trailingAnchor, constant: 45).isActive = true
@@ -145,6 +149,10 @@ class CurrencyViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
 
+        
+        
+        
+        
         
     }
     
@@ -452,3 +460,5 @@ extension CurrencyViewController: UIScrollViewDelegate {
     
     
 }
+
+
