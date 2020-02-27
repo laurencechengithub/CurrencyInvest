@@ -19,6 +19,8 @@ target 'CurrencyInvest' do
   pod 'Fabric', '~> 1.10.1'
   pod 'Crashlytics', '~> 3.13.1'
   pod 'Firebase/Messaging'
+  pod 'UPCarouselFlowLayout'
+  pod 'Charts'
 
   target 'CurrencyInvestTests' do
     inherit! :search_paths

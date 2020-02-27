@@ -11,22 +11,30 @@ import SwiftyJSON
 
 
 
-struct CryptoHistoryDataModel: Codable {
+struct CryptoHistoryDataModel {
+    
+    let historyData:[HistoryData]
+    
+    init(fromJson json:JSON) {
+        self.historyData = json.arrayValue.map({
+                HistoryData(fromJson: $0)
+        })
+    }
+    
+}
+
+struct HistoryData {
     
     let low, average: Double
     let time: String
     let open, high: Double
     
-//    init(fromJson json:JSON) {
-//        self.low = json["low"].doubleValue
-//        self.average = json["average"].doubleValue
-//        self.time = json["time"].stringValue
-//        self.open = json["open"].doubleValue
-//        self.high = json["high"].doubleValue
-//    }
+    init(fromJson json:JSON) {
+        self.low = json["low"].doubleValue
+        self.average = json["average"].doubleValue
+        self.time = json["time"].stringValue
+        self.open = json["open"].doubleValue
+        self.high = json["high"].doubleValue
+    }
     
-}
-
-struct historyData: Codable {
-
 }

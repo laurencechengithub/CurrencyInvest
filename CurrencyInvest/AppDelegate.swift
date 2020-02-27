@@ -84,13 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         
-        //shortcupItem
+        //shortcutItem
         if let shortCutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             launchedShortcutItem = shortCutItem
         }
         
         //show sqlite filepath
-        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
+//        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
         
 //        Global.isToSetting = false
         
@@ -100,12 +100,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        dPrint("applicationWillResignActive")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
+        dPrint("applicationDidEnterBackground")
 //        saveDataToUserDefault ()
         
     }
@@ -125,14 +126,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        dPrint(applicationDidBecomeActive)
+        dPrint("applicationDidBecomeActive")
         
         guard let shortCutItem = launchedShortcutItem else {
             return
         }
         
         //If there is any shortcutItem,that will be handled upon the app becomes active
-        _ = handleShortcutItem(item: shortCutItem)
+        _ = handleShortcutItem(shortcutItem: shortCutItem)
         //We make it nil after perfom/handle method call for that shortcutItem action
         launchedShortcutItem = nil
         
@@ -216,54 +217,74 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
-        completionHandler(handleShortcutItem(item: shortcutItem))
+        completionHandler(handleShortcutItem(shortcutItem: shortcutItem))
         
     }
     
     
     
-    func handleShortcutItem(item: UIApplicationShortcutItem) -> Bool {
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
         
-        var handled = false
-        // Verify that the provided shortcutItem's type is one handled by the application.
-        guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
-        guard let shortCutType = item.type as String? else { return false }
-        
-        
-        let mainSB = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-        var reqVC: UIViewController!
-        
-        
-        switch shortCutType {
-        case ShortcutIdentifier.First.type:
-//            reqVC = mainSB.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-            
-            handled = true
-            
-        case ShortcutIdentifier.Second.type:
-            reqVC = mainSB.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
-            handled = true
-            
-        case ShortcutIdentifier.Dynamic.type:
-            
-            self.handleDynamicAction()
-            return true
-            
+        var handled:Bool!
+        switch shortcutItem.type {
+        case "com.llng-intl.MoneyXBit.currency":
+            let entryViewSB = UIStoryboard.init(name: "EntryView", bundle: Bundle.main)
+            let entryViewVC = entryViewSB.instantiateViewController(withIdentifier: "EntryViewViewController") as! EntryViewViewController
+            if let homeVC = self.window?.rootViewController as? UINavigationController {
+                handled = true
+                homeVC.pushViewController(entryViewVC, animated: true)
+            }
         default:
-            print("Shortcut Item Handle func")
+            handled = false
+            break
         }
         
-        let root = self.window?.rootViewController
-        root?.present(reqVC, animated: true, completion: nil)
-        
-        if let homeVC = self.window?.rootViewController as? UINavigationController {
-            homeVC.pushViewController(reqVC, animated: true)
-//
-        } else {
-            return false
-        }
         
         return handled
+        
+        
+        
+        
+        
+        
+        
+        
+//        var handled = false
+//        // Verify that the provided shortcutItem's type is one handled by the application.
+//        guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
+//        guard let shortCutType = item.type as String? else { return false }
+//
+//
+//        let mainSB = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+//        var reqVC: UIViewController!
+//
+//
+//        switch shortCutType {
+//        case ShortcutIdentifier.First.type:
+//            reqVC = mainSB.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//
+//            handled = true
+//
+//        case ShortcutIdentifier.Dynamic.type:
+//
+//            self.handleDynamicAction()
+//            return true
+//
+//        default:
+//            print("Shortcut Item Handle func")
+//        }
+//
+//        let root = self.window?.rootViewController
+//        root?.present(reqVC, animated: true, completion: nil)
+//
+//        if let homeVC = self.window?.rootViewController as? UINavigationController {
+//            homeVC.pushViewController(reqVC, animated: true)
+////
+//        } else {
+//            return false
+//        }
+//
+//        return handled
         
     }
     

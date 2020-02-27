@@ -7,34 +7,45 @@
 //
 
 import UIKit
+import UPCarouselFlowLayout
 
 class BitCoinViewController: UIViewController {
     
     var bitCoinCollectionView:UICollectionView!
+
+    var bitBTCHistoryDataArray = [HistoryData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
-        
-        // Do any additional setup after loading the view.
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+   
+        
     }
+    
     
     func setUpView() {
         
         self.view.backgroundColor = UIColor.ciDarkGunMetal
         
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 40, left: 0, bottom: 10, right: 0)
-        flowLayout.itemSize = CGSize(width: self.view.frame.width * 0.8 , height: 140)
-        flowLayout.minimumLineSpacing = CGFloat(integerLiteral: 30)
-        flowLayout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
+//        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = UPCarouselFlowLayout()
+        flowLayout.itemSize = CGSize(width: self.view.frame.width*0.8, height: self.view.frame.height*0.6)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 5
+
+//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 0)
+//        flowLayout.itemSize = CGSize(width: self.view.frame.width * 0.6 , height: self.view.frame.height * 0.6)
+        
+//        flowLayout.minimumLineSpacing = CGFloat(integerLiteral: 10)
+//        flowLayout.minimumInteritemSpacing = CGFloat(integerLiteral: -10)
         //            flowLayout.headerReferenceSize = CGSize(width: self.view.width, height: 50)
-        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical //預設
+        
         bitCoinCollectionView = UICollectionView.init(frame: self.view.bounds, collectionViewLayout: flowLayout)
         bitCoinCollectionView.register(bitCoinCollectionViewCell.self, forCellWithReuseIdentifier: "reuseCell")
         bitCoinCollectionView.backgroundColor = UIColor.ciDarkGunMetal
@@ -44,7 +55,7 @@ class BitCoinViewController: UIViewController {
         self.view.addSubview(bitCoinCollectionView)
         
         bitCoinCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        bitCoinCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
+        bitCoinCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 24).isActive = true
         bitCoinCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         bitCoinCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         bitCoinCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -78,11 +89,21 @@ extension BitCoinViewController: UICollectionViewDataSource {
         cell.setCellLabelWith(typeArray: UserDefualtManager.sharedInstance.localCryptoTypeArray,
                               priceArray: UserDefualtManager.sharedInstance.localCryptoPriceArray,
                               indexPath: indexPath)
+    
+        cell.setChartData(typeArray: UserDefualtManager.sharedInstance.localCryptoTypeArray, indexPath: indexPath)
+        
         
         return cell
     }
+
+}
+
+extension BitCoinViewController {
     
-    
+    func getHistoryData() {
+        
+      
+    }
     
     
     

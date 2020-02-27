@@ -27,7 +27,7 @@ class CountingLabel:UILabel {
         self.text = "\(startValue)"
         self.textAlignment = .center
         self.font = UIFont.boldSystemFont(ofSize: 40)
-        self.textColor = UIColor.ciMaize
+        self.textColor = UIColor.white
         self.backgroundColor = UIColor.clear
         
         displayLink = CADisplayLink(target: self, selector: #selector(handle))

@@ -125,20 +125,16 @@ class CurrencyViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = CGFloat(integerLiteral: 10)
         flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical //預設
         flowLayout.headerReferenceSize = CGSize(width: self.view.frame.width, height: 54)
+        
         collectionView = TapThroughCollectionView.init(frame: self.view.bounds, collectionViewLayout: flowLayout)
         collectionView.register(CurrencyCollectionViewCell.self, forCellWithReuseIdentifier: "reuseCell")
         collectionView.register(NothingCollectionViewCell.self, forCellWithReuseIdentifier: "nothingCell")
         collectionView.backgroundColor = UIColor.clear
-        
         collectionView.register(CurrencyHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
-        
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
         self.view.addSubview(collectionView)
-        
-        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 164).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -150,10 +146,6 @@ class CurrencyViewController: UIViewController {
         collectionView.dataSource = self
 
         
-        
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,9 +154,13 @@ class CurrencyViewController: UIViewController {
     
     
     func setData() {
-        allQuotesWithName = currencyViewModel.getQuotes()
+        allQuotesWithName = currencyViewModel.getQuotes() // = user default masterquotes
         allNamesArray = currencyViewModel.getQuotesKey()
         selectedNamesArray = currencyViewModel.lastSelectedName()
+        if selectedNamesArray.count == 0 {
+            selectedNamesArray = [""]
+        }
+        
         selectedQuotesArray = currencyViewModel.lastSelectedQuotes()
         selectedAmountArray = currencyViewModel.lastSelectedAmount()
 //        Global.lastEnterAmount = currencyViewModel.lastEnterAmount()

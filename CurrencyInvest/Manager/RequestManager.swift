@@ -18,6 +18,9 @@ class RequestManager {
     
     enum Url:String {
         
+        // coinlayer api key : 45e9499cdc38e3255beff761c87cee99
+        // X-ba-key: NDhlNTUzMGVlNDI5NDI5YmJiOTczYzZmODEzNDZlNGY
+        // http://api.coinlayer.com/api/
         case currency = "http://apilayer.net/api/live?access_key=0c056c4320688c8c947e54ab6f59bfcb"
         case cryptoHistry = "https://apiv2.bitcoinaverage.com/indices/global/history/"
         case cryptoBTC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
@@ -27,6 +30,9 @@ class RequestManager {
         case cryptoXRP = "https://apiv2.bitcoinaverage.com/indices/global/ticker/XRPUSD"
         case cryptoZEC = "https://apiv2.bitcoinaverage.com/indices/global/ticker/ZECUSD"
     }
+    
+
+
     
 
     
@@ -64,58 +70,73 @@ class RequestManager {
         
     }
     
-    func getHistoryFor(cryptoName:crytoType ,completeHandler:@escaping (_ responseJSON:[CryptoHistoryDataModel]) -> () ) {
-        
-        guard var urlComponent = URLComponents(string: "\(Url.cryptoHistry.rawValue)\(cryptoName.string)") else {
-            return
-        }
-        urlComponent.queryItems = [
-            URLQueryItem(name: "period", value: "monthly"),
-            URLQueryItem(name: "format", value: "json")
-        ]
-        
-        guard let theURL = urlComponent.url else {
-            return
-        }
-        
-        URLSession.shared.dataTask(with: theURL) { (data, response, error) in
-            guard let theDate = data else {
-                dPrint("URLSession.shared.dataTask ==> data is nil")
-                return
-            }
-            
-            do {
-                let decodedData = try JSONDecoder().decode([CryptoHistoryDataModel].self, from: theDate)
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                
-                var dataArray = [CryptoHistoryDataModel]()
-                
-                for data in decodedData {
-                    let given = data.time
-                    guard let date = dateFormatter.date(from: given) else {
-                        return
-                    }
-                    dateFormatter.dateFormat = "HH:mm:ss"
-                    let result = dateFormatter.string(from: date)
-                    print(result)
-                    
-                    if result == "23:00:00" {
-                        dataArray.append(data)
-                    }
-                }
-                print(dataArray)
-                
-                
-                completeHandler(decodedData)
-            }catch{
-                let showerror = error
-                dPrint("getHistoryBTC error : \(showerror)")
-            }
-            
-            
-        }.resume()
+//    func getHistoryFor(cryptoName:CrytoType ,completeHandler:@escaping (_ responseJSON:CryptoHistoryDataModel) -> () ) {
+//
+//        let param:[String:String] = [
+//             "period" : "monthly",
+//             "format" : "json"]
+//
+//         let header:HTTPHeaders = ["X-ba-key":"NDhlNTUzMGVlNDI5NDI5YmJiOTczYzZmODEzNDZlNGY"]
+//
+//         guard let url:URL = URL(string: "\(Url.cryptoHistry.rawValue)\(cryptoName.string)") else {
+//             return
+//         }
+//
+//        Alamofire.request(url, method: .get, parameters: param, encoding: URLEncoding.default, headers: header).responseJSON { (response) in
+//
+//             switch response.result {
+//             case .success(let responseData):
+//                 let jsonData = JSON(responseData)
+//
+//                 print(jsonData)
+//
+//                 completeHandler(CryptoHistoryDataModel(fromJson: jsonData))
+//             case .failure(let error):
+//                 print(error)
+//             }
+//
+//
+//         }
+//    }
+//
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            guard let theDate = data else {
+//                dPrint("URLSession.shared.dataTask ==> data is nil")
+//                return
+//            }
+//
+//            do {
+//                let decodedData = try JSONDecoder().decode([CryptoHistoryDataModel].self, from: theDate)
+//
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//
+//                var dataArray = [CryptoHistoryDataModel]()
+//
+//                for data in decodedData {
+//                    let given = data.time
+//                    guard let date = dateFormatter.date(from: given) else {
+//                        return
+//                    }
+//                    dateFormatter.dateFormat = "HH:mm:ss"
+//                    let result = dateFormatter.string(from: date)
+//                    print(result)
+//
+//                    if result == "23:00:00" {
+//                        dataArray.append(data)
+//                    }
+//                }
+//                print(dataArray)
+//
+//
+//                completeHandler(decodedData)
+//            }catch{
+//                let showerror = error
+//                dPrint("getHistoryBTC error : \(showerror)")
+//            }
+//
+//
+//        }.resume()
         
         
 //        guard let url = URL(string: "\(Url.cryptoHistry.rawValue)\(cryptoName.string)") else {
@@ -138,7 +159,7 @@ class RequestManager {
 //        }.resume()
       
         
-    }
+//    }
     
     
     

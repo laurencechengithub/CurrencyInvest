@@ -17,6 +17,12 @@ struct Global {
     static var selectedAmounts = [Double]()
     static var allQuotes = [String:Double]()
     static var allNames = [String]()
+    static var historyBTCValue = [Double]()
+    static var historyETHValue = [Double]()
+    static var historyLTCValue = [Double]()
+    static var historyXMRValue = [Double]()
+    static var historyXRPValue = [Double]()
+    static var historyZECValue = [Double]()
     
     static var isCurrencyPageShowing:Bool = true
     static var isBitCoinPageShlowing:Bool = false
@@ -40,30 +46,36 @@ enum coinType:String {
     case zec = "ZEC"
 }
 
-enum crytoType {
+enum CrytoType {
     case BTC
-    case ETC
+    case ETH
     case LTC
     case XMR
     case XRP
-    case ZWC
+    case ZEC
     
     var string:String {
         get {
             switch self {
             case .BTC:
                 return "BTCUSD"
-            case .ETC:
-                return "ETCUSD"
+            case .ETH:
+                return "ETHUSD"
             case .LTC:
                 return "LTCUSD"
             case .XMR:
                 return "XMRUSD"
             case .XRP:
                 return "XRPUSD"
-            case .ZWC:
-                return "ZWCUSD"
+            case .ZEC:
+                return "ZECUSD"
             }
+        }
+    }
+    static let allCrytoTypeValues = [BTC,ETH,LTC,XMR,XRP,ZEC]
+    var count:Int {
+        get {
+            return CrytoType.allCrytoTypeValues.count
         }
     }
     
