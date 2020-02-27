@@ -126,7 +126,7 @@ class EntryViewViewController: UIViewController {
 
             if bool == true {
                 DispatchQueue.main.async {
-                    self.getBitCoin()
+                    self.toMainView()
                 }
             } else {
                 self.showAlert(string: "Get Currency Fail")
@@ -135,109 +135,10 @@ class EntryViewViewController: UIViewController {
         
     }
     
-    func getBitHistory() {
-        
-        let btc:crytoType = .BTC
-        entryViewViewModel.getCryptoHistoryFor(type: btc)
-        
-    }
-    
-    
-    func getBitCoin() {
-        
-        entryViewViewModel.getBitPrice()
-        entryViewViewModel.bitCompleteHandler = { (bool) in
-            
-            if bool == true {
-                DispatchQueue.main.async {
-                self.getEthCoin()
-                }
-            } else {
-                self.showAlert(string: "Get BitCoin Fail")
-            }
-            
-        }
 
-    }
-    
-    
-    func getEthCoin() {
-        entryViewViewModel.getEthPrice()
-        entryViewViewModel.ethCompleteHandler = { (bool) in
-        
-            if bool == true {
-                DispatchQueue.main.async {
-                    self.getLTCCoin()
-                }
-            } else {
-                self.showAlert(string: "Get EthCoin Fail")
-            }
-            
-        }
-    }
-    
-    func getLTCCoin() {
-        entryViewViewModel.getLTCPrice()
-        entryViewViewModel.ltcCompleteHandler = { (bool) in
-            
-            if bool == true {
-                DispatchQueue.main.async {
-                    self.getXMRCoin()
-                }
-            } else {
-                self.showAlert(string: "Get LTCCoin Fail")
-            }
-            
-        }
-    }
-    
-    func getXMRCoin() {
-        entryViewViewModel.getXMRPrice()
-        entryViewViewModel.xmrCompleteHandler = { (bool) in
-            
-            if bool == true {
-                DispatchQueue.main.async {
-                    self.getXRPCoin()
-                }
-            } else {
-                self.showAlert(string: "Get XMRCoin Fail")
-            }
-            
-        }
-    }
-    
-    func getXRPCoin() {
-        entryViewViewModel.getXRPPrice()
-        entryViewViewModel.xrpCompleteHandler = { (bool) in
-            
-            if bool == true {
-                DispatchQueue.main.async {
-                    self.getZECCoin()
-                }
-            } else {
-                self.showAlert(string: "Get XRPCoin Fail")
-            }
-            
-        }
-    }
-    func getZECCoin() {
-        entryViewViewModel.getZECPrice()
-        entryViewViewModel.zecCompleteHandler = { (bool) in
-            
-            if bool == true {
-                DispatchQueue.main.async {
-                    UserDefualtManager.sharedInstance.isFirstTimeEnterApp = false
-                    self.toMainView()
-                }
-            } else {
-                self.showAlert(string: "Get ZECCoin Fail")
-            }
-            
-        }
-    }
     func toMainView() {
         
-        if UserDefualtManager.sharedInstance.isFirstTimeEnterApp == true {
+        if UserDefualtManager.sharedInstance.isFirstTimeEnterApp == true && Global.isOffLineMode == true {
             
             let alertVC = UIAlertController(title: "1st time enter App",
                                             message: "please make sure internet connection \n and restart app",
