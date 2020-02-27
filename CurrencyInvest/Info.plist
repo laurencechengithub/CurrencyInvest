@@ -57,17 +57,7 @@
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Currency</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).First</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypePause</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Crypto Price</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>BitCoin</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Second</string>
+			<string>com.llng-intl.MoneyXBit.currency</string>
 		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>

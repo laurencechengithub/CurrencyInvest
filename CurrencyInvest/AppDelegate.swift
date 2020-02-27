@@ -221,47 +221,22 @@ extension AppDelegate {
     
     func handleShortcutItem(item: UIApplicationShortcutItem) -> Bool {
         
-        var handled = false
-        // Verify that the provided shortcutItem's type is one handled by the application.
-        guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
-        guard let shortCutType = item.type as String? else { return false }
         
-        
-        let mainSB = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-        var reqVC: UIViewController!
-        
-        
-        switch shortCutType {
-        case ShortcutIdentifier.First.type:
-//            reqVC = mainSB.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-            
-            handled = true
-            
-        case ShortcutIdentifier.Second.type:
-            reqVC = mainSB.instantiateViewController(withIdentifier: "BitCoinViewController") as! BitCoinViewController
-            handled = true
-            
-        case ShortcutIdentifier.Dynamic.type:
-            
-            self.handleDynamicAction()
-            return true
-            
+        var handled:Bool!
+        switch item.type {
+        case "com.llng-intl.MoneyXBit.currency":
+            let entryViewSB = UIStoryboard.init(name: "EntryView", bundle: Bundle.main)
+            let entryViewVC = entryViewSB.instantiateViewController(withIdentifier: "EntryViewViewController") as! EntryViewViewController
+            if let homeVC = self.window?.rootViewController as? UINavigationController {
+                handled = true
+                homeVC.pushViewController(entryViewVC, animated: true)
+            }
         default:
-            print("Shortcut Item Handle func")
+            handled = false
+            break
         }
-        
-        let root = self.window?.rootViewController
-        root?.present(reqVC, animated: true, completion: nil)
-        
-        if let homeVC = self.window?.rootViewController as? UINavigationController {
-            homeVC.pushViewController(reqVC, animated: true)
-//
-        } else {
-            return false
-        }
-        
+
         return handled
-        
     }
     
     func handleDynamicAction() {
